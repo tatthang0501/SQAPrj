@@ -1,0 +1,14 @@
+package ptit.data;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.CrudRepository;
+
+import ptit.BoMon;
+
+public interface BoMonRepository extends CrudRepository<BoMon, Integer>{
+    @Query(value="SELECT * FROM bomon WHERE khoaid = ?1",nativeQuery = true)
+    List<BoMon> getListBoMon(int khoaId);
+}
