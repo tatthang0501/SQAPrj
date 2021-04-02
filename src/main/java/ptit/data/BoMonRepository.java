@@ -1,6 +1,5 @@
 package ptit.data;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.Query;
