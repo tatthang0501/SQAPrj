@@ -97,37 +97,39 @@ public class RegisterAPI {
             // if (giangvien == null) {
             //     response.sendRedirect("/login?err=timeout");
             // }
-            ThanhVien giangvien = tvRepo.findById(1).get();
-            GiangVienKhoa gvk = gvkRepo.findById(giangvien.getId()).get();
+            // ThanhVien giangvien = tvRepo.findById(1).get();
+            GiangVienKhoa gvk = gvkRepo.findById(1).get();
+            // GiangVienKhoa gvk = gvkRepo.findById(giangvien.getId()).get();
             System.out.println(gvk.getId());
-            ArrayList<BoMon> listBoMonKhoa = (ArrayList<BoMon>) bmRepo.getListBoMon(gvk.getKhoa().getId());
-            ArrayList<Integer> listIdMon = new ArrayList<Integer>();
-            for (BoMon bm : listBoMonKhoa) {
-                ArrayList<MonHoc> listMH = (ArrayList<MonHoc>) mhRepo.getListMHByBoMonID(bm.getId());
-                for (MonHoc mh : listMH) {
-                    listIdMon.add(mh.getId());
-                }
-                bm.setDsMonHoc((MonHoc[]) listMH.toArray());
-            }
-            ArrayList<KyHoc> listKy = (ArrayList<KyHoc>) kyhocRepo.findAll();
-            KyHoc newestKH = listKy.get(listKy.size() - 1);
-            ArrayList<MonHocKyHoc> listMHKH = (ArrayList<MonHocKyHoc>) mhkhRepo.getListMHKH(newestKH.getId());
-            for (MonHocKyHoc mhkh : listMHKH) {
-                if (!listIdMon.contains(mhkh.getMh().getId())) {
-                    listMHKH.remove(mhkh);
-                } else {
-                    MonHoc mh = mhRepo.findById(mhkh.getMh().getId()).get();
-                    mhkh.setMh(mh);
-                }
-            }
-            // model.addAttribute("msg", "Lấy danh sách môn học thành công");
-            System.out.println(listMHKH.size());
-            return new ResponseEntity<>(listMHKH, HttpStatus.OK);
+            // ArrayList<BoMon> listBoMonKhoa = (ArrayList<BoMon>) bmRepo.getListBoMon(gvk.getKhoa().getId());
+            // ArrayList<Integer> listIdMon = new ArrayList<Integer>();
+            // for (BoMon bm : listBoMonKhoa) {
+            //     ArrayList<MonHoc> listMH = (ArrayList<MonHoc>) mhRepo.getListMHByBoMonID(bm.getId());
+            //     for (MonHoc mh : listMH) {
+            //         listIdMon.add(mh.getId());
+            //     }
+            //     bm.setDsMonHoc((MonHoc[]) listMH.toArray());
+            // }
+            // ArrayList<KyHoc> listKy = (ArrayList<KyHoc>) kyhocRepo.findAll();
+            // KyHoc newestKH = listKy.get(listKy.size() - 1);
+            // ArrayList<MonHocKyHoc> listMHKH = (ArrayList<MonHocKyHoc>) mhkhRepo.getListMHKH(newestKH.getId());
+            // for (MonHocKyHoc mhkh : listMHKH) {
+            //     if (!listIdMon.contains(mhkh.getMh().getId())) {
+            //         listMHKH.remove(mhkh);
+            //     } else {
+            //         MonHoc mh = mhRepo.findById(mhkh.getMh().getId()).get();
+            //         mhkh.setMh(mh);
+            //     }
+            // }
+            // // model.addAttribute("msg", "Lấy danh sách môn học thành công");
+            // System.out.println(listMHKH.size());
+            // return new ResponseEntity<>(listMHKH, HttpStatus.OK);
         // } catch (Exception e) {
         //     model.addAttribute("msg", "Có lỗi xảy ra khi chọn môn học");
         //     rs = new ResponseEntity<>("fail", HttpStatus.NOT_FOUND);
         //     response.sendRedirect("/chonmonhoc?error");
         // }
+        return new ResponseEntity<>("ok", HttpStatus.OK);
     }
 
     @GetMapping(name = "/dslophocphan", value = "/{id}", produces = "application/json")

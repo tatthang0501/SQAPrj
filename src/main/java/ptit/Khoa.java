@@ -15,7 +15,7 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name="`khoa`")
+@Table(name="khoa")
 public class Khoa implements Serializable {
     /**
      *
@@ -26,12 +26,11 @@ public class Khoa implements Serializable {
     private int id;
 
     @NotNull
-    @Column(name="`ten`")
+    @Column(name="ten")
     private String ten;
     @NotNull
-    @Column(name="`mota`")
+    @Column(name="mota")
     private String mota;
-
     @NotNull
     @OneToMany(targetEntity = BoMon.class, cascade = CascadeType.ALL)
     @OrderColumn

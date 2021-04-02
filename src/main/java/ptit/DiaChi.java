@@ -13,7 +13,7 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name="`diachi`")
+@Table(name="diachi")
 public class DiaChi implements Serializable{
 
     /**
@@ -22,25 +22,25 @@ public class DiaChi implements Serializable{
     private static final long serialVersionUID = 1L;
     @Id
     @NotNull
-    @Column(name="`id`")
+    @Column(name="id")
     private int id;
     
     @NotNull
-    @Column(name="`sonha`")
+    @Column(name="sonha")
     private String sonha;
     @NotNull
-    @Column(name="`toanha`")
+    @Column(name="toanha")
     private String toanha;
     @NotNull
-    @Column(name="`xompho`")
+    @Column(name="xompho")
     private String xompho;
     @NotNull
-    @Column(name="`phuongxa`")
+    @Column(name="phuongxa")
     private String phuongxa;
     @NotNull
-    @Column(name="`quanhuyen`")
+    @Column(name="quanhuyen")
     private String quanhuyen;
     @NotNull
-    @Column(name="`tinhthanh`")
+    @Column(name="tinhthanh")
     private String tinhthanh;
 }

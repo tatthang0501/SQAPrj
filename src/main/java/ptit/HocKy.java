@@ -21,14 +21,14 @@ public class HocKy implements Serializable{
 
     @Id
     @NotNull
-    @Column(name="`id`")
+    @Column(name="id")
     private int id;
 
     @NotNull
-    @Column(name="`ten`")
+    @Column(name="ten")
     private String ten;
 
     @NotNull
-    @Column(name="`mota`")
+    @Column(name="mota")
     private String mota;
 }

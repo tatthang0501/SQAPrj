@@ -15,7 +15,7 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name="`lichhoc`")
+@Table(name="lichhoc")
 public class LichHoc implements Serializable{
 
     /**
@@ -24,34 +24,33 @@ public class LichHoc implements Serializable{
     private static final long serialVersionUID = 1L;
     
     @Id
-    @Column(name="`id`")
+    @Column(name="id")
     private int id;
     @NotNull
-    @Column(name="`ten`")
+    @Column(name="ten")
     private String ten;
     
     @NotNull
-    @JoinColumn(name="`lhpid`")
+    @JoinColumn(name="lhpid")
     @ManyToOne(targetEntity = LopHocPhan.class, cascade = CascadeType.ALL)
     private LopHocPhan lhp;
 
     @NotNull
-    @JoinColumn(name="`tuanid`")
+    @JoinColumn(name="tuanid")
     @ManyToOne(targetEntity = TuanHoc.class, cascade = CascadeType.ALL)
     private TuanHoc tuanhoc;
 
     @NotNull
-    @JoinColumn(name="`ngayid`")
+    @JoinColumn(name="ngayid")
     @ManyToOne(targetEntity = NgayHoc.class, cascade = CascadeType.ALL)
     private NgayHoc ngayhoc;
 
     @NotNull
-    @JoinColumn(name="`kipid`")
+    @JoinColumn(name="kipid")
     @ManyToOne(targetEntity = KipHoc.class, cascade = CascadeType.ALL)
     private KipHoc kiphoc;
 
-    @NotNull
-    @JoinColumn(name="`giangvienid`")
+    @JoinColumn(name="giangvienid")
     @ManyToOne(targetEntity = ThanhVien.class, cascade = CascadeType.ALL)
     private ThanhVien gv;
 }

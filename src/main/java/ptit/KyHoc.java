@@ -16,7 +16,7 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name="`kyhoc`")
+@Table(name="kyhoc")
 public class KyHoc implements Serializable{
 
     /**
@@ -25,16 +25,16 @@ public class KyHoc implements Serializable{
     private static final long serialVersionUID = 1L;
     @Id
     @NotNull
-    @Column(name="`id`")
+    @Column(name="id")
     private int id;
 
     @NotNull
-    @JoinColumn(name="`namhocid`")
+    @JoinColumn(name="namhocid")
     @OneToOne(targetEntity = NamHoc.class, cascade = CascadeType.ALL)
     private NamHoc nh;
 
     @NotNull
-    @JoinColumn(name="`hockyid`")
+    @JoinColumn(name="hockyid")
     @ManyToOne(targetEntity = HocKy.class, cascade = CascadeType.ALL)
     private HocKy hk;
 }

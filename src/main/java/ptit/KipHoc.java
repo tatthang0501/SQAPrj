@@ -13,7 +13,7 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name="`kiphoc`")
+@Table(name="kiphoc")
 public class KipHoc implements Serializable{
 
     /**
@@ -23,9 +23,9 @@ public class KipHoc implements Serializable{
     @Id
     private int id;
     @NotNull
-    @Column(name="`ten`")
+    @Column(name="ten")
     private String ten;
     @NotNull
-    @Column(name="`mota`")
+    @Column(name="mota")
     private String mota;
 }
