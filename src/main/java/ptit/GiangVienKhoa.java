@@ -31,6 +31,7 @@ public class GiangVienKhoa implements Serializable{
     @ManyToOne(targetEntity = ThanhVien.class, cascade = CascadeType.ALL)
     private ThanhVien giangVien;
 
-    @JoinColumn(name="k_id")
+    @JoinColumn(name="khoa_id")
+    @ManyToOne(targetEntity = Khoa.class, cascade = CascadeType.ALL)
     private Khoa khoa;
 }

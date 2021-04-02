@@ -40,12 +40,12 @@ public class BoMon implements Serializable {
     @JoinColumn(name="khoa_id")
     private Khoa khoa;
 
-    @NotNull
-    @OneToMany(targetEntity = MonHoc.class, cascade = CascadeType.ALL)
-    @OrderColumn
+    // @NotNull
+    // @OneToMany(targetEntity = MonHoc.class, cascade = CascadeType.ALL)
+    // @OrderColumn
     private MonHoc[] dsMonHoc;
-    @NotNull
-    @OneToMany(targetEntity = ThanhVien.class, cascade = CascadeType.ALL)
-    @OrderColumn
+    // @NotNull
+    // @OneToMany(targetEntity = ThanhVien.class, cascade = CascadeType.ALL)
+    // @OrderColumn
     private ThanhVien[] dsGiangVien;
 }

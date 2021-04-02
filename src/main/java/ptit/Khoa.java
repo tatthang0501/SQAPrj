@@ -31,8 +31,8 @@ public class Khoa implements Serializable {
     @NotNull
     @Column(name="mota")
     private String mota;
-    @NotNull
-    @OneToMany(targetEntity = BoMon.class, cascade = CascadeType.ALL)
-    @OrderColumn
+    // @NotNull
+    // @OneToMany(targetEntity = BoMon.class,  cascade = CascadeType.ALL)
+    // @OrderColumn
     private BoMon[] bomon[];
 }
