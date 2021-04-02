@@ -9,6 +9,6 @@ import org.springframework.data.repository.CrudRepository;
 import ptit.BoMon;
 
 public interface BoMonRepository extends CrudRepository<BoMon, Integer>{
-    @Query(value="SELECT * FROM bomon WHERE khoaid = ?1",nativeQuery = true)
+    @Query(value="SELECT * FROM bomon WHERE khoa_id = ?1",nativeQuery = true)
     List<BoMon> getListBoMon(int khoaId);
 }

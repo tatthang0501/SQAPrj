@@ -1,6 +1,7 @@
 package ptit;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -40,12 +41,13 @@ public class BoMon implements Serializable {
     @JoinColumn(name="khoa_id")
     private Khoa khoa;
 
-    // @NotNull
-    // @OneToMany(targetEntity = MonHoc.class, cascade = CascadeType.ALL)
-    // @OrderColumn
-    private MonHoc[] dsMonHoc;
-    // @NotNull
-    // @OneToMany(targetEntity = ThanhVien.class, cascade = CascadeType.ALL)
-    // @OrderColumn
-    private ThanhVien[] dsGiangVien;
+    @NotNull
+    @OneToMany(targetEntity = MonHoc.class, cascade = CascadeType.ALL)
+    @OrderColumn
+    private List<MonHoc> dsMonHoc;
+
+    @NotNull
+    @OneToMany(targetEntity = ThanhVien.class, cascade = CascadeType.ALL)
+    @OrderColumn
+    private List<ThanhVien> dsGiangVien;
 }

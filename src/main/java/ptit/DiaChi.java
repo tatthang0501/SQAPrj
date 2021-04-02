@@ -44,3 +44,4 @@ public class DiaChi implements Serializable{
     @Column(name="tinhthanh")
     private String tinhthanh;
 }
+
