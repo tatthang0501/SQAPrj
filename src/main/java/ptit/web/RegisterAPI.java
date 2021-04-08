@@ -1,7 +1,6 @@
 package ptit.web;
 
 import java.io.IOException;
-// import java.lang.ProcessBuilder.Redirect;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,22 +14,21 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-// import org.springframework.web.bind.annotation.PathVariable;
-// import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import ptit.BoMon;
 import ptit.GiangVienKhoa;
 import ptit.KyHoc;
 import ptit.LichHoc;
+import ptit.LichHocView;
 import ptit.ListDaDK_ListCoTheDK;
 import ptit.LopHocPhan;
 import ptit.MonHoc;
 import ptit.MonHocKyHoc;
+import ptit.MonHocKyHocView;
 import ptit.ThanhVien;
 import ptit.data.BoMonRepository;
 import ptit.data.GiangVienKhoaRepository;
@@ -108,6 +106,7 @@ public class RegisterAPI {
             ArrayList<KyHoc> listKy = (ArrayList<KyHoc>) kyhocRepo.findAll();
             KyHoc newestKH = listKy.get(listKy.size() - 1);
             ArrayList<MonHocKyHoc> listMHKH = (ArrayList<MonHocKyHoc>) mhkhRepo.getListMHKH(newestKH.getId());
+            ArrayList<MonHocKyHocView> listMHKHView = new ArrayList<MonHocKyHocView>();
             for (MonHocKyHoc mhkh : listMHKH) {
                 if (!listIdMon.contains(mhkh.getMh().getId())) {
                     listMHKH.remove(mhkh);
@@ -116,9 +115,18 @@ public class RegisterAPI {
                     mhkh.setMh(mh);
                 }
             }
+            
+            for(MonHocKyHoc mhkh : listMHKH){
+                MonHocKyHocView mhkhv = new MonHocKyHocView();
+                mhkhv.setId(mhkh.getId());
+                mhkhv.setMota(mhkh.getMh().getMota());
+                mhkhv.setSoTC(mhkh.getMh().getSoTC());
+                mhkhv.setTen(mhkh.getMh().getTen());
+                listMHKHView.add(mhkhv);
+            }
+
             model.addAttribute("msg", "Lấy danh sách môn học thành công");
-            System.out.println(listMHKH.size());
-            return new ResponseEntity<>(listMHKH, HttpStatus.OK);
+            return new ResponseEntity<>(listMHKHView, HttpStatus.OK);
         } catch (Exception e) {
             model.addAttribute("msg", "Có lỗi xảy ra khi chọn môn học");
             return new ResponseEntity<>("fail", HttpStatus.NOT_FOUND);
@@ -128,7 +136,6 @@ public class RegisterAPI {
     @GetMapping(value = "/dslhp/{id}", produces = "application/json")
     public ResponseEntity<?> getDSLHP(@PathVariable int id, HttpServletRequest request, Model model,
             HttpServletResponse response) {
-        System.out.println("Id truyen vao" + id);
         try {
             HttpSession session = request.getSession();
             ThanhVien giangvien = (ThanhVien) session.getAttribute("giangvien");
@@ -137,11 +144,9 @@ public class RegisterAPI {
             }
             ArrayList<LichHoc> listLichLHP = new ArrayList<LichHoc>();
             ArrayList<LopHocPhan> listLHPFound = (ArrayList<LopHocPhan>) lhpRepo.getLHPByMHKHId(id);
-            System.out.println("so lop hoc phan tim duoc " + listLHPFound.size());
 
             for (LopHocPhan lhp : listLHPFound) {
                 ArrayList<LichHoc> listLichHoc = (ArrayList<LichHoc>) lhRepo.findLichLHP(lhp.getId());
-                System.out.println("So lop hoc tim duoc " + listLichHoc.size());
                 LichHoc lh = listLichHoc.get(0);
                 lh.setLhp(lhp);
                 lh.setTuanhoc(thRepo.findById(lh.getTuanhoc().getId()).get());
@@ -150,12 +155,34 @@ public class RegisterAPI {
                 listLichLHP.add(lh);
             }
 
-            System.out.println("alo" + listLichLHP.size());
             ArrayList<LichHoc> listLichDaDK = (ArrayList<LichHoc>) lhRepo.findDaDKLHP(giangvien.getId());
 
-            System.out.println("lop da dang ky" + listLichDaDK.size());
+            ArrayList<LichHocView> listLichViewDaDK = new ArrayList<LichHocView>();
+            ArrayList<LichHocView> listLichViewLHP = new ArrayList<LichHocView>();
+            for(LichHoc lh : listLichLHP){
+                LichHocView lhv = new LichHocView();
+                lhv.setId(lh.getId());
+                lhv.setKiphoc(lh.getKiphoc().getTen());
+                lhv.setNgayhoc(lh.getNgayhoc().getTen());
+                lhv.setSoTC(lh.getLhp().getMhkh().getMh().getSoTC());
+                lhv.setTuanhoc(lh.getTuanhoc().getTen());
+                lhv.setTen(lh.getTen());
+                listLichViewLHP.add(lhv);
+            }
+            for(LichHoc lh : listLichDaDK){
+                LichHocView lhv = new LichHocView();
+                lhv.setId(lh.getId());
+                lhv.setKiphoc(lh.getKiphoc().getTen());
+                lhv.setNgayhoc(lh.getNgayhoc().getTen());
+                lhv.setSoTC(lh.getLhp().getMhkh().getMh().getSoTC());
+                lhv.setTuanhoc(lh.getTuanhoc().getTen());
+                lhv.setTen(lh.getTen());
+                listLichViewDaDK.add(lhv);
+            }
+            ListDaDK_ListCoTheDK list = new ListDaDK_ListCoTheDK();
+            list.setListLichDaDK(listLichViewDaDK);
+            list.setListLichLHP(listLichViewLHP);
             session.setAttribute("listDaDK", listLichDaDK);
-            ListDaDK_ListCoTheDK list = new ListDaDK_ListCoTheDK(listLichDaDK, listLichLHP);
             return new ResponseEntity<>(list, HttpStatus.OK);
         } catch (Exception e) {
             model.addAttribute("msg", "Có lỗi xảy ra khi lấy danh sách lớp học phần");
@@ -164,7 +191,7 @@ public class RegisterAPI {
     }
 
     @PutMapping(value="/updateDangKy", produces = "application/json")
-    public ResponseEntity<?> updateDKHP(@RequestBody ArrayList<LichHoc> listDK, HttpServletRequest request,
+    public ResponseEntity<?> updateDKHP(@RequestBody ArrayList<LichHocView> listDK, HttpServletRequest request,
             HttpServletResponse response, Model model) {
         HttpSession session = request.getSession();
         try {
@@ -173,18 +200,18 @@ public class RegisterAPI {
                 response.sendRedirect("/login?err=timeout");
             }
             ArrayList<LichHoc> listLichDaDK = (ArrayList<LichHoc>) session.getAttribute("listDaDK");
-            for (LichHoc lh : listDK) {
+            for (LichHocView lh : listDK) {
                 for (LichHoc lhDaDK : listLichDaDK) {
-                    if (lhDaDK.getKiphoc().getId() == lh.getKiphoc().getId()
-                            && lhDaDK.getNgayhoc().getId() == lh.getNgayhoc().getId()) {
-                        String msg = "Bị trùng lịch giảng dạy môn " + lh.getTen() + ", kíp " + lh.getKiphoc().getTen()
-                                + ", thứ " + lh.getNgayhoc().getTen() + " hàng tuần";
+                    if (lhDaDK.getKiphoc().getTen()== lh.getKiphoc()
+                            && lhDaDK.getNgayhoc().getTen() == lh.getNgayhoc()) {
+                        String msg = "Bị trùng lịch giảng dạy môn " + lh.getTen() + ", " + lh.getKiphoc()
+                                + ", " + lh.getNgayhoc() + " hàng tuần";
                         model.addAttribute("msg", msg);
                         response.sendRedirect("/dangky/dslophocphan?error");
                     }
                 }
             }
-            for (LichHoc lh : listDK) {
+            for (LichHocView lh : listDK) {
                 lhRepo.updateDangKy(giangvien.getId(), lh.getId());
             }
             String msg = "Lưu đăng ký thành công";
