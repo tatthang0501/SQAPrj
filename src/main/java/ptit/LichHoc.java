@@ -11,6 +11,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import org.springframework.lang.Nullable;
+
 import lombok.Data;
 
 @Data
@@ -50,6 +52,7 @@ public class LichHoc implements Serializable{
     @ManyToOne(targetEntity = KipHoc.class, cascade = CascadeType.ALL)
     private KipHoc kiphoc;
 
+    @Nullable
     @JoinColumn(name="giangvienid")
     @ManyToOne(targetEntity = ThanhVien.class, cascade = CascadeType.ALL)
     private ThanhVien gv;

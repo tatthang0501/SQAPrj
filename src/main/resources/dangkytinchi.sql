@@ -849,4 +849,9 @@ INSERT INTO `giangvienkhoa` (`id`, `k_id`, `giangvienid`) VALUES (1,1,1);
 
 -- Dump completed on 2021-04-02 13:08:35
 
+use dangkytinchii;
 select * from bomon;
+select * from monhoc;
+select * from lichhoc;
+delete from lichhoc where id = null;
+INSERT INTO `lichhoc` (`ten`, `lhpid`, `tuanid`, `ngayid`, `kipid`, `mota`, `giangvienid`) VALUES ('Nhap Mon CNPM',5,2,1,2,'Hoc som',1);

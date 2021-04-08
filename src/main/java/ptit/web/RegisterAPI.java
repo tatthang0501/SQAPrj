@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 // import org.springframework.web.bind.annotation.PathVariable;
 // import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -68,10 +69,10 @@ public class RegisterAPI {
     @Autowired
     private final BoMonRepository bmRepo;
 
-
     public RegisterAPI(KyHocRepository kyhocRepo, MonHocKyHocRepository mhkhRepo, MonHocRepository mhRepo,
             LopHocPhanRepository lhpRepo, LichHocRepository lhRepo, KipHocRepository khRepo, NgayHocRepository nhRepo,
-            TuanHocRepository thRepo, GiangVienKhoaRepository gvkRepo, BoMonRepository bmRepo, ThanhVienRepository tvRepo) {
+            TuanHocRepository thRepo, GiangVienKhoaRepository gvkRepo, BoMonRepository bmRepo,
+            ThanhVienRepository tvRepo) {
         this.kyhocRepo = kyhocRepo;
         this.mhkhRepo = mhkhRepo;
         this.mhRepo = mhRepo;
@@ -84,9 +85,9 @@ public class RegisterAPI {
         this.bmRepo = bmRepo;
     }
 
-    @GetMapping()
-    public ResponseEntity<?> getDSMonHocByGvId(HttpServletRequest request, HttpServletResponse response, Model model) throws IOException {
-        // ResponseEntity rs = null;
+    @GetMapping(produces = "application/json")
+    public ResponseEntity<?> getDSMonHocByGvId(HttpServletRequest request, HttpServletResponse response, Model model)
+            throws IOException {
         try {
             HttpSession session = request.getSession();
             ThanhVien giangvien = (ThanhVien) session.getAttribute("giangvien");
@@ -124,9 +125,10 @@ public class RegisterAPI {
         }
     }
 
-    @GetMapping(name = "/dslophocphan", produces = "application/json")
-    public ResponseEntity<?> getDSLHP(@RequestParam(name = "id") int id, HttpServletRequest request, Model model,
+    @GetMapping(value = "/dslhp/{id}", produces = "application/json")
+    public ResponseEntity<?> getDSLHP(@PathVariable int id, HttpServletRequest request, Model model,
             HttpServletResponse response) {
+        System.out.println("Id truyen vao" + id);
         try {
             HttpSession session = request.getSession();
             ThanhVien giangvien = (ThanhVien) session.getAttribute("giangvien");
@@ -135,56 +137,42 @@ public class RegisterAPI {
             }
             ArrayList<LichHoc> listLichLHP = new ArrayList<LichHoc>();
             ArrayList<LopHocPhan> listLHPFound = (ArrayList<LopHocPhan>) lhpRepo.getLHPByMHKHId(id);
-            int x = 0;
+            System.out.println("so lop hoc phan tim duoc " + listLHPFound.size());
+
             for (LopHocPhan lhp : listLHPFound) {
                 ArrayList<LichHoc> listLichHoc = (ArrayList<LichHoc>) lhRepo.findLichLHP(lhp.getId());
+                System.out.println("So lop hoc tim duoc " + listLichHoc.size());
                 LichHoc lh = listLichHoc.get(0);
                 lh.setLhp(lhp);
                 lh.setTuanhoc(thRepo.findById(lh.getTuanhoc().getId()).get());
                 lh.setNgayhoc(nhRepo.findById(lh.getNgayhoc().getId()).get());
                 lh.setKiphoc(khRepo.findById(lh.getKiphoc().getId()).get());
                 listLichLHP.add(lh);
-                System.out.println(listLichLHP.size());
-                x = listLichLHP.size();
             }
-            System.out.println(x);
-            ArrayList<LichHoc> listLichDaDK = new ArrayList<LichHoc>();
-            
-            for (LichHoc lh : listLichLHP) {
-                System.out.println(lh.getGv().getId());
-                if (lh.getGv().getId() == giangvien.getId()) {
-                    listLichDaDK.add(lh);
-                    listLichLHP.remove(lh);
-                }
-            }
-            model.addAttribute("lichDaDK", listLichDaDK);
-            
+
+            System.out.println("alo" + listLichLHP.size());
+            ArrayList<LichHoc> listLichDaDK = (ArrayList<LichHoc>) lhRepo.findDaDKLHP(giangvien.getId());
+
+            System.out.println("lop da dang ky" + listLichDaDK.size());
+            session.setAttribute("listDaDK", listLichDaDK);
             ListDaDK_ListCoTheDK list = new ListDaDK_ListCoTheDK(listLichDaDK, listLichLHP);
-            System.out.println(listLichDaDK.size());
-            
             return new ResponseEntity<>(list, HttpStatus.OK);
         } catch (Exception e) {
             model.addAttribute("msg", "Có lỗi xảy ra khi lấy danh sách lớp học phần");
             return new ResponseEntity<>("fail", HttpStatus.NOT_FOUND);
-        //     try {
-        //         response.sendRedirect("/chonmonhoc?error");
-        //     } catch (IOException e1) {
-        //         e1.printStackTrace();
-        //         return new ResponseEntity("fail", HttpStatus.NOT_FOUND);
-        //     }
         }
     }
 
-    @PutMapping(name="/updateDangKy", produces = "application/json")
+    @PutMapping(value="/updateDangKy", produces = "application/json")
     public ResponseEntity<?> updateDKHP(@RequestBody ArrayList<LichHoc> listDK, HttpServletRequest request,
             HttpServletResponse response, Model model) {
+        HttpSession session = request.getSession();
         try {
-            HttpSession session = request.getSession();
             ThanhVien giangvien = (ThanhVien) session.getAttribute("giangvien");
             if (giangvien == null) {
                 response.sendRedirect("/login?err=timeout");
             }
-            ArrayList<LichHoc> listLichDaDK = (ArrayList<LichHoc>) model.getAttribute("lichDaDK");
+            ArrayList<LichHoc> listLichDaDK = (ArrayList<LichHoc>) session.getAttribute("listDaDK");
             for (LichHoc lh : listDK) {
                 for (LichHoc lhDaDK : listLichDaDK) {
                     if (lhDaDK.getKiphoc().getId() == lh.getKiphoc().getId()
@@ -201,11 +189,13 @@ public class RegisterAPI {
             }
             String msg = "Lưu đăng ký thành công";
             model.addAttribute("msg", msg);
-            return new ResponseEntity<>("update successful", HttpStatus.OK); 
+            session.removeAttribute("listDaDK");
+            return new ResponseEntity<>("update successful", HttpStatus.OK);
         } catch (Exception e) {
             String msg = "Có lỗi xảy ra khi lưu danh sách đăng ký";
+            session.removeAttribute("listDaDK");
             model.addAttribute("msg", msg);
-            return new ResponseEntity<>("fail", HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("fail", HttpStatus.NOT_MODIFIED);
         }
     }
 }
