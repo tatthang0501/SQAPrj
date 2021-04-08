@@ -1,7 +1,7 @@
 package ptit.web;
 
 import java.io.IOException;
-import java.lang.ProcessBuilder.Redirect;
+// import java.lang.ProcessBuilder.Redirect;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,8 +14,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+// import org.springframework.web.bind.annotation.PathVariable;
+// import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -86,7 +86,7 @@ public class RegisterAPI {
 
     @GetMapping()
     public ResponseEntity<?> getDSMonHocByGvId(HttpServletRequest request, HttpServletResponse response, Model model) throws IOException {
-        ResponseEntity rs = null;
+        // ResponseEntity rs = null;
         try {
             HttpSession session = request.getSession();
             ThanhVien giangvien = (ThanhVien) session.getAttribute("giangvien");
@@ -120,16 +120,13 @@ public class RegisterAPI {
             return new ResponseEntity<>(listMHKH, HttpStatus.OK);
         } catch (Exception e) {
             model.addAttribute("msg", "Có lỗi xảy ra khi chọn môn học");
-            rs = new ResponseEntity<>("fail", HttpStatus.NOT_FOUND);
-            response.sendRedirect("/chonmonhoc?error");
+            return new ResponseEntity<>("fail", HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>("ok", HttpStatus.OK);
     }
 
     @GetMapping(name = "/dslophocphan", produces = "application/json")
     public ResponseEntity<?> getDSLHP(@RequestParam(name = "id") int id, HttpServletRequest request, Model model,
             HttpServletResponse response) {
-        ResponseEntity rs = null;
         try {
             HttpSession session = request.getSession();
             ThanhVien giangvien = (ThanhVien) session.getAttribute("giangvien");
@@ -165,23 +162,22 @@ public class RegisterAPI {
             ListDaDK_ListCoTheDK list = new ListDaDK_ListCoTheDK(listLichDaDK, listLichLHP);
             System.out.println(listLichDaDK.size());
             
-            rs = new ResponseEntity<>(list, HttpStatus.OK);
+            return new ResponseEntity<>(list, HttpStatus.OK);
         } catch (Exception e) {
             model.addAttribute("msg", "Có lỗi xảy ra khi lấy danh sách lớp học phần");
-            rs = new ResponseEntity<>("fail", HttpStatus.NOT_FOUND);
-            try {
-                response.sendRedirect("/chonmonhoc?error");
-            } catch (IOException e1) {
-                e1.printStackTrace();
-            }
+            return new ResponseEntity<>("fail", HttpStatus.NOT_FOUND);
+        //     try {
+        //         response.sendRedirect("/chonmonhoc?error");
+        //     } catch (IOException e1) {
+        //         e1.printStackTrace();
+        //         return new ResponseEntity("fail", HttpStatus.NOT_FOUND);
+        //     }
         }
-        return rs;
     }
 
     @PutMapping(name="/updateDangKy", produces = "application/json")
     public ResponseEntity<?> updateDKHP(@RequestBody ArrayList<LichHoc> listDK, HttpServletRequest request,
             HttpServletResponse response, Model model) {
-        ResponseEntity rs = null;
         try {
             HttpSession session = request.getSession();
             ThanhVien giangvien = (ThanhVien) session.getAttribute("giangvien");
@@ -205,17 +201,11 @@ public class RegisterAPI {
             }
             String msg = "Lưu đăng ký thành công";
             model.addAttribute("msg", msg);
-            rs = new ResponseEntity<>("update successful", HttpStatus.OK); 
+            return new ResponseEntity<>("update successful", HttpStatus.OK); 
         } catch (Exception e) {
             String msg = "Có lỗi xảy ra khi lưu danh sách đăng ký";
-            rs = new ResponseEntity<>("fail", HttpStatus.NOT_FOUND);
             model.addAttribute("msg", msg);
-            try {
-                response.sendRedirect("/dangky/dslophocphan?error");
-            } catch (IOException e1) {
-                e1.printStackTrace();
-            }
+            return new ResponseEntity<>("fail", HttpStatus.NOT_FOUND);
         }
-        return rs;
     }
 }
