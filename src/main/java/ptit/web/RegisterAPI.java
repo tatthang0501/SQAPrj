@@ -190,7 +190,7 @@ public class RegisterAPI {
         }
     }
 
-    @PutMapping(value="/updateDangKy", produces = "application/json")
+    @PutMapping(value="/updatedangky", produces = "application/json")
     public ResponseEntity<?> updateDKHP(@RequestBody ArrayList<LichHocView> listDK, HttpServletRequest request,
             HttpServletResponse response, Model model) {
         HttpSession session = request.getSession();

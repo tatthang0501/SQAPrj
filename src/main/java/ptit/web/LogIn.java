@@ -39,9 +39,6 @@ public class LogIn {
                     session.setAttribute("giangvien", tv);
                     String msg = "Đăng nhập thành công";
                     model.addAttribute("msg", msg);
-                    System.out.println(tv.getUsername());
-                    System.out.println(tv.getPassword());
-                    System.out.println("ok");
                     return new ResponseEntity<>("ok", HttpStatus.OK);
                 }
                 else{
