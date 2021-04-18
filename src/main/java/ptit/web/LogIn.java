@@ -10,10 +10,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+// import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import ptit.LoginForm;
 import ptit.ThanhVien;
 import ptit.data.ThanhVienRepository;
 
@@ -29,9 +31,8 @@ public class LogIn {
     }
 
     @PostMapping(produces = "application/json")
-    public ResponseEntity<?> checkLogin(@RequestParam String username, @RequestParam String password,
-            HttpServletRequest request, Model model) {
-        ArrayList<ThanhVien> listFound = (ArrayList<ThanhVien>) tvRepo.checkLogin(username, password);
+    public ResponseEntity<?> checkLogin(@RequestBody LoginForm loginForm, HttpServletRequest request, Model model) {
+        ArrayList<ThanhVien> listFound = (ArrayList<ThanhVien>) tvRepo.checkLogin(loginForm.getUsername(), loginForm.getPassword());
         if (listFound.size() == 1) {
             ThanhVien tv = listFound.get(0);
                 if (tv.getVitri().equals("giangvien")) {
@@ -44,7 +45,7 @@ public class LogIn {
                 else{
                     String msg = "Không phải giảng viên";
                     model.addAttribute("msg", msg);
-                    return new ResponseEntity<>("ok", HttpStatus.NOT_ACCEPTABLE);
+                    return new ResponseEntity<>("Không phải giảng viên", HttpStatus.NOT_ACCEPTABLE);
                 }
             } else {
             String msg = "Tên đăng nhập hoặc mật khẩu không đúng";
