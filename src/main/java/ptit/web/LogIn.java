@@ -33,6 +33,8 @@ public class LogIn {
     @PostMapping(produces = "application/json")
     public ResponseEntity<?> checkLogin(@RequestBody LoginForm loginForm, HttpServletRequest request, Model model) {
         ArrayList<ThanhVien> listFound = (ArrayList<ThanhVien>) tvRepo.checkLogin(loginForm.getUsername(), loginForm.getPassword());
+        System.out.println(loginForm.getUsername());
+        System.out.println(loginForm.getPassword());
         if (listFound.size() == 1) {
             ThanhVien tv = listFound.get(0);
                 if (tv.getVitri().equals("giangvien")) {

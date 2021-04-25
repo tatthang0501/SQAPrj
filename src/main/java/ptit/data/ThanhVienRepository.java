@@ -11,4 +11,6 @@ public interface ThanhVienRepository extends CrudRepository<ThanhVien,Integer>{
     
     @Query(value="select * from thanhvien where thanhvien.username = ?1 AND thanhvien.password = ?2 ", nativeQuery = true)
     public List<ThanhVien> checkLogin(String username, String password);
+
+    ThanhVien findByUsername(String username);
 }
