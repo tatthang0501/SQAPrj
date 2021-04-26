@@ -1,4 +1,4 @@
-package ptit;
+package ptit.dto;
 
 import java.io.Serializable;
 
