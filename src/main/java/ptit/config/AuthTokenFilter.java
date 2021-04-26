@@ -17,13 +17,13 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import ptit.common.jwtUtils;
+import ptit.common.JwtUtils;
 import ptit.services.UserDetailsServiceImpl;
 
 public class AuthTokenFilter extends OncePerRequestFilter{
 
     @Autowired
-    private jwtUtils jwtUtils;
+    private JwtUtils jwtUtils;
 
     @Autowired
     private UserDetailsServiceImpl userDetailsService;

@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 // import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import ptit.LoginForm;
 import ptit.ThanhVien;
 import ptit.data.ThanhVienRepository;
+import ptit.dto.LoginForm;
 
 @RestController
 @CrossOrigin("*")
