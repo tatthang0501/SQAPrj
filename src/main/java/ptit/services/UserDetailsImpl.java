@@ -6,13 +6,22 @@ import java.util.Objects;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import ptit.ThanhVien;
+import ptit.DiaChi;
+import ptit.controllers.User;
 
 public class UserDetailsImpl implements UserDetails{
     private int id;
     private String username;
     private String password;
     private String email;
+    private String ngaySinh;
+    private DiaChi diaChi;
+    private String dt;
+    private String ghichu;
+    private String vitri;
+    private String ho;
+    private String dem;
+    private String ten;
     
     public UserDetailsImpl(int id, String username, String password, String email) {
         this.id = id;
@@ -21,13 +30,12 @@ public class UserDetailsImpl implements UserDetails{
         this.email = email;
     }
 
-    public static UserDetailsImpl build(ThanhVien user){
+    public static UserDetailsImpl build(User user){
         return new UserDetailsImpl(user.getId(), user.getUsername(), user.getPassword(), user.getEmail());
     }
-
+    
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        // TODO Auto-generated method stub
         return null;
     }
     
@@ -57,37 +65,95 @@ public class UserDetailsImpl implements UserDetails{
 
     @Override
     public String getPassword() {
-        // TODO Auto-generated method stub
         return password;
     }
 
     @Override
     public String getUsername() {
-        // TODO Auto-generated method stub
         return username;
+    }
+
+    public String getNgaySinh() {
+        return ngaySinh;
+    }
+
+    public void setNgaySinh(String ngaySinh) {
+        this.ngaySinh = ngaySinh;
+    }
+
+    public DiaChi getDiaChi() {
+        return diaChi;
+    }
+
+    public void setDiaChi(DiaChi diaChi) {
+        this.diaChi = diaChi;
+    }
+
+    public String getDt() {
+        return dt;
+    }
+
+    public void setDt(String dt) {
+        this.dt = dt;
+    }
+
+    public String getGhichu() {
+        return ghichu;
+    }
+
+    public void setGhichu(String ghichu) {
+        this.ghichu = ghichu;
+    }
+
+    public String getVitri() {
+        return vitri;
+    }
+
+    public void setVitri(String vitri) {
+        this.vitri = vitri;
+    }
+
+    public String getHo() {
+        return ho;
+    }
+
+    public void setHo(String ho) {
+        this.ho = ho;
+    }
+
+    public String getDem() {
+        return dem;
+    }
+
+    public void setDem(String dem) {
+        this.dem = dem;
+    }
+
+    public String getTen() {
+        return ten;
+    }
+
+    public void setTen(String ten) {
+        this.ten = ten;
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        // TODO Auto-generated method stub
         return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        // TODO Auto-generated method stub
         return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        // TODO Auto-generated method stub
         return true;
     }
 
     @Override
     public boolean isEnabled() {
-        // TODO Auto-generated method stub
         return true;
     }
     

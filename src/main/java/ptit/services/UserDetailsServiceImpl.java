@@ -8,18 +8,19 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import ptit.ThanhVien;
-import ptit.data.ThanhVienRepository;
+import ptit.controllers.User;
+import ptit.controllers.UserRepository;
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService{
 
     @Autowired
-    ThanhVienRepository thanhVienRepo;
+    UserRepository userRepo;
 
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        ThanhVien user = thanhVienRepo.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("Khong tim thay username: " + username));
+        
+        User user = userRepo.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("Khong tim thay username: " + username));
         return UserDetailsImpl.build(user);
     }
     
