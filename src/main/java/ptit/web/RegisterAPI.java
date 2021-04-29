@@ -29,7 +29,7 @@ import ptit.LopHocPhan;
 import ptit.MonHoc;
 import ptit.MonHocKyHoc;
 import ptit.MonHocKyHocView;
-import ptit.ThanhVien;
+import ptit.controllers.UserRepository;
 import ptit.data.BoMonRepository;
 import ptit.data.GiangVienKhoaRepository;
 import ptit.data.KipHocRepository;
@@ -39,8 +39,8 @@ import ptit.data.LopHocPhanRepository;
 import ptit.data.MonHocKyHocRepository;
 import ptit.data.MonHocRepository;
 import ptit.data.NgayHocRepository;
-import ptit.data.ThanhVienRepository;
 import ptit.data.TuanHocRepository;
+import ptit.dto.JwtResponse;
 
 @RestController
 @CrossOrigin("*")
@@ -66,11 +66,13 @@ public class RegisterAPI {
     private final GiangVienKhoaRepository gvkRepo;
     @Autowired
     private final BoMonRepository bmRepo;
+    @Autowired
+    private final UserRepository tvRepo;
 
     public RegisterAPI(KyHocRepository kyhocRepo, MonHocKyHocRepository mhkhRepo, MonHocRepository mhRepo,
             LopHocPhanRepository lhpRepo, LichHocRepository lhRepo, KipHocRepository khRepo, NgayHocRepository nhRepo,
             TuanHocRepository thRepo, GiangVienKhoaRepository gvkRepo, BoMonRepository bmRepo,
-            ThanhVienRepository tvRepo) {
+            UserRepository tvRepo) {
         this.kyhocRepo = kyhocRepo;
         this.mhkhRepo = mhkhRepo;
         this.mhRepo = mhRepo;
@@ -81,6 +83,7 @@ public class RegisterAPI {
         this.thRepo = thRepo;
         this.gvkRepo = gvkRepo;
         this.bmRepo = bmRepo;
+        this.tvRepo = tvRepo;
     }
 
     @GetMapping(produces = "application/json")
@@ -88,11 +91,9 @@ public class RegisterAPI {
             throws IOException {
         try {
             HttpSession session = request.getSession();
-            ThanhVien giangvien = (ThanhVien) session.getAttribute("giangvien");
-            if (giangvien == null) {
-                response.sendRedirect("/login?err=timeout");
-            }
-            GiangVienKhoa gvk = gvkRepo.findById(giangvien.getId()).get();
+            JwtResponse jwtResponse = (JwtResponse) session.getAttribute("user");
+            System.out.println(jwtResponse.getId());
+            GiangVienKhoa gvk = gvkRepo.findById(jwtResponse.getId()).get();
             System.out.println(gvk.getId());
             ArrayList<BoMon> listBoMonKhoa = (ArrayList<BoMon>) bmRepo.getListBoMon(gvk.getKhoa().getId());
             ArrayList<Integer> listIdMon = new ArrayList<Integer>();
@@ -115,8 +116,8 @@ public class RegisterAPI {
                     mhkh.setMh(mh);
                 }
             }
-            
-            for(MonHocKyHoc mhkh : listMHKH){
+
+            for (MonHocKyHoc mhkh : listMHKH) {
                 MonHocKyHocView mhkhv = new MonHocKyHocView();
                 mhkhv.setId(mhkh.getId());
                 mhkhv.setMota(mhkh.getMh().getMota());
@@ -124,7 +125,6 @@ public class RegisterAPI {
                 mhkhv.setTen(mhkh.getMh().getTen());
                 listMHKHView.add(mhkhv);
             }
-
             model.addAttribute("msg", "Lấy danh sách môn học thành công");
             return new ResponseEntity<>(listMHKHView, HttpStatus.OK);
         } catch (Exception e) {
@@ -138,10 +138,8 @@ public class RegisterAPI {
             HttpServletResponse response) {
         try {
             HttpSession session = request.getSession();
-            ThanhVien giangvien = (ThanhVien) session.getAttribute("giangvien");
-            if (giangvien == null) {
-                response.sendRedirect("/login?err=timeout");
-            }
+            JwtResponse jwtResponse = (JwtResponse) session.getAttribute("user");
+            System.out.println("id day" + jwtResponse.getId());
             ArrayList<LichHoc> listLichLHP = new ArrayList<LichHoc>();
             ArrayList<LopHocPhan> listLHPFound = (ArrayList<LopHocPhan>) lhpRepo.getLHPByMHKHId(id);
 
@@ -155,11 +153,11 @@ public class RegisterAPI {
                 listLichLHP.add(lh);
             }
 
-            ArrayList<LichHoc> listLichDaDK = (ArrayList<LichHoc>) lhRepo.findDaDKLHP(giangvien.getId());
+            ArrayList<LichHoc> listLichDaDK = (ArrayList<LichHoc>) lhRepo.findDaDKLHP(jwtResponse.getId());
 
             ArrayList<LichHocView> listLichViewDaDK = new ArrayList<LichHocView>();
             ArrayList<LichHocView> listLichViewLHP = new ArrayList<LichHocView>();
-            for(LichHoc lh : listLichLHP){
+            for (LichHoc lh : listLichLHP) {
                 LichHocView lhv = new LichHocView();
                 lhv.setId(lh.getId());
                 lhv.setKiphoc(lh.getKiphoc().getTen());
@@ -169,7 +167,7 @@ public class RegisterAPI {
                 lhv.setTen(lh.getTen());
                 listLichViewLHP.add(lhv);
             }
-            for(LichHoc lh : listLichDaDK){
+            for (LichHoc lh : listLichDaDK) {
                 LichHocView lhv = new LichHocView();
                 lhv.setId(lh.getId());
                 lhv.setKiphoc(lh.getKiphoc().getTen());
@@ -190,29 +188,27 @@ public class RegisterAPI {
         }
     }
 
-    @PutMapping(value="/updatedangky", produces = "application/json")
+    @PutMapping(value = "/updatedangky", produces = "application/json")
     public ResponseEntity<?> updateDKHP(@RequestBody ArrayList<LichHocView> listDK, HttpServletRequest request,
             HttpServletResponse response, Model model) {
-        HttpSession session = request.getSession();
+                HttpSession session = request.getSession();
         try {
-            ThanhVien giangvien = (ThanhVien) session.getAttribute("giangvien");
-            if (giangvien == null) {
-                response.sendRedirect("/login?err=timeout");
-            }
+            
+            JwtResponse jwtResponse = (JwtResponse) session.getAttribute("user");
             ArrayList<LichHoc> listLichDaDK = (ArrayList<LichHoc>) session.getAttribute("listDaDK");
             for (LichHocView lh : listDK) {
                 for (LichHoc lhDaDK : listLichDaDK) {
-                    if (lhDaDK.getKiphoc().getTen()== lh.getKiphoc()
+                    if (lhDaDK.getKiphoc().getTen() == lh.getKiphoc()
                             && lhDaDK.getNgayhoc().getTen() == lh.getNgayhoc()) {
-                        String msg = "Bị trùng lịch giảng dạy môn " + lh.getTen() + ", " + lh.getKiphoc()
-                                + ", " + lh.getNgayhoc() + " hàng tuần";
+                        String msg = "Bị trùng lịch giảng dạy môn " + lh.getTen() + ", " + lh.getKiphoc() + ", "
+                                + lh.getNgayhoc() + " hàng tuần";
                         model.addAttribute("msg", msg);
                         response.sendRedirect("/dangky/dslophocphan?error");
                     }
                 }
             }
             for (LichHocView lh : listDK) {
-                lhRepo.updateDangKy(giangvien.getId(), lh.getId());
+                lhRepo.updateDangKy(jwtResponse.getId(), lh.getId());
             }
             String msg = "Lưu đăng ký thành công";
             model.addAttribute("msg", msg);

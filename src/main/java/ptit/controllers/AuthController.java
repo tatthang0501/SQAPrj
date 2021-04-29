@@ -58,6 +58,7 @@ public class AuthController {
 		JwtResponse jwtResponse = new JwtResponse(jwt, userDetails.getId(), userDetails.getUsername(), userDetails.getEmail());
 		HttpSession session = request.getSession();
 		session.setAttribute("user", jwtResponse);
+		System.out.println("Da dang nhap");
 		return ResponseEntity.ok(jwtResponse);
 	}
 
@@ -72,7 +73,7 @@ public class AuthController {
 		}
 
 		// Create new user's account
-		User user = new User(signUpRequest.getUsername(), signUpRequest.getEmail(),
+		ThanhVien user = new ThanhVien(signUpRequest.getUsername(), signUpRequest.getEmail(),
 				encoder.encode(signUpRequest.getPassword()));
 		user.setDem("thang");
 		user.setDt("0337971060");

@@ -7,7 +7,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import ptit.DiaChi;
-import ptit.controllers.User;
+import ptit.controllers.ThanhVien;
 
 public class UserDetailsImpl implements UserDetails{
     private int id;
@@ -30,7 +30,7 @@ public class UserDetailsImpl implements UserDetails{
         this.email = email;
     }
 
-    public static UserDetailsImpl build(User user){
+    public static UserDetailsImpl build(ThanhVien user){
         return new UserDetailsImpl(user.getId(), user.getUsername(), user.getPassword(), user.getEmail());
     }
     

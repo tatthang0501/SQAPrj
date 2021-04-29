@@ -1,7 +1,6 @@
 drop database if exists dangkytinchii;
-create database dangkytinchii;
+-- create database dangkytinchii;
 use dangkytinchii;
-
 -- MySQL dump 10.13  Distrib 8.0.22, for Win64 (x86_64)
 --
 -- Host: localhost    Database: dangkytinchi
@@ -105,7 +104,8 @@ CREATE TABLE `thanhvien` (
 --
 
 /*!40000 ALTER TABLE `thanhvien` DISABLE KEYS */;
-INSERT INTO `thanhvien` (`id`, `username`, `password`, `ngaysinh`, `email`, `dt`, `ghichu`, `vitri`, `ho`, `dem`, `ten`, `diachiid`) VALUES (1,'thang','123456','1999-01-05','tatthang0501@gmail.com','0337971060','khong co','giangvien','Nguyen','Tat','Thang',1);
+-- INSERT INTO `thanhvien` (`id`, `username`, `password`, `ngaysinh`, `email`, `dt`, `ghichu`, `vitri`, `ho`, `dem`, `ten`, `diachiid`) VALUES (1,'thang','123456','1999-01-05','tatthang0501@gmail.com','0337971060','khong co','giangvien','Nguyen','Tat','Thang',1);
+-- INSERT INTO `thanhvien` (`username`, `password`, `ngaysinh`, `email`, `dt`, `ghichu`, `vitri`, `ho`, `dem`, `ten`, `diachiid`) VALUES ('thangnguyen','123456','1999-01-05','tatthang0501@gmail.com','0337971060','khong co','giangvien','Nguyen','Tat','Thang',1);
 /*!40000 ALTER TABLE `thanhvien` ENABLE KEYS */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -848,10 +848,12 @@ INSERT INTO `giangvienkhoa` (`id`, `k_id`, `giangvienid`) VALUES (1,1,1);
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2021-04-02 13:08:35
-
-use dangkytinchii;
-select * from bomon;
-select * from monhoc;
-select * from lichhoc;
-delete from lichhoc where id = null;
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `tuanid`, `ngayid`, `kipid`, `mota`, `giangvienid`) VALUES ('Nhap Mon CNPM',5,2,1,2,'Hoc som',1);
+insert into lichhoc(ten,lhpid,tuanid,ngayid,kipid,mota) values("Nhap mon CNPM",5,1,3,3,"hoc");
+-- select * from bomon;
+-- select * from monhoc;
+-- select * from giangvienkhoa;
+-- select * from bomon;
+-- insert into giangvienkhoa values(2,1,4);
+-- delete from thanhvien where id = 2;
+-- INSERT INTO `lichhoc` (`ten`, `lhpid`, `tuanid`, `ngayid`, `kipid`, `mota`, `giangvienid`) VALUES ('Nhap Mon CNPM',5,2,1,2,'Hoc som',1);
+alter table thanhvien MODIFY password VARCHAR(255);

@@ -1,25 +1,25 @@
 package ptit.dto;
 
 public class JwtResponse {
-    private String token;
+    private String access_token;
     private String type = "Bearer";
     private int id;
     private String username;
     private String email;
 
-    public JwtResponse(String accessToken, int id, String username, String email) {
-		this.token = accessToken;
+    public JwtResponse(String access_token, int id, String username, String email) {
+		this.access_token = access_token;
 		this.id = id;
 		this.username = username;
 		this.email = email;
 	}
 
     public String getAccessToken() {
-		return token;
+		return access_token;
 	}
 
 	public void setAccessToken(String accessToken) {
-		this.token = accessToken;
+		this.access_token = accessToken;
 	}
 
 	public String getTokenType() {

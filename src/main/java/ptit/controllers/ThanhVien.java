@@ -10,14 +10,14 @@ import lombok.Data;
 import ptit.DiaChi;
 
 @Entity
-@Table(name = "user", uniqueConstraints = { @UniqueConstraint(columnNames = "username"),
+@Table(name = "thanhvien", uniqueConstraints = { @UniqueConstraint(columnNames = "username"),
 		@UniqueConstraint(columnNames = "email") })
 @Data
-public class User {
-	public User() {
+public class ThanhVien {
+	public ThanhVien() {
 	}
 
-	public User(String username, String email, String password) {
+	public ThanhVien(String username, String email, String password) {
 		this.username = username;
 		this.email = email;
 		this.password = password;
@@ -93,10 +93,6 @@ public class User {
 	@Column(name = "ngaysinh")
 	private String ngaySinh;
 
-	@OneToOne
-	@JoinColumn(name = "diachiid", referencedColumnName = "id")
-	private DiaChi diaChi;
-
 	@NotNull
 	@Column(name = "email")
 	private String email;
@@ -119,4 +115,7 @@ public class User {
 	@Column(name = "ten")
 	private String ten;
 
+	@OneToOne
+	@JoinColumn(name = "diachiid", referencedColumnName = "id")
+	private DiaChi diaChi;
 }
