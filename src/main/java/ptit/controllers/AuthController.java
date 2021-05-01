@@ -30,7 +30,7 @@ import ptit.services.UserDetailsImpl;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping("/api")
 public class AuthController {
 	@Autowired
 	AuthenticationManager authenticationManager;
@@ -61,7 +61,7 @@ public class AuthController {
 		System.out.println("Da dang nhap");
 		return ResponseEntity.ok(jwtResponse);
 	}
-
+	
 	@PostMapping("/signup")
 	public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
 		if (userRepository.existsByUsername(signUpRequest.getUsername())) {
