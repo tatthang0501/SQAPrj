@@ -29,7 +29,6 @@ import ptit.LopHocPhan;
 import ptit.MonHoc;
 import ptit.MonHocKyHoc;
 import ptit.MonHocKyHocView;
-import ptit.controllers.UserRepository;
 import ptit.data.BoMonRepository;
 import ptit.data.GiangVienKhoaRepository;
 import ptit.data.KipHocRepository;
@@ -40,6 +39,7 @@ import ptit.data.MonHocKyHocRepository;
 import ptit.data.MonHocRepository;
 import ptit.data.NgayHocRepository;
 import ptit.data.TuanHocRepository;
+import ptit.data.UserRepository;
 import ptit.dto.JwtResponse;
 
 @RestController
@@ -66,13 +66,10 @@ public class RegisterAPI {
     private final GiangVienKhoaRepository gvkRepo;
     @Autowired
     private final BoMonRepository bmRepo;
-    @Autowired
-    private final UserRepository tvRepo;
 
     public RegisterAPI(KyHocRepository kyhocRepo, MonHocKyHocRepository mhkhRepo, MonHocRepository mhRepo,
             LopHocPhanRepository lhpRepo, LichHocRepository lhRepo, KipHocRepository khRepo, NgayHocRepository nhRepo,
-            TuanHocRepository thRepo, GiangVienKhoaRepository gvkRepo, BoMonRepository bmRepo,
-            UserRepository tvRepo) {
+            TuanHocRepository thRepo, GiangVienKhoaRepository gvkRepo, BoMonRepository bmRepo) {
         this.kyhocRepo = kyhocRepo;
         this.mhkhRepo = mhkhRepo;
         this.mhRepo = mhRepo;
@@ -83,7 +80,6 @@ public class RegisterAPI {
         this.thRepo = thRepo;
         this.gvkRepo = gvkRepo;
         this.bmRepo = bmRepo;
-        this.tvRepo = tvRepo;
     }
 
     @GetMapping(produces = "application/json")

@@ -1,4 +1,4 @@
-package ptit.controllers;
+package ptit.web;
 
 import java.util.HashSet;
 import java.util.List;
@@ -21,7 +21,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import ptit.ThanhVien;
 import ptit.common.JwtUtils;
+import ptit.data.UserRepository;
 import ptit.dto.JwtResponse;
 import ptit.dto.LoginForm;
 import ptit.dto.MessageResponse;
@@ -30,7 +33,7 @@ import ptit.services.UserDetailsImpl;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/login")
 public class AuthController {
 	@Autowired
 	AuthenticationManager authenticationManager;
@@ -44,7 +47,7 @@ public class AuthController {
 	@Autowired
 	JwtUtils jwtUtils;
 
-	@PostMapping("/signin")
+	@PostMapping()
 	public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginForm loginRequest, HttpServletRequest request) {
 
 		Authentication authentication = authenticationManager.authenticate(

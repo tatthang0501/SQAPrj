@@ -15,7 +15,6 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import lombok.Data;
-import ptit.controllers.ThanhVien;
 
 @Data
 @Entity

@@ -7,7 +7,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import ptit.DiaChi;
-import ptit.controllers.ThanhVien;
+import ptit.ThanhVien;
 
 public class UserDetailsImpl implements UserDetails{
     private int id;

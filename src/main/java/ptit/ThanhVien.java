@@ -1,4 +1,4 @@
-package ptit.controllers;
+package ptit;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -7,7 +7,6 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import lombok.Data;
-import ptit.DiaChi;
 
 @Entity
 @Table(name = "thanhvien", uniqueConstraints = { @UniqueConstraint(columnNames = "username"),

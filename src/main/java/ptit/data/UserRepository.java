@@ -1,9 +1,11 @@
-package ptit.controllers;
+package ptit.data;
 
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+
+import ptit.ThanhVien;
 
 
 @Repository
