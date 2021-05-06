@@ -3,7 +3,8 @@
 -- Host: localhost    Database: dangkytinchii
 -- ------------------------------------------------------
 -- Server version	8.0.23
-
+create database if not exists dangkytinchii;
+use dangkytinchii;
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
@@ -209,13 +210,13 @@ DROP TABLE IF EXISTS `kiphoc`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `kiphoc` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `ten` varchar(30) DEFAULT NULL,
+  `ten` int DEFAULT NULL,
   `mota` varchar(50) DEFAULT NULL,
   `lichhocid` int NOT NULL,
   PRIMARY KEY (`id`),
   KEY `lichhocid` (`lichhocid`),
   CONSTRAINT `kiphoc_ibfk_1` FOREIGN KEY (`lichhocid`) REFERENCES `lichhoc` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -224,6 +225,7 @@ CREATE TABLE `kiphoc` (
 
 LOCK TABLES `kiphoc` WRITE;
 /*!40000 ALTER TABLE `kiphoc` DISABLE KEYS */;
+INSERT INTO `kiphoc` VALUES (1,1,NULL,1),(2,2,NULL,1),(3,3,NULL,2),(4,4,NULL,2),(5,5,NULL,3),(6,6,NULL,3),(7,7,NULL,4),(8,8,NULL,4),(9,1,NULL,5),(10,2,NULL,5),(11,3,NULL,6),(12,4,NULL,6),(13,5,NULL,7),(14,6,NULL,7),(15,7,NULL,8),(16,8,NULL,8),(17,1,NULL,9),(18,2,NULL,9),(19,3,NULL,10),(20,4,NULL,10),(21,5,NULL,11),(22,6,NULL,11),(23,7,NULL,12),(24,8,NULL,12),(25,1,NULL,13),(26,2,NULL,13),(27,3,NULL,14),(28,4,NULL,14),(29,5,NULL,15),(30,6,NULL,15),(31,7,NULL,16),(32,8,NULL,16),(33,1,NULL,17),(34,2,NULL,17),(35,3,NULL,18),(36,4,NULL,18),(37,5,NULL,19),(38,6,NULL,19),(39,7,NULL,20),(40,8,NULL,20),(41,1,NULL,21),(42,2,NULL,21),(43,3,NULL,22),(44,4,NULL,22),(45,5,NULL,23),(46,6,NULL,23),(47,7,NULL,24),(48,8,NULL,24),(49,1,NULL,25),(50,2,NULL,25);
 /*!40000 ALTER TABLE `kiphoc` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -411,13 +413,13 @@ DROP TABLE IF EXISTS `ngayhoc`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ngayhoc` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `ten` varchar(30) DEFAULT NULL,
+  `ten` int DEFAULT NULL,
   `mota` varchar(50) DEFAULT NULL,
   `lichhocid` int NOT NULL,
   PRIMARY KEY (`id`),
   KEY `lichhocid` (`lichhocid`),
   CONSTRAINT `ngayhoc_ibfk_1` FOREIGN KEY (`lichhocid`) REFERENCES `lichhoc` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -426,6 +428,7 @@ CREATE TABLE `ngayhoc` (
 
 LOCK TABLES `ngayhoc` WRITE;
 /*!40000 ALTER TABLE `ngayhoc` DISABLE KEYS */;
+INSERT INTO `ngayhoc` VALUES (1,2,NULL,1),(2,2,NULL,2),(3,2,NULL,3),(4,2,NULL,4),(5,3,NULL,5),(6,3,NULL,6),(7,3,NULL,7),(8,3,NULL,8),(9,4,NULL,9),(10,4,NULL,10),(11,4,NULL,11),(12,4,NULL,12),(13,5,NULL,13),(14,5,NULL,14),(15,5,NULL,15),(16,5,NULL,16),(17,6,NULL,17),(18,6,NULL,18),(19,6,NULL,18),(20,6,NULL,20),(21,7,NULL,21),(22,7,NULL,22),(23,7,NULL,23),(24,7,NULL,24),(25,7,NULL,25);
 /*!40000 ALTER TABLE `ngayhoc` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -476,13 +479,13 @@ DROP TABLE IF EXISTS `tuanhoc`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `tuanhoc` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `ten` varchar(30) DEFAULT NULL,
+  `ten` int DEFAULT NULL,
   `mota` varchar(30) DEFAULT NULL,
   `lichhocid` int NOT NULL,
   PRIMARY KEY (`id`),
   KEY `lichhocid` (`lichhocid`),
   CONSTRAINT `tuanhoc_ibfk_1` FOREIGN KEY (`lichhocid`) REFERENCES `lichhoc` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=147 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -491,8 +494,13 @@ CREATE TABLE `tuanhoc` (
 
 LOCK TABLES `tuanhoc` WRITE;
 /*!40000 ALTER TABLE `tuanhoc` DISABLE KEYS */;
+INSERT INTO `tuanhoc` VALUES (1,1,NULL,1),(2,2,NULL,1),(3,3,NULL,1),(4,4,NULL,1),(5,5,NULL,1),(6,6,NULL,1),(7,7,NULL,1),(8,8,NULL,1),(9,9,NULL,1),(10,10,NULL,1),(11,11,NULL,1),(12,12,NULL,1),(13,13,NULL,1),(14,14,NULL,1),(15,15,NULL,1),(16,16,NULL,1),(17,1,NULL,2),(18,2,NULL,2),(19,3,NULL,2),(20,4,NULL,2),(21,5,NULL,2),(22,6,NULL,2),(23,7,NULL,2),(24,8,NULL,2),(25,9,NULL,2),(26,10,NULL,2),(27,11,NULL,2),(28,12,NULL,2),(29,13,NULL,2),(30,14,NULL,2),(31,15,NULL,2),(32,16,NULL,2),(33,1,NULL,3),(34,2,NULL,3),(35,3,NULL,3),(36,4,NULL,3),(37,5,NULL,3),(38,6,NULL,3),(39,7,NULL,3),(40,8,NULL,3),(41,9,NULL,3),(42,10,NULL,3),(43,11,NULL,3),(44,12,NULL,3),(45,13,NULL,3),(47,15,NULL,3),(48,16,NULL,3),(49,1,NULL,4),(50,2,NULL,4),(51,3,NULL,4),(52,4,NULL,4),(53,5,NULL,4),(54,6,NULL,4),(55,7,NULL,4),(56,8,NULL,4),(57,9,NULL,4),(58,10,NULL,4),(59,11,NULL,4),(60,12,NULL,4),(61,13,NULL,4),(62,14,NULL,4),(63,15,NULL,4),(64,16,NULL,4),(146,14,NULL,3);
 /*!40000 ALTER TABLE `tuanhoc` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Dumping routines for database 'dangkytinchii'
+--
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -503,4 +511,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-05-07  0:05:57
+-- Dump completed on 2021-05-07  3:03:31

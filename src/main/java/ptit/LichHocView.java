@@ -17,7 +17,7 @@ public class LichHocView implements Serializable{
     private String phong;
     private int nhomTH;
     private int siSoToiDa;
-    private List<NgayHoc> ngayHoc;
-    private List<KipHoc> kipHoc;
-    private List<TuanHoc> tuanHoc;
+    private List<Integer> ngayHoc;
+    private List<Integer> kipHoc;
+    private List<Integer> tuanHoc;
 }

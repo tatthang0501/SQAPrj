@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.security.Principal;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -33,6 +34,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import ptit.BoMon;
 import ptit.GiangVienKhoa;
+import ptit.KipHoc;
 import ptit.KyHoc;
 import ptit.LichHoc;
 import ptit.LichHocView;
@@ -41,7 +43,9 @@ import ptit.LopHocPhan;
 import ptit.MonHoc;
 import ptit.MonHocKyHoc;
 import ptit.MonHocKyHocView;
+import ptit.NgayHoc;
 import ptit.ThanhVien;
+import ptit.TuanHoc;
 import ptit.common.JwtUtils;
 import ptit.data.BoMonRepository;
 import ptit.data.GiangVienKhoaRepository;
@@ -229,9 +233,26 @@ public class RegisterAPI {
                 ArrayList<LichHoc> listLichHoc = (ArrayList<LichHoc>) lhRepo.findLichLHP(lhp.getId());
                 LichHoc lh = listLichHoc.get(0);
                 lh.setLhp(lhp);
-                lh.setTuanHoc(thRepo.findByLichHocId(lh.getId()));
-                lh.setKipHoc(khRepo.findByLichHocId(lh.getId()));
-                lh.setNgayHoc(nhRepo.findByLichHocId(lh.getId()));
+                // lh.setTuanHoc(thRepo.findByLichHocId(lh.getId()));
+                // lh.setKipHoc(khRepo.findByLichHocId(lh.getId()));
+                // lh.setNgayHoc(nhRepo.findByLichHocId(lh.getId()));
+                List<KipHoc> kh = lh.getKipHoc();
+                for(KipHoc kip : kh){
+                    kip.setLh(null);
+                }
+                lh.setKipHoc(kh);
+
+                List<NgayHoc> nh = lh.getNgayHoc();
+                for(NgayHoc ngay : nh){
+                    ngay.setLh(null);
+                }
+                lh.setNgayHoc(nh);
+
+                List<TuanHoc> th = lh.getTuanHoc();
+                for(TuanHoc tuan : th){
+                    tuan.setLh(null);
+                }
+                lh.setTuanHoc(th);
                 listLichLHP.add(lh);
             }
 
@@ -247,9 +268,28 @@ public class RegisterAPI {
                 lhv.setPhong(lh.getPhong());
                 lhv.setNhomTH(lh.getNhomTH());
                 lhv.setSiSoToiDa(lh.getLhp().getSisotoida());
-                lhv.setKipHoc(lh.getKipHoc());
-                lhv.setNgayHoc(lh.getNgayHoc());
-                lhv.setTuanHoc(lh.getTuanHoc());
+                
+                List<KipHoc> kh = lh.getKipHoc();
+                List<Integer> listKH = new ArrayList<>();
+                for(KipHoc kip : kh){
+                    listKH.add(kip.getTen());
+                }
+                lhv.setKipHoc(listKH);
+
+                List<NgayHoc> nh = lh.getNgayHoc();
+                List<Integer> listNH = new ArrayList<>();
+                for(NgayHoc ngay : nh){
+                    listNH.add(ngay.getTen());
+                }
+                lhv.setNgayHoc(listNH);
+
+                List<TuanHoc> th = lh.getTuanHoc();
+                List<Integer> listTH = new ArrayList<>();
+                for(TuanHoc tuan : th){
+                    listTH.add(tuan.getTen());
+                }
+                lhv.setTuanHoc(listTH);
+
                 listLichViewLHP.add(lhv);
             }
             for (LichHoc lh : listLichDaDK) {
@@ -260,9 +300,6 @@ public class RegisterAPI {
                 lhv.setPhong(lh.getPhong());
                 lhv.setNhomTH(lh.getNhomTH());
                 lhv.setSiSoToiDa(lh.getLhp().getSisotoida());
-                lhv.setKipHoc(lh.getKipHoc());
-                lhv.setNgayHoc(lh.getNgayHoc());
-                lhv.setTuanHoc(lh.getTuanHoc());
                 listLichViewDaDK.add(lhv);
             }
             ListDaDK_ListCoTheDK list = new ListDaDK_ListCoTheDK();
@@ -285,18 +322,18 @@ public class RegisterAPI {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             String currentPrincipalName = authentication.getName();
             ThanhVien tv = userRepository.findByUsername(currentPrincipalName).get();
-            ArrayList<LichHoc> listLichDaDK = (ArrayList<LichHoc>) session.getAttribute("listDaDK");
-            for (LichHocView lh : listDK) {
-                for (LichHoc lhDaDK : listLichDaDK) {
-                    // if (lhDaDK.getKiphoc().getTen() == lh.getKiphoc()
-                    //         && lhDaDK.getNgayhoc().getTen() == lh.getNgayhoc()) {
-                    //     String msg = "Bị trùng lịch giảng dạy môn " + lh.getTen() + ", " + lh.getKiphoc() + ", "
-                    //             + lh.getNgayhoc() + " hàng tuần";
-                    //     model.addAttribute("msg", msg);
-                    //     response.sendRedirect("/dangky/dslophocphan?error");
-                    // }
-                }
-            }
+            // ArrayList<LichHoc> listLichDaDK = (ArrayList<LichHoc>) session.getAttribute("listDaDK");
+            // for (LichHocView lh : listDK) {
+            //     for (LichHoc lhDaDK : listLichDaDK) {
+            //         // if (lhDaDK.getKiphoc().getTen() == lh.getKiphoc()
+            //         //         && lhDaDK.getNgayhoc().getTen() == lh.getNgayhoc()) {
+            //         //     String msg = "Bị trùng lịch giảng dạy môn " + lh.getTen() + ", " + lh.getKiphoc() + ", "
+            //         //             + lh.getNgayhoc() + " hàng tuần";
+            //         //     model.addAttribute("msg", msg);
+            //         //     response.sendRedirect("/dangky/dslophocphan?error");
+            //         // }
+            //     }
+            // }
             for (LichHocView lh : listDK) {
                 lhRepo.updateDangKy(tv.getId(), lh.getId());
             }

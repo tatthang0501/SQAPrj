@@ -26,7 +26,7 @@ public class TuanHoc implements Serializable{
     private int id;
     @NotNull
     @Column(name="ten")
-    private String ten;
+    private int ten;
     @NotNull
     @Column(name="mota")
     private String mota;
