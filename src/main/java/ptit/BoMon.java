@@ -45,8 +45,8 @@ public class BoMon implements Serializable {
     @OrderColumn
     private List<MonHoc> dsMonHoc;
 
-    // @NotNull
-    // @OneToMany(targetEntity = ThanhVien.class, cascade = CascadeType.ALL)
-    // @OrderColumn
-    // private List<ThanhVien> dsGiangVien;
+    @NotNull
+    @OneToMany(targetEntity = ThanhVien.class, cascade = CascadeType.ALL)
+    @OrderColumn
+    private List<ThanhVien> dsGiangVien;
 }

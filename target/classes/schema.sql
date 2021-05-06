@@ -1,499 +1,8 @@
-drop database if exists dangkytinchii;
-create database dangkytinchii;
-use dangkytinchii;
--- MySQL dump 10.13  Distrib 8.0.22, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.23, for Win64 (x86_64)
 --
--- Host: localhost    Database: dangkytinchi
+-- Host: localhost    Database: dangkytinchii
 -- ------------------------------------------------------
--- Server version	8.0.22
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-
---
--- Table structure for table `diachi`
---
-
-DROP TABLE IF EXISTS `diachi`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `diachi` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `sonha` varchar(50) DEFAULT NULL,
-  `toanha` varchar(50) DEFAULT NULL,
-  `xompho` varchar(50) DEFAULT NULL,
-  `phuongxa` varchar(50) DEFAULT NULL,
-  `quanhuyen` varchar(50) DEFAULT NULL,
-  `tinhthanh` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `diachi`
---
-
-/*!40000 ALTER TABLE `diachi` DISABLE KEYS */;
-INSERT INTO `diachi` (`id`, `sonha`, `toanha`, `xompho`, `phuongxa`, `quanhuyen`, `tinhthanh`) VALUES (1,'27','Nguyễn Đức Cảnh','Hoàng Văn Thụ','Trương Định','Hoàng Mai','Hà Nội');
-/*!40000 ALTER TABLE `diachi` ENABLE KEYS */;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
-
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
--- Dump completed on 2021-04-02 13:08:34
-
--- MySQL dump 10.13  Distrib 8.0.22, for Win64 (x86_64)
---
--- Host: localhost    Database: dangkytinchi
--- ------------------------------------------------------
--- Server version	8.0.22
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-
---
--- Table structure for table `thanhvien`
---
-
-DROP TABLE IF EXISTS `thanhvien`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `thanhvien` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `username` varchar(50) DEFAULT NULL,
-  `password` varchar(50) DEFAULT NULL,
-  `ngaysinh` date DEFAULT NULL,
-  `email` varchar(50) DEFAULT NULL,
-  `dt` varchar(15) DEFAULT NULL,
-  `ghichu` varchar(100) DEFAULT NULL,
-  `vitri` varchar(15) DEFAULT NULL,
-  `ho` varchar(10) DEFAULT NULL,
-  `dem` varchar(10) DEFAULT NULL,
-  `ten` varchar(10) DEFAULT NULL,
-  `diachiid` int DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `diachiid` (`diachiid`),
-  CONSTRAINT `thanhvien_ibfk_1` FOREIGN KEY (`diachiid`) REFERENCES `diachi` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `thanhvien`
---
-
-/*!40000 ALTER TABLE `thanhvien` DISABLE KEYS */;
--- INSERT INTO `thanhvien` (`id`, `username`, `password`, `ngaysinh`, `email`, `dt`, `ghichu`, `vitri`, `ho`, `dem`, `ten`, `diachiid`) VALUES (1,'thang','123456','1999-01-05','tatthang0501@gmail.com','0337971060','khong co','giangvien','Nguyen','Tat','Thang',1);
--- INSERT INTO `thanhvien` (`username`, `password`, `ngaysinh`, `email`, `dt`, `ghichu`, `vitri`, `ho`, `dem`, `ten`, `diachiid`) VALUES ('thangnguyen','123456','1999-01-05','tatthang0501@gmail.com','0337971060','khong co','giangvien','Nguyen','Tat','Thang',1);
-/*!40000 ALTER TABLE `thanhvien` ENABLE KEYS */;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
-
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
--- Dump completed on 2021-04-02 13:08:35
-
--- MySQL dump 10.13  Distrib 8.0.22, for Win64 (x86_64)
---
--- Host: localhost    Database: dangkytinchi
--- ------------------------------------------------------
--- Server version	8.0.22
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-
---
--- Table structure for table `khoa`
---
-
-DROP TABLE IF EXISTS `khoa`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `khoa` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `ten` varchar(30) DEFAULT NULL,
-  `mota` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `khoa`
---
-
-/*!40000 ALTER TABLE `khoa` DISABLE KEYS */;
-INSERT INTO `khoa` (`id`, `ten`, `mota`) VALUES (1,'CNTT','');
-INSERT INTO `khoa` (`id`, `ten`, `mota`) VALUES (2,'ATTT','');
-INSERT INTO `khoa` (`id`, `ten`, `mota`) VALUES (3,'CNĐPT','');
-/*!40000 ALTER TABLE `khoa` ENABLE KEYS */;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
-
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
--- Dump completed on 2021-04-02 13:08:35
-
--- MySQL dump 10.13  Distrib 8.0.22, for Win64 (x86_64)
---
--- Host: localhost    Database: dangkytinchi
--- ------------------------------------------------------
--- Server version	8.0.22
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-
---
--- Table structure for table `ngayhoc`
---
-
-DROP TABLE IF EXISTS `ngayhoc`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `ngayhoc` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `ten` varchar(30) DEFAULT NULL,
-  `mota` varchar(50) DEFAULT NULL,
-  `lichhocid` int NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `ngayhoc`
---
-
-/*!40000 ALTER TABLE `ngayhoc` DISABLE KEYS */;
-
-/*!40000 ALTER TABLE `ngayhoc` ENABLE KEYS */;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
-
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
--- Dump completed on 2021-04-02 13:08:36
-
--- MySQL dump 10.13  Distrib 8.0.22, for Win64 (x86_64)
---
--- Host: localhost    Database: dangkytinchi
--- ------------------------------------------------------
--- Server version	8.0.22
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-
---
--- Table structure for table `namhoc`
---
-
-DROP TABLE IF EXISTS `namhoc`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `namhoc` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `ten` varchar(30) DEFAULT NULL,
-  `mota` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `namhoc`
---
-
-/*!40000 ALTER TABLE `namhoc` DISABLE KEYS */;
-INSERT INTO `namhoc` (`id`, `ten`, `mota`) VALUES (1,'2015-2016','');
-INSERT INTO `namhoc` (`id`, `ten`, `mota`) VALUES (2,'2016-2017','');
-INSERT INTO `namhoc` (`id`, `ten`, `mota`) VALUES (3,'2017-2018','');
-INSERT INTO `namhoc` (`id`, `ten`, `mota`) VALUES (4,'2020-2021','');
-/*!40000 ALTER TABLE `namhoc` ENABLE KEYS */;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
-
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
--- Dump completed on 2021-04-02 13:08:35
-
--- MySQL dump 10.13  Distrib 8.0.22, for Win64 (x86_64)
---
--- Host: localhost    Database: dangkytinchi
--- ------------------------------------------------------
--- Server version	8.0.22
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-
---
--- Table structure for table `tuanhoc`
---
-
-DROP TABLE IF EXISTS `tuanhoc`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `tuanhoc` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `ten` varchar(30) DEFAULT NULL,
-  `mota` varchar(30) DEFAULT NULL,
-  `lichhocid` int NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `tuanhoc`
---
-
-/*!40000 ALTER TABLE `tuanhoc` DISABLE KEYS */;
-
-/*!40000 ALTER TABLE `tuanhoc` ENABLE KEYS */;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
-
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
--- Dump completed on 2021-04-02 13:08:34
-
--- MySQL dump 10.13  Distrib 8.0.22, for Win64 (x86_64)
---
--- Host: localhost    Database: dangkytinchi
--- ------------------------------------------------------
--- Server version	8.0.22
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-
---
--- Table structure for table `kiphoc`
---
-
-DROP TABLE IF EXISTS `kiphoc`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `kiphoc` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `ten` varchar(30) DEFAULT NULL,
-  `mota` varchar(50) DEFAULT NULL,
-  `lichhocid` int NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
---
--- Dumping data for table `kiphoc`
---
-
-/*!40000 ALTER TABLE `kiphoc` DISABLE KEYS */;
-
-/*!40000 ALTER TABLE `kiphoc` ENABLE KEYS */;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
-
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
--- Dump completed on 2021-04-02 13:08:35
-
--- MySQL dump 10.13  Distrib 8.0.22, for Win64 (x86_64)
---
--- Host: localhost    Database: dangkytinchi
--- ------------------------------------------------------
--- Server version	8.0.22
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-
---
--- Table structure for table `hocky`
---
-
-DROP TABLE IF EXISTS `hocky`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `hocky` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `ten` varchar(30) DEFAULT NULL,
-  `mota` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `hocky`
---
-
-/*!40000 ALTER TABLE `hocky` DISABLE KEYS */;
-INSERT INTO `hocky` (`id`, `ten`, `mota`) VALUES (1,'Học kỳ 1','');
-INSERT INTO `hocky` (`id`, `ten`, `mota`) VALUES (2,'Học kỳ 2','');
-/*!40000 ALTER TABLE `hocky` ENABLE KEYS */;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
-
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
--- Dump completed on 2021-04-02 13:08:35
-
--- MySQL dump 10.13  Distrib 8.0.22, for Win64 (x86_64)
---
--- Host: localhost    Database: dangkytinchi
--- ------------------------------------------------------
--- Server version	8.0.22
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-
---
--- Table structure for table `kyhoc`
---
-
-DROP TABLE IF EXISTS `kyhoc`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `kyhoc` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `namhocid` int DEFAULT NULL,
-  `hockyid` int DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `namhocid` (`namhocid`),
-  KEY `hockyid` (`hockyid`),
-  CONSTRAINT `kyhoc_ibfk_1` FOREIGN KEY (`namhocid`) REFERENCES `namhoc` (`id`),
-  CONSTRAINT `kyhoc_ibfk_2` FOREIGN KEY (`hockyid`) REFERENCES `hocky` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `kyhoc`
---
-
-/*!40000 ALTER TABLE `kyhoc` DISABLE KEYS */;
-INSERT INTO `kyhoc` (`id`, `namhocid`, `hockyid`) VALUES (1,4,1);
-INSERT INTO `kyhoc` (`id`, `namhocid`, `hockyid`) VALUES (2,4,2);
-/*!40000 ALTER TABLE `kyhoc` ENABLE KEYS */;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
-
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
--- Dump completed on 2021-04-02 13:08:35
-
--- MySQL dump 10.13  Distrib 8.0.22, for Win64 (x86_64)
---
--- Host: localhost    Database: dangkytinchi
--- ------------------------------------------------------
--- Server version	8.0.22
+-- Server version	8.0.23
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -521,349 +30,231 @@ CREATE TABLE `bomon` (
   PRIMARY KEY (`id`),
   KEY `khoaid` (`khoa_id`),
   CONSTRAINT `bomon_ibfk_1` FOREIGN KEY (`khoa_id`) REFERENCES `khoa` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `bomon`
 --
 
+LOCK TABLES `bomon` WRITE;
 /*!40000 ALTER TABLE `bomon` DISABLE KEYS */;
-INSERT INTO `bomon` (`id`, `ten`, `mota`, `khoa_id`) VALUES (1,'Công nghệ phần mềm','Chuyên ngành CNTT',1);
-INSERT INTO `bomon` (`id`, `ten`, `mota`, `khoa_id`) VALUES (2,'Trí tuệ nhân tạo','Chuyên ngành HTTT',1);
-INSERT INTO `bomon` (`ten`, `mota`, `khoa_id`) VALUES ('Bảo mật hệ thống','Chuyên ngành ATTT', 2);
-INSERT INTO `bomon` (`ten`, `mota`, `khoa_id`) VALUES ('Ngăn chặn tấn công DDOS','Chuyên ngành ATTT', 2);
-INSERT INTO `bomon` (`ten`, `mota`, `khoa_id`) VALUES ('Khai phá dữ liệu đa phương tiện','Chuyên ngành CNĐPT', 3);
-INSERT INTO `bomon` (`ten`, `mota`, `khoa_id`) VALUES ('Lập trình game','Chuyên ngành CNĐPT', 3);
+INSERT INTO `bomon` VALUES (1,'Công nghệ phần mềm','Chuyên ngành CNTT',1),(2,'Trí tuệ nhân tạo','Chuyên ngành HTTT',1),(3,'Bảo mật hệ thống','Chuyên ngành ATTT',2),(4,'Ngăn chặn tấn công DDOS','Chuyên ngành ATTT',2),(5,'Khai phá dữ liệu đa phương tiệ','Chuyên ngành CNĐPT',3),(6,'Lập trình game','Chuyên ngành CNĐPT',3);
 /*!40000 ALTER TABLE `bomon` ENABLE KEYS */;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
--- Dump completed on 2021-04-02 13:08:34
-
--- MySQL dump 10.13  Distrib 8.0.22, for Win64 (x86_64)
---
--- Host: localhost    Database: dangkytinchi
--- ------------------------------------------------------
--- Server version	8.0.22
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+UNLOCK TABLES;
 
 --
--- Table structure for table `monhoc`
+-- Table structure for table `bomon_ds_giang_vien`
 --
 
-DROP TABLE IF EXISTS `monhoc`;
+DROP TABLE IF EXISTS `bomon_ds_giang_vien`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `monhoc` (
+CREATE TABLE `bomon_ds_giang_vien` (
+  `bo_mon_id` int NOT NULL,
+  `ds_giang_vien_id` int NOT NULL,
+  `ds_giang_vien_order` int NOT NULL,
+  PRIMARY KEY (`bo_mon_id`,`ds_giang_vien_order`),
+  UNIQUE KEY `UK_ibmj3wva9yjdne3yuubblyqno` (`ds_giang_vien_id`),
+  CONSTRAINT `FKbfj0sn0wlmoqtcw584rhf9v2a` FOREIGN KEY (`ds_giang_vien_id`) REFERENCES `thanhvien` (`id`),
+  CONSTRAINT `FKq978bh729bisqlmhjhdgvwtb7` FOREIGN KEY (`bo_mon_id`) REFERENCES `bomon` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `bomon_ds_giang_vien`
+--
+
+LOCK TABLES `bomon_ds_giang_vien` WRITE;
+/*!40000 ALTER TABLE `bomon_ds_giang_vien` DISABLE KEYS */;
+/*!40000 ALTER TABLE `bomon_ds_giang_vien` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `diachi`
+--
+
+DROP TABLE IF EXISTS `diachi`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `diachi` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `sonha` varchar(50) DEFAULT NULL,
+  `toanha` varchar(50) DEFAULT NULL,
+  `xompho` varchar(50) DEFAULT NULL,
+  `phuongxa` varchar(50) DEFAULT NULL,
+  `quanhuyen` varchar(50) DEFAULT NULL,
+  `tinhthanh` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `diachi`
+--
+
+LOCK TABLES `diachi` WRITE;
+/*!40000 ALTER TABLE `diachi` DISABLE KEYS */;
+INSERT INTO `diachi` VALUES (1,'27','Nguyễn Đức Cảnh','Hoàng Văn Thụ','Trương Định','Hoàng Mai','Hà Nội');
+/*!40000 ALTER TABLE `diachi` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `giangvienkhoa`
+--
+
+DROP TABLE IF EXISTS `giangvienkhoa`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `giangvienkhoa` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `k_id` int DEFAULT NULL,
+  `giangvienid` int DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `khoaid` (`k_id`),
+  KEY `giangvienid` (`giangvienid`),
+  CONSTRAINT `giangvienkhoa_ibfk_1` FOREIGN KEY (`k_id`) REFERENCES `khoa` (`id`),
+  CONSTRAINT `giangvienkhoa_ibfk_2` FOREIGN KEY (`giangvienid`) REFERENCES `thanhvien` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `giangvienkhoa`
+--
+
+LOCK TABLES `giangvienkhoa` WRITE;
+/*!40000 ALTER TABLE `giangvienkhoa` DISABLE KEYS */;
+INSERT INTO `giangvienkhoa` VALUES (1,1,1),(2,2,2),(3,3,3);
+/*!40000 ALTER TABLE `giangvienkhoa` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `hibernate_sequence`
+--
+
+DROP TABLE IF EXISTS `hibernate_sequence`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `hibernate_sequence` (
+  `next_val` bigint DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `hibernate_sequence`
+--
+
+LOCK TABLES `hibernate_sequence` WRITE;
+/*!40000 ALTER TABLE `hibernate_sequence` DISABLE KEYS */;
+INSERT INTO `hibernate_sequence` VALUES (4);
+/*!40000 ALTER TABLE `hibernate_sequence` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `hocky`
+--
+
+DROP TABLE IF EXISTS `hocky`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `hocky` (
   `id` int NOT NULL AUTO_INCREMENT,
   `ten` varchar(30) DEFAULT NULL,
-  `sotc` int DEFAULT NULL,
   `mota` varchar(50) DEFAULT NULL,
-  `bomonid` int DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `bomonid` (`bomonid`),
-  CONSTRAINT `monhoc_ibfk_1` FOREIGN KEY (`bomonid`) REFERENCES `bomon` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `monhoc`
+-- Dumping data for table `hocky`
 --
 
-/*!40000 ALTER TABLE `monhoc` DISABLE KEYS */;
-INSERT INTO `monhoc` (`id`,`ten`, `sotc`, `mota`, `bomonid`) VALUES (1,'Nhập môn công nghệ phần mềm',3,'Môn chuyên ngành',1);
-INSERT INTO `monhoc` (`id`,`ten`, `sotc`, `mota`, `bomonid`) VALUES (2,'Các hệ thống phân tán',3,'Môn chuyên ngành',1);
-INSERT INTO `monhoc` (`id`,`ten`, `sotc`, `mota`, `bomonid`) VALUES (3,'Cơ sở dữ liệu phân tán',2,'Môn chuyên ngành',1);
-INSERT INTO `monhoc` (`id`,`ten`, `sotc`, `mota`, `bomonid`) VALUES (4,'Chuyên đề công nghệ phần mềm',1,'Môn chuyên ngành',1);
-INSERT INTO `monhoc` (`id`,`ten`, `sotc`, `mota`, `bomonid`) VALUES (5,'Lập trình hệ thống nhúng',3,'Môn chuyên ngành',1);
-INSERT INTO `monhoc` (`ten`, `sotc`, `mota`, `bomonid`) VALUES ('Nhập môn trí tuệ nhân tạo',3,'Môn chuyên ngành',2);
-INSERT INTO `monhoc` (`ten`, `sotc`, `mota`, `bomonid`) VALUES ('Nhập môn tương tác người - máy',3,'Môn chuyên ngành',2);
-INSERT INTO `monhoc` (`ten`, `sotc`, `mota`, `bomonid`) VALUES ('Cơ sở dữ liệu phân tán',3,'Môn chuyên ngành',2);
-INSERT INTO `monhoc` (`ten`, `sotc`, `mota`, `bomonid`) VALUES ('An toàn và bảo mật hệ thống cơ bản',3,'Môn chuyên ngành',3);
-INSERT INTO `monhoc` (`ten`, `sotc`, `mota`, `bomonid`) VALUES ('Bảo mật cơ sở dữ liệu',2,'Môn chuyên ngành',3);
-INSERT INTO `monhoc` (`ten`, `sotc`, `mota`, `bomonid`) VALUES ('Ngăn chặn tấn công SQL Injection',2,'Môn chuyên ngành',3);
-INSERT INTO `monhoc` (`ten`, `sotc`, `mota`, `bomonid`) VALUES ('DDOS và các vấn đề liên quan',2,'Môn chuyên ngành',4);
-INSERT INTO `monhoc` (`ten`, `sotc`, `mota`, `bomonid`) VALUES ('Tìm hiểu và xử lý lỗ hổng hệ thống',3,'Môn chuyên ngành',4);
-INSERT INTO `monhoc` (`ten`, `sotc`, `mota`, `bomonid`) VALUES ('Nhập môn dữ liệu đa phương tiện',3,'Môn chuyên ngành',5);
-INSERT INTO `monhoc` (`ten`, `sotc`, `mota`, `bomonid`) VALUES ('Thao tác với dữ liệu đa phương tiện',2,'Môn chuyên ngành',5);
-INSERT INTO `monhoc` (`ten`, `sotc`, `mota`, `bomonid`) VALUES ('Chuyên đề công nghệ đa phương tiện',1,'Môn chuyên ngành',5);
-INSERT INTO `monhoc` (`ten`, `sotc`, `mota`, `bomonid`) VALUES ('Nhập môn lập trình game',3,'Môn chuyên ngành',6);
-INSERT INTO `monhoc` (`ten`, `sotc`, `mota`, `bomonid`) VALUES ('Công nghệ phát triển game',3,'Môn chuyên ngành',6);
-INSERT INTO `monhoc` (`ten`, `sotc`, `mota`, `bomonid`) VALUES ('Công nghệ thực tế ảo',3,'Môn chuyên ngành',6);
-
-
-
-
-/*!40000 ALTER TABLE `monhoc` ENABLE KEYS */;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
-
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
--- Dump completed on 2021-04-02 13:08:35
-
--- MySQL dump 10.13  Distrib 8.0.22, for Win64 (x86_64)
---
--- Host: localhost    Database: dangkytinchi
--- ------------------------------------------------------
--- Server version	8.0.22
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+LOCK TABLES `hocky` WRITE;
+/*!40000 ALTER TABLE `hocky` DISABLE KEYS */;
+INSERT INTO `hocky` VALUES (1,'Học kỳ 1',''),(2,'Học kỳ 2','');
+/*!40000 ALTER TABLE `hocky` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Table structure for table `monhockyhoc`
+-- Table structure for table `khoa`
 --
 
-DROP TABLE IF EXISTS `monhockyhoc`;
+DROP TABLE IF EXISTS `khoa`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `monhockyhoc` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `monhocid` int DEFAULT NULL,
-  `kyhocid` int DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `monhocid` (`monhocid`),
-  KEY `kyhocid` (`kyhocid`),
-  CONSTRAINT `monhockyhoc_ibfk_1` FOREIGN KEY (`monhocid`) REFERENCES `monhoc` (`id`),
-  CONSTRAINT `monhockyhoc_ibfk_2` FOREIGN KEY (`kyhocid`) REFERENCES `kyhoc` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `monhockyhoc`
---
-
-/*!40000 ALTER TABLE `monhockyhoc` DISABLE KEYS */;
-INSERT INTO `monhockyhoc` (`id`, `monhocid`, `kyhocid`) VALUES (1,1,2);
-INSERT INTO `monhockyhoc` (`id`, `monhocid`, `kyhocid`) VALUES (2,2,2);
-INSERT INTO `monhockyhoc` (`id`, `monhocid`, `kyhocid`) VALUES (3,3,2);
-INSERT INTO `monhockyhoc` (`id`, `monhocid`, `kyhocid`) VALUES (4,4,2);
-INSERT INTO `monhockyhoc` (`monhocid`, `kyhocid`) VALUES (5,2),(6,2),(7,2),(8,2),(9,2),(10,2),(11,2),(12,2),(13,2),(14,2),(15,2),(16,2),(17,2),(18,2),(19,2);
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
-
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
--- Dump completed on 2021-04-02 13:08:35
-
--- MySQL dump 10.13  Distrib 8.0.22, for Win64 (x86_64)
---
--- Host: localhost    Database: dangkytinchi
--- ------------------------------------------------------
--- Server version	8.0.22
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-
---
--- Table structure for table `lophocphan`
---
-
-DROP TABLE IF EXISTS `lophocphan`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `lophocphan` (
+CREATE TABLE `khoa` (
   `id` int NOT NULL AUTO_INCREMENT,
   `ten` varchar(30) DEFAULT NULL,
-  `sisotoida` int DEFAULT NULL,
   `mota` varchar(50) DEFAULT NULL,
-  `monhockyhocid` int DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `monhockyhocid` (`monhockyhocid`),
-  CONSTRAINT `lophocphan_ibfk_1` FOREIGN KEY (`monhockyhocid`) REFERENCES `monhockyhoc` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `lophocphan`
+-- Dumping data for table `khoa`
 --
-/*!40000 ALTER TABLE `lophocphan` DISABLE KEYS */;
-INSERT INTO `lophocphan` (`id`, `ten`, `sisotoida`, `mota`, `monhockyhocid`) VALUES (1,'NMCNPM',50,'',1);
-INSERT INTO `lophocphan` (`id`, `ten`, `sisotoida`, `mota`, `monhockyhocid`) VALUES (2,'NMCNPM',45,'',1);
-INSERT INTO `lophocphan` (`id`, `ten`, `sisotoida`, `mota`, `monhockyhocid`) VALUES (3,'NMCNPM',50,'',1);
-INSERT INTO `lophocphan` (`id`, `ten`, `sisotoida`, `mota`, `monhockyhocid`) VALUES (4,'NMCNPM',50,'',1);
-INSERT INTO `lophocphan` (`id`, `ten`, `sisotoida`, `mota`, `monhockyhocid`) VALUES (5,'NMCNPM',50,'',1);
 
-INSERT INTO `lophocphan` (`sisotoida`, `mota`, `monhockyhocid`) VALUES (50,'ok',2);
-INSERT INTO `lophocphan` (`sisotoida`, `mota`, `monhockyhocid`) VALUES (50,'ok',2);
-INSERT INTO `lophocphan` (`sisotoida`, `mota`, `monhockyhocid`) VALUES (50,'ok',2);
-INSERT INTO `lophocphan` (`sisotoida`, `mota`, `monhockyhocid`) VALUES (50,'ok',2);
-INSERT INTO `lophocphan` (`sisotoida`, `mota`, `monhockyhocid`) VALUES (50,'ok',2);
+LOCK TABLES `khoa` WRITE;
+/*!40000 ALTER TABLE `khoa` DISABLE KEYS */;
+INSERT INTO `khoa` VALUES (1,'CNTT',''),(2,'ATTT',''),(3,'CNĐPT','');
+/*!40000 ALTER TABLE `khoa` ENABLE KEYS */;
+UNLOCK TABLES;
 
-INSERT INTO `lophocphan` (`sisotoida`, `mota`, `monhockyhocid`) VALUES (50,'ok',3);
-INSERT INTO `lophocphan` (`sisotoida`, `mota`, `monhockyhocid`) VALUES (50,'ok',3);
-INSERT INTO `lophocphan` (`sisotoida`, `mota`, `monhockyhocid`) VALUES (50,'ok',3);
-INSERT INTO `lophocphan` (`sisotoida`, `mota`, `monhockyhocid`) VALUES (50,'ok',3);
-INSERT INTO `lophocphan` (`sisotoida`, `mota`, `monhockyhocid`) VALUES (50,'ok',3);
-
-INSERT INTO `lophocphan` (`sisotoida`, `mota`, `monhockyhocid`) VALUES (50,'ok',4);
-INSERT INTO `lophocphan` (`sisotoida`, `mota`, `monhockyhocid`) VALUES (50,'ok',4);
-INSERT INTO `lophocphan` (`sisotoida`, `mota`, `monhockyhocid`) VALUES (50,'ok',4);
-INSERT INTO `lophocphan` (`sisotoida`, `mota`, `monhockyhocid`) VALUES (50,'ok',4);
-INSERT INTO `lophocphan` (`sisotoida`, `mota`, `monhockyhocid`) VALUES (50,'ok',4);
-
-INSERT INTO `lophocphan` (`sisotoida`, `mota`, `monhockyhocid`) VALUES (50,'ok',5);
-INSERT INTO `lophocphan` (`sisotoida`, `mota`, `monhockyhocid`) VALUES (50,'ok',5);
-INSERT INTO `lophocphan` (`sisotoida`, `mota`, `monhockyhocid`) VALUES (50,'ok',5);
-INSERT INTO `lophocphan` (`sisotoida`, `mota`, `monhockyhocid`) VALUES (50,'ok',5);
-INSERT INTO `lophocphan` (`sisotoida`, `mota`, `monhockyhocid`) VALUES (50,'ok',5);
-
-INSERT INTO `lophocphan` (`sisotoida`, `mota`, `monhockyhocid`) VALUES (50,'ok',6);
-INSERT INTO `lophocphan` (`sisotoida`, `mota`, `monhockyhocid`) VALUES (50,'ok',6);
-INSERT INTO `lophocphan` (`sisotoida`, `mota`, `monhockyhocid`) VALUES (50,'ok',6);
-INSERT INTO `lophocphan` (`sisotoida`, `mota`, `monhockyhocid`) VALUES (50,'ok',6);
-INSERT INTO `lophocphan` (`sisotoida`, `mota`, `monhockyhocid`) VALUES (50,'ok',6);
-
-INSERT INTO `lophocphan` (`sisotoida`, `mota`, `monhockyhocid`) VALUES (50,'ok',7);
-INSERT INTO `lophocphan` (`sisotoida`, `mota`, `monhockyhocid`) VALUES (50,'ok',7);
-INSERT INTO `lophocphan` (`sisotoida`, `mota`, `monhockyhocid`) VALUES (50,'ok',7);
-INSERT INTO `lophocphan` (`sisotoida`, `mota`, `monhockyhocid`) VALUES (50,'ok',7);
-INSERT INTO `lophocphan` (`sisotoida`, `mota`, `monhockyhocid`) VALUES (50,'ok',7);
-
-INSERT INTO `lophocphan` (`sisotoida`, `mota`, `monhockyhocid`) VALUES (50,'ok',8);
-INSERT INTO `lophocphan` (`sisotoida`, `mota`, `monhockyhocid`) VALUES (50,'ok',8);
-INSERT INTO `lophocphan` (`sisotoida`, `mota`, `monhockyhocid`) VALUES (50,'ok',8);
-INSERT INTO `lophocphan` (`sisotoida`, `mota`, `monhockyhocid`) VALUES (50,'ok',8);
-INSERT INTO `lophocphan` (`sisotoida`, `mota`, `monhockyhocid`) VALUES (50,'ok',8);
-
-INSERT INTO `lophocphan` (`sisotoida`, `mota`, `monhockyhocid`) VALUES (50,'ok',9);
-INSERT INTO `lophocphan` (`sisotoida`, `mota`, `monhockyhocid`) VALUES (50,'ok',9);
-INSERT INTO `lophocphan` (`sisotoida`, `mota`, `monhockyhocid`) VALUES (50,'ok',9);
-INSERT INTO `lophocphan` (`sisotoida`, `mota`, `monhockyhocid`) VALUES (50,'ok',9);
-INSERT INTO `lophocphan` (`sisotoida`, `mota`, `monhockyhocid`) VALUES (50,'ok',9);
-
-INSERT INTO `lophocphan` (`sisotoida`, `mota`, `monhockyhocid`) VALUES (50,'ok',10);
-INSERT INTO `lophocphan` (`sisotoida`, `mota`, `monhockyhocid`) VALUES (50,'ok',10);
-INSERT INTO `lophocphan` (`sisotoida`, `mota`, `monhockyhocid`) VALUES (50,'ok',10);
-INSERT INTO `lophocphan` (`sisotoida`, `mota`, `monhockyhocid`) VALUES (50,'ok',10);
-INSERT INTO `lophocphan` (`sisotoida`, `mota`, `monhockyhocid`) VALUES (50,'ok',10);
-
-INSERT INTO `lophocphan` (`sisotoida`, `mota`, `monhockyhocid`) VALUES (50,'ok',11);
-INSERT INTO `lophocphan` (`sisotoida`, `mota`, `monhockyhocid`) VALUES (50,'ok',11);
-INSERT INTO `lophocphan` (`sisotoida`, `mota`, `monhockyhocid`) VALUES (50,'ok',11);
-INSERT INTO `lophocphan` (`sisotoida`, `mota`, `monhockyhocid`) VALUES (50,'ok',11);
-INSERT INTO `lophocphan` (`sisotoida`, `mota`, `monhockyhocid`) VALUES (50,'ok',11);
-
-INSERT INTO `lophocphan` (`sisotoida`, `mota`, `monhockyhocid`) VALUES (50,'ok',12);
-INSERT INTO `lophocphan` (`sisotoida`, `mota`, `monhockyhocid`) VALUES (50,'ok',12);
-INSERT INTO `lophocphan` (`sisotoida`, `mota`, `monhockyhocid`) VALUES (50,'ok',12);
-INSERT INTO `lophocphan` (`sisotoida`, `mota`, `monhockyhocid`) VALUES (50,'ok',12);
-INSERT INTO `lophocphan` (`sisotoida`, `mota`, `monhockyhocid`) VALUES (50,'ok',12);
-
-INSERT INTO `lophocphan` (`sisotoida`, `mota`, `monhockyhocid`) VALUES (50,'ok',13);
-INSERT INTO `lophocphan` (`sisotoida`, `mota`, `monhockyhocid`) VALUES (50,'ok',13);
-INSERT INTO `lophocphan` (`sisotoida`, `mota`, `monhockyhocid`) VALUES (50,'ok',13);
-INSERT INTO `lophocphan` (`sisotoida`, `mota`, `monhockyhocid`) VALUES (50,'ok',13);
-INSERT INTO `lophocphan` (`sisotoida`, `mota`, `monhockyhocid`) VALUES (50,'ok',13);
-
-INSERT INTO `lophocphan` (`sisotoida`, `mota`, `monhockyhocid`) VALUES (50,'ok',14);
-INSERT INTO `lophocphan` (`sisotoida`, `mota`, `monhockyhocid`) VALUES (50,'ok',14);
-INSERT INTO `lophocphan` (`sisotoida`, `mota`, `monhockyhocid`) VALUES (50,'ok',14);
-INSERT INTO `lophocphan` (`sisotoida`, `mota`, `monhockyhocid`) VALUES (50,'ok',14);
-INSERT INTO `lophocphan` (`sisotoida`, `mota`, `monhockyhocid`) VALUES (50,'ok',14);
-
-INSERT INTO `lophocphan` (`sisotoida`, `mota`, `monhockyhocid`) VALUES (50,'ok',15);
-INSERT INTO `lophocphan` (`sisotoida`, `mota`, `monhockyhocid`) VALUES (50,'ok',15);
-INSERT INTO `lophocphan` (`sisotoida`, `mota`, `monhockyhocid`) VALUES (50,'ok',15);
-INSERT INTO `lophocphan` (`sisotoida`, `mota`, `monhockyhocid`) VALUES (50,'ok',15);
-INSERT INTO `lophocphan` (`sisotoida`, `mota`, `monhockyhocid`) VALUES (50,'ok',15);
-
-INSERT INTO `lophocphan` (`sisotoida`, `mota`, `monhockyhocid`) VALUES (50,'ok',16);
-INSERT INTO `lophocphan` (`sisotoida`, `mota`, `monhockyhocid`) VALUES (50,'ok',16);
-INSERT INTO `lophocphan` (`sisotoida`, `mota`, `monhockyhocid`) VALUES (50,'ok',16);
-INSERT INTO `lophocphan` (`sisotoida`, `mota`, `monhockyhocid`) VALUES (50,'ok',16);
-INSERT INTO `lophocphan` (`sisotoida`, `mota`, `monhockyhocid`) VALUES (50,'ok',16);
-
-INSERT INTO `lophocphan` (`sisotoida`, `mota`, `monhockyhocid`) VALUES (50,'ok',17);
-INSERT INTO `lophocphan` (`sisotoida`, `mota`, `monhockyhocid`) VALUES (50,'ok',17);
-INSERT INTO `lophocphan` (`sisotoida`, `mota`, `monhockyhocid`) VALUES (50,'ok',17);
-INSERT INTO `lophocphan` (`sisotoida`, `mota`, `monhockyhocid`) VALUES (50,'ok',17);
-INSERT INTO `lophocphan` (`sisotoida`, `mota`, `monhockyhocid`) VALUES (50,'ok',17);
-
-INSERT INTO `lophocphan` (`sisotoida`, `mota`, `monhockyhocid`) VALUES (50,'ok',18);
-INSERT INTO `lophocphan` (`sisotoida`, `mota`, `monhockyhocid`) VALUES (50,'ok',18);
-INSERT INTO `lophocphan` (`sisotoida`, `mota`, `monhockyhocid`) VALUES (50,'ok',18);
-INSERT INTO `lophocphan` (`sisotoida`, `mota`, `monhockyhocid`) VALUES (50,'ok',18);
-INSERT INTO `lophocphan` (`sisotoida`, `mota`, `monhockyhocid`) VALUES (50,'ok',18);
-
-INSERT INTO `lophocphan` (`sisotoida`, `mota`, `monhockyhocid`) VALUES (50,'ok',19);
-INSERT INTO `lophocphan` (`sisotoida`, `mota`, `monhockyhocid`) VALUES (50,'ok',19);
-INSERT INTO `lophocphan` (`sisotoida`, `mota`, `monhockyhocid`) VALUES (50,'ok',19);
-INSERT INTO `lophocphan` (`sisotoida`, `mota`, `monhockyhocid`) VALUES (50,'ok',19);
-INSERT INTO `lophocphan` (`sisotoida`, `mota`, `monhockyhocid`) VALUES (50,'ok',19);
-/*!40000 ALTER TABLE `lophocphan` ENABLE KEYS */;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
-
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
--- Dump completed on 2021-04-02 13:08:36
-
--- MySQL dump 10.13  Distrib 8.0.22, for Win64 (x86_64)
 --
--- Host: localhost    Database: dangkytinchi
--- ------------------------------------------------------
--- Server version	8.0.22
+-- Table structure for table `kiphoc`
+--
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+DROP TABLE IF EXISTS `kiphoc`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `kiphoc` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `ten` varchar(30) DEFAULT NULL,
+  `mota` varchar(50) DEFAULT NULL,
+  `lichhocid` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `lichhocid` (`lichhocid`),
+  CONSTRAINT `kiphoc_ibfk_1` FOREIGN KEY (`lichhocid`) REFERENCES `lichhoc` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `kiphoc`
+--
+
+LOCK TABLES `kiphoc` WRITE;
+/*!40000 ALTER TABLE `kiphoc` DISABLE KEYS */;
+/*!40000 ALTER TABLE `kiphoc` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `kyhoc`
+--
+
+DROP TABLE IF EXISTS `kyhoc`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `kyhoc` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `namhocid` int DEFAULT NULL,
+  `hockyid` int DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `namhocid` (`namhocid`),
+  KEY `hockyid` (`hockyid`),
+  CONSTRAINT `kyhoc_ibfk_1` FOREIGN KEY (`namhocid`) REFERENCES `namhoc` (`id`),
+  CONSTRAINT `kyhoc_ibfk_2` FOREIGN KEY (`hockyid`) REFERENCES `hocky` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `kyhoc`
+--
+
+LOCK TABLES `kyhoc` WRITE;
+/*!40000 ALTER TABLE `kyhoc` DISABLE KEYS */;
+INSERT INTO `kyhoc` VALUES (1,4,1),(2,4,2);
+/*!40000 ALTER TABLE `kyhoc` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `lichhoc`
@@ -885,183 +276,223 @@ CREATE TABLE `lichhoc` (
   KEY `giangvienid` (`giangvienid`),
   CONSTRAINT `lichhoc_ibfk_1` FOREIGN KEY (`lhpid`) REFERENCES `lophocphan` (`id`),
   CONSTRAINT `lichhoc_ibfk_5` FOREIGN KEY (`giangvienid`) REFERENCES `thanhvien` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=96 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `lichhoc`
 --
 
+LOCK TABLES `lichhoc` WRITE;
 /*!40000 ALTER TABLE `lichhoc` DISABLE KEYS */;
-INSERT INTO `lichhoc` (`id`,`ten`, `lhpid`, `mota`, `giangvienid`) VALUES (1, 'Nhập môn công nghệ phần mềm', 1, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`id`,`ten`, `lhpid`, `mota`, `giangvienid`) VALUES (2, 'Nhập môn công nghệ phần mềm', 2, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`id`,`ten`, `lhpid`, `mota`, `giangvienid`) VALUES (3, 'Nhập môn công nghệ phần mềm', 3, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`id`,`ten`, `lhpid`, `mota`, `giangvienid`) VALUES (4, 'Nhập môn công nghệ phần mềm', 4, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`id`,`ten`, `lhpid`, `mota`, `giangvienid`) VALUES (5, 'Nhập môn công nghệ phần mềm', 5, 'Hoc som', NULL);
-
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Các hệ thống phân tán', 6, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Các hệ thống phân tán', 7, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Các hệ thống phân tán', 8, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Các hệ thống phân tán', 9, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Các hệ thống phân tán', 10, 'Hoc som', NULL);
-
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Cơ sở dữ liệu phân tán', 11, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Cơ sở dữ liệu phân tán', 12, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Cơ sở dữ liệu phân tán', 13, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Cơ sở dữ liệu phân tán', 14, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Cơ sở dữ liệu phân tán', 15, 'Hoc som', NULL);
-
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Chuyên đề công nghệ phần mềm', 16, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Chuyên đề công nghệ phần mềm', 17, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Chuyên đề công nghệ phần mềm', 18, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Chuyên đề công nghệ phần mềm', 19, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Chuyên đề công nghệ phần mềm', 20, 'Hoc som', NULL);
-
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Lập trình hệ thống nhúng', 21, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Lập trình hệ thống nhúng', 22, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Lập trình hệ thống nhúng', 23, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Lập trình hệ thống nhúng', 24, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Lập trình hệ thống nhúng', 25, 'Hoc som', NULL);
-
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn trí tuệ nhân tạo', 26, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn trí tuệ nhân tạo', 27, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn trí tuệ nhân tạo', 28, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn trí tuệ nhân tạo', 29, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn trí tuệ nhân tạo', 30, 'Hoc som', NULL);
-
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn tương tác người - máy', 31, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn tương tác người - máy', 32, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn tương tác người - máy', 33, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn tương tác người - máy', 34, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn tương tác người - máy', 35, 'Hoc som', NULL);
-
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Cơ sở dữ liệu phân tán', 36, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Cơ sở dữ liệu phân tán', 37, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Cơ sở dữ liệu phân tán', 38, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Cơ sở dữ liệu phân tán', 39, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Cơ sở dữ liệu phân tán', 40, 'Hoc som', NULL);
-
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('An toàn và bảo mật hệ thống cơ bản', 41, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('An toàn và bảo mật hệ thống cơ bản', 42, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('An toàn và bảo mật hệ thống cơ bản', 43, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('An toàn và bảo mật hệ thống cơ bản', 44, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('An toàn và bảo mật hệ thống cơ bản', 45, 'Hoc som', NULL);
-
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Bảo mật cơ sở dữ liệu', 46, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Bảo mật cơ sở dữ liệu', 47, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Bảo mật cơ sở dữ liệu', 48, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Bảo mật cơ sở dữ liệu', 49, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Bảo mật cơ sở dữ liệu', 50, 'Hoc som', NULL);
-
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Ngăn chặn tấn công SQL Injection', 51, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Ngăn chặn tấn công SQL Injection', 52, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Ngăn chặn tấn công SQL Injection', 53, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Ngăn chặn tấn công SQL Injection', 54, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Ngăn chặn tấn công SQL Injection', 55, 'Hoc som', NULL);
-
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('DDOS và các vấn đề liên quan', 56, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('DDOS và các vấn đề liên quan', 57, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('DDOS và các vấn đề liên quan', 58, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('DDOS và các vấn đề liên quan', 59, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('DDOS và các vấn đề liên quan', 60, 'Hoc som', NULL);
-
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Tìm hiểu và xử lý lỗ hổng hệ thống', 61, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Tìm hiểu và xử lý lỗ hổng hệ thống', 62, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Tìm hiểu và xử lý lỗ hổng hệ thống', 63, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Tìm hiểu và xử lý lỗ hổng hệ thống', 64, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Tìm hiểu và xử lý lỗ hổng hệ thống', 65, 'Hoc som', NULL);
-
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn dữ liệu đa phương tiện', 66, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn dữ liệu đa phương tiện', 67, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn dữ liệu đa phương tiện', 68, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn dữ liệu đa phương tiện', 69, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn dữ liệu đa phương tiện', 70, 'Hoc som', NULL);
-
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Thao tác với dữ liệu đa phương tiện', 71, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Thao tác với dữ liệu đa phương tiện', 72, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Thao tác với dữ liệu đa phương tiện', 73, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Thao tác với dữ liệu đa phương tiện', 74, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Thao tác với dữ liệu đa phương tiện', 75, 'Hoc som', NULL);
-
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Chuyên đề công nghệ đa phương tiện', 76, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Chuyên đề công nghệ đa phương tiện', 77, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Chuyên đề công nghệ đa phương tiện', 78, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Chuyên đề công nghệ đa phương tiện', 79, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Chuyên đề công nghệ đa phương tiện', 80, 'Hoc som', NULL);
-
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn lập trình game', 81, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn lập trình game', 82, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn lập trình game', 83, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn lập trình game', 84, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn lập trình game', 85, 'Hoc som', NULL);
-
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Công nghệ phát triển game', 86, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Công nghệ phát triển game', 87, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Công nghệ phát triển game', 88, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Công nghệ phát triển game', 89, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Công nghệ phát triển game', 90, 'Hoc som', NULL);
-
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Công nghệ thực tế ảo', 91, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Công nghệ thực tế ảo', 92, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Công nghệ thực tế ảo', 93, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Công nghệ thực tế ảo', 94, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Công nghệ thực tế ảo', 95, 'Hoc som', NULL);
+INSERT INTO `lichhoc` VALUES (1,'Nhập môn công nghệ phần mềm',1,'A2',1,'Hoc som',NULL),(2,'Nhập môn công nghệ phần mềm',2,'A2',1,'Hoc som',NULL),(3,'Nhập môn công nghệ phần mềm',3,'A2',1,'Hoc som',NULL),(4,'Nhập môn công nghệ phần mềm',4,'A2',1,'Hoc som',NULL),(5,'Nhập môn công nghệ phần mềm',5,'A2',1,'Hoc som',NULL),(6,'Các hệ thống phân tán',6,'A2',1,'Hoc som',NULL),(7,'Các hệ thống phân tán',7,'A2',1,'Hoc som',NULL),(8,'Các hệ thống phân tán',8,'A2',1,'Hoc som',NULL),(9,'Các hệ thống phân tán',9,'A2',1,'Hoc som',NULL),(10,'Các hệ thống phân tán',10,'A2',1,'Hoc som',NULL),(11,'Cơ sở dữ liệu phân tán',11,'A2',1,'Hoc som',NULL),(12,'Cơ sở dữ liệu phân tán',12,'A2',1,'Hoc som',NULL),(13,'Cơ sở dữ liệu phân tán',13,'A2',1,'Hoc som',NULL),(14,'Cơ sở dữ liệu phân tán',14,'A2',1,'Hoc som',NULL),(15,'Cơ sở dữ liệu phân tán',15,'A2',1,'Hoc som',NULL),(16,'Chuyên đề công nghệ phần mềm',16,'A2',1,'Hoc som',NULL),(17,'Chuyên đề công nghệ phần mềm',17,'A2',1,'Hoc som',NULL),(18,'Chuyên đề công nghệ phần mềm',18,'A2',1,'Hoc som',NULL),(19,'Chuyên đề công nghệ phần mềm',19,'A2',1,'Hoc som',NULL),(20,'Chuyên đề công nghệ phần mềm',20,'A2',1,'Hoc som',NULL),(21,'Lập trình hệ thống nhúng',21,'A2',1,'Hoc som',NULL),(22,'Lập trình hệ thống nhúng',22,'A2',1,'Hoc som',NULL),(23,'Lập trình hệ thống nhúng',23,'A2',1,'Hoc som',NULL),(24,'Lập trình hệ thống nhúng',24,'A2',1,'Hoc som',NULL),(25,'Lập trình hệ thống nhúng',25,'A2',1,'Hoc som',NULL),(26,'Nhập môn trí tuệ nhân tạo',26,'A2',1,'Hoc som',NULL),(27,'Nhập môn trí tuệ nhân tạo',27,'A2',1,'Hoc som',NULL),(28,'Nhập môn trí tuệ nhân tạo',28,'A2',1,'Hoc som',NULL),(29,'Nhập môn trí tuệ nhân tạo',29,'A2',1,'Hoc som',NULL),(30,'Nhập môn trí tuệ nhân tạo',30,'A2',1,'Hoc som',NULL),(31,'Nhập môn tương tác người - máy',31,'A2',1,'Hoc som',NULL),(32,'Nhập môn tương tác người - máy',32,'A2',1,'Hoc som',NULL),(33,'Nhập môn tương tác người - máy',33,'A2',1,'Hoc som',NULL),(34,'Nhập môn tương tác người - máy',34,'A2',1,'Hoc som',NULL),(35,'Nhập môn tương tác người - máy',35,'A2',1,'Hoc som',NULL),(36,'Cơ sở dữ liệu phân tán',36,'A2',1,'Hoc som',NULL),(37,'Cơ sở dữ liệu phân tán',37,'A2',1,'Hoc som',NULL),(38,'Cơ sở dữ liệu phân tán',38,'A2',1,'Hoc som',NULL),(39,'Cơ sở dữ liệu phân tán',39,'A2',1,'Hoc som',NULL),(40,'Cơ sở dữ liệu phân tán',40,'A2',1,'Hoc som',NULL),(41,'An toàn và bảo mật hệ thống cơ',41,'A2',1,'Hoc som',NULL),(42,'An toàn và bảo mật hệ thống cơ',42,'A2',1,'Hoc som',NULL),(43,'An toàn và bảo mật hệ thống cơ',43,'A2',1,'Hoc som',NULL),(44,'An toàn và bảo mật hệ thống cơ',44,'A2',1,'Hoc som',NULL),(45,'An toàn và bảo mật hệ thống cơ',45,'A2',1,'Hoc som',NULL),(46,'Bảo mật cơ sở dữ liệu',46,'A2',1,'Hoc som',NULL),(47,'Bảo mật cơ sở dữ liệu',47,'A2',1,'Hoc som',NULL),(48,'Bảo mật cơ sở dữ liệu',48,'A2',1,'Hoc som',NULL),(49,'Bảo mật cơ sở dữ liệu',49,'A2',1,'Hoc som',NULL),(50,'Bảo mật cơ sở dữ liệu',50,'A2',1,'Hoc som',NULL),(51,'Ngăn chặn tấn công SQL Injecti',51,'A2',1,'Hoc som',NULL),(52,'Ngăn chặn tấn công SQL Injecti',52,'A2',1,'Hoc som',NULL),(53,'Ngăn chặn tấn công SQL Injecti',53,'A2',1,'Hoc som',NULL),(54,'Ngăn chặn tấn công SQL Injecti',54,'A2',1,'Hoc som',NULL),(55,'Ngăn chặn tấn công SQL Injecti',55,'A2',1,'Hoc som',NULL),(56,'DDOS và các vấn đề liên quan',56,'A2',1,'Hoc som',NULL),(57,'DDOS và các vấn đề liên quan',57,'A2',1,'Hoc som',NULL),(58,'DDOS và các vấn đề liên quan',58,'A2',1,'Hoc som',NULL),(59,'DDOS và các vấn đề liên quan',59,'A2',1,'Hoc som',NULL),(60,'DDOS và các vấn đề liên quan',60,'A2',1,'Hoc som',NULL),(61,'Tìm hiểu và xử lý lỗ hổng hệ t',61,'A2',1,'Hoc som',NULL),(62,'Tìm hiểu và xử lý lỗ hổng hệ t',62,'A2',1,'Hoc som',NULL),(63,'Tìm hiểu và xử lý lỗ hổng hệ t',63,'A2',1,'Hoc som',NULL),(64,'Tìm hiểu và xử lý lỗ hổng hệ t',64,'A2',1,'Hoc som',NULL),(65,'Tìm hiểu và xử lý lỗ hổng hệ t',65,'A2',1,'Hoc som',NULL),(66,'Nhập môn dữ liệu đa phương tiệ',66,'A2',1,'Hoc som',NULL),(67,'Nhập môn dữ liệu đa phương tiệ',67,'A2',1,'Hoc som',NULL),(68,'Nhập môn dữ liệu đa phương tiệ',68,'A2',1,'Hoc som',NULL),(69,'Nhập môn dữ liệu đa phương tiệ',69,'A2',1,'Hoc som',NULL),(70,'Nhập môn dữ liệu đa phương tiệ',70,'A2',1,'Hoc som',NULL),(71,'Thao tác với dữ liệu đa phương',71,'A2',1,'Hoc som',NULL),(72,'Thao tác với dữ liệu đa phương',72,'A2',1,'Hoc som',NULL),(73,'Thao tác với dữ liệu đa phương',73,'A2',1,'Hoc som',NULL),(74,'Thao tác với dữ liệu đa phương',74,'A2',1,'Hoc som',NULL),(75,'Thao tác với dữ liệu đa phương',75,'A2',1,'Hoc som',NULL),(76,'Chuyên đề công nghệ đa phương ',76,'A2',1,'Hoc som',NULL),(77,'Chuyên đề công nghệ đa phương ',77,'A2',1,'Hoc som',NULL),(78,'Chuyên đề công nghệ đa phương ',78,'A2',1,'Hoc som',NULL),(79,'Chuyên đề công nghệ đa phương ',79,'A2',1,'Hoc som',NULL),(80,'Chuyên đề công nghệ đa phương ',80,'A2',1,'Hoc som',NULL),(81,'Nhập môn lập trình game',81,'A2',1,'Hoc som',NULL),(82,'Nhập môn lập trình game',82,'A2',1,'Hoc som',NULL),(83,'Nhập môn lập trình game',83,'A2',1,'Hoc som',NULL),(84,'Nhập môn lập trình game',84,'A2',1,'Hoc som',NULL),(85,'Nhập môn lập trình game',85,'A2',1,'Hoc som',NULL),(86,'Công nghệ phát triển game',86,'A2',1,'Hoc som',NULL),(87,'Công nghệ phát triển game',87,'A2',1,'Hoc som',NULL),(88,'Công nghệ phát triển game',88,'A2',1,'Hoc som',NULL),(89,'Công nghệ phát triển game',89,'A2',1,'Hoc som',NULL),(90,'Công nghệ phát triển game',90,'A2',1,'Hoc som',NULL),(91,'Công nghệ thực tế ảo',91,'A2',1,'Hoc som',NULL),(92,'Công nghệ thực tế ảo',92,'A2',1,'Hoc som',NULL),(93,'Công nghệ thực tế ảo',93,'A2',1,'Hoc som',NULL),(94,'Công nghệ thực tế ảo',94,'A2',1,'Hoc som',NULL),(95,'Công nghệ thực tế ảo',95,'A2',1,'Hoc som',NULL);
 /*!40000 ALTER TABLE `lichhoc` ENABLE KEYS */;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
-
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
--- Dump completed on 2021-04-02 13:08:35
-
--- MySQL dump 10.13  Distrib 8.0.22, for Win64 (x86_64)
---
--- Host: localhost    Database: dangkytinchi
--- ------------------------------------------------------
--- Server version	8.0.22
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+UNLOCK TABLES;
 
 --
--- Table structure for table `giangvienkhoa`
+-- Table structure for table `lophocphan`
 --
 
-DROP TABLE IF EXISTS `giangvienkhoa`;
+DROP TABLE IF EXISTS `lophocphan`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `giangvienkhoa` (
+CREATE TABLE `lophocphan` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `k_id` int DEFAULT NULL,
-  `giangvienid` int DEFAULT NULL,
+  `ten` varchar(30) DEFAULT NULL,
+  `sisotoida` int DEFAULT NULL,
+  `mota` varchar(50) DEFAULT NULL,
+  `monhockyhocid` int DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `khoaid` (`k_id`),
-  KEY `giangvienid` (`giangvienid`),
-  CONSTRAINT `giangvienkhoa_ibfk_1` FOREIGN KEY (`k_id`) REFERENCES `khoa` (`id`),
-  CONSTRAINT `giangvienkhoa_ibfk_2` FOREIGN KEY (`giangvienid`) REFERENCES `thanhvien` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `monhockyhocid` (`monhockyhocid`),
+  CONSTRAINT `lophocphan_ibfk_1` FOREIGN KEY (`monhockyhocid`) REFERENCES `monhockyhoc` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=96 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `giangvienkhoa`
+-- Dumping data for table `lophocphan`
 --
 
-/*!40000 ALTER TABLE `giangvienkhoa` DISABLE KEYS */;
+LOCK TABLES `lophocphan` WRITE;
+/*!40000 ALTER TABLE `lophocphan` DISABLE KEYS */;
+INSERT INTO `lophocphan` VALUES (1,'NMCNPM',50,'',1),(2,'NMCNPM',45,'',1),(3,'NMCNPM',50,'',1),(4,'NMCNPM',50,'',1),(5,'NMCNPM',50,'',1),(6,NULL,50,'ok',2),(7,NULL,50,'ok',2),(8,NULL,50,'ok',2),(9,NULL,50,'ok',2),(10,NULL,50,'ok',2),(11,NULL,50,'ok',3),(12,NULL,50,'ok',3),(13,NULL,50,'ok',3),(14,NULL,50,'ok',3),(15,NULL,50,'ok',3),(16,NULL,50,'ok',4),(17,NULL,50,'ok',4),(18,NULL,50,'ok',4),(19,NULL,50,'ok',4),(20,NULL,50,'ok',4),(21,NULL,50,'ok',5),(22,NULL,50,'ok',5),(23,NULL,50,'ok',5),(24,NULL,50,'ok',5),(25,NULL,50,'ok',5),(26,NULL,50,'ok',6),(27,NULL,50,'ok',6),(28,NULL,50,'ok',6),(29,NULL,50,'ok',6),(30,NULL,50,'ok',6),(31,NULL,50,'ok',7),(32,NULL,50,'ok',7),(33,NULL,50,'ok',7),(34,NULL,50,'ok',7),(35,NULL,50,'ok',7),(36,NULL,50,'ok',8),(37,NULL,50,'ok',8),(38,NULL,50,'ok',8),(39,NULL,50,'ok',8),(40,NULL,50,'ok',8),(41,NULL,50,'ok',9),(42,NULL,50,'ok',9),(43,NULL,50,'ok',9),(44,NULL,50,'ok',9),(45,NULL,50,'ok',9),(46,NULL,50,'ok',10),(47,NULL,50,'ok',10),(48,NULL,50,'ok',10),(49,NULL,50,'ok',10),(50,NULL,50,'ok',10),(51,NULL,50,'ok',11),(52,NULL,50,'ok',11),(53,NULL,50,'ok',11),(54,NULL,50,'ok',11),(55,NULL,50,'ok',11),(56,NULL,50,'ok',12),(57,NULL,50,'ok',12),(58,NULL,50,'ok',12),(59,NULL,50,'ok',12),(60,NULL,50,'ok',12),(61,NULL,50,'ok',13),(62,NULL,50,'ok',13),(63,NULL,50,'ok',13),(64,NULL,50,'ok',13),(65,NULL,50,'ok',13),(66,NULL,50,'ok',14),(67,NULL,50,'ok',14),(68,NULL,50,'ok',14),(69,NULL,50,'ok',14),(70,NULL,50,'ok',14),(71,NULL,50,'ok',15),(72,NULL,50,'ok',15),(73,NULL,50,'ok',15),(74,NULL,50,'ok',15),(75,NULL,50,'ok',15),(76,NULL,50,'ok',16),(77,NULL,50,'ok',16),(78,NULL,50,'ok',16),(79,NULL,50,'ok',16),(80,NULL,50,'ok',16),(81,NULL,50,'ok',17),(82,NULL,50,'ok',17),(83,NULL,50,'ok',17),(84,NULL,50,'ok',17),(85,NULL,50,'ok',17),(86,NULL,50,'ok',18),(87,NULL,50,'ok',18),(88,NULL,50,'ok',18),(89,NULL,50,'ok',18),(90,NULL,50,'ok',18),(91,NULL,50,'ok',19),(92,NULL,50,'ok',19),(93,NULL,50,'ok',19),(94,NULL,50,'ok',19),(95,NULL,50,'ok',19);
+/*!40000 ALTER TABLE `lophocphan` ENABLE KEYS */;
+UNLOCK TABLES;
 
-/*!40000 ALTER TABLE `giangvienkhoa` ENABLE KEYS */;
+--
+-- Table structure for table `monhoc`
+--
+
+DROP TABLE IF EXISTS `monhoc`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `monhoc` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `ten` varchar(30) DEFAULT NULL,
+  `sotc` int DEFAULT NULL,
+  `mota` varchar(50) DEFAULT NULL,
+  `bomonid` int DEFAULT NULL,
+  `ds_mon_hoc_order` int DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `bomonid` (`bomonid`),
+  CONSTRAINT `monhoc_ibfk_1` FOREIGN KEY (`bomonid`) REFERENCES `bomon` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `monhoc`
+--
+
+LOCK TABLES `monhoc` WRITE;
+/*!40000 ALTER TABLE `monhoc` DISABLE KEYS */;
+INSERT INTO `monhoc` VALUES (1,'Nhập môn công nghệ phần mềm',3,'Môn chuyên ngành',1,NULL),(2,'Các hệ thống phân tán',3,'Môn chuyên ngành',1,NULL),(3,'Cơ sở dữ liệu phân tán',2,'Môn chuyên ngành',1,NULL),(4,'Chuyên đề công nghệ phần mềm',1,'Môn chuyên ngành',1,NULL),(5,'Lập trình hệ thống nhúng',3,'Môn chuyên ngành',1,NULL),(6,'Nhập môn trí tuệ nhân tạo',3,'Môn chuyên ngành',2,NULL),(7,'Nhập môn tương tác người - máy',3,'Môn chuyên ngành',2,NULL),(8,'Cơ sở dữ liệu phân tán',3,'Môn chuyên ngành',2,NULL),(9,'An toàn và bảo mật hệ thống cơ',3,'Môn chuyên ngành',3,NULL),(10,'Bảo mật cơ sở dữ liệu',2,'Môn chuyên ngành',3,NULL),(11,'Ngăn chặn tấn công SQL Injecti',2,'Môn chuyên ngành',3,NULL),(12,'DDOS và các vấn đề liên quan',2,'Môn chuyên ngành',4,NULL),(13,'Tìm hiểu và xử lý lỗ hổng hệ t',3,'Môn chuyên ngành',4,NULL),(14,'Nhập môn dữ liệu đa phương tiệ',3,'Môn chuyên ngành',5,NULL),(15,'Thao tác với dữ liệu đa phương',2,'Môn chuyên ngành',5,NULL),(16,'Chuyên đề công nghệ đa phương ',1,'Môn chuyên ngành',5,NULL),(17,'Nhập môn lập trình game',3,'Môn chuyên ngành',6,NULL),(18,'Công nghệ phát triển game',3,'Môn chuyên ngành',6,NULL),(19,'Công nghệ thực tế ảo',3,'Môn chuyên ngành',6,NULL);
+/*!40000 ALTER TABLE `monhoc` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `monhockyhoc`
+--
+
+DROP TABLE IF EXISTS `monhockyhoc`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `monhockyhoc` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `monhocid` int DEFAULT NULL,
+  `kyhocid` int DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `monhocid` (`monhocid`),
+  KEY `kyhocid` (`kyhocid`),
+  CONSTRAINT `monhockyhoc_ibfk_1` FOREIGN KEY (`monhocid`) REFERENCES `monhoc` (`id`),
+  CONSTRAINT `monhockyhoc_ibfk_2` FOREIGN KEY (`kyhocid`) REFERENCES `kyhoc` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `monhockyhoc`
+--
+
+LOCK TABLES `monhockyhoc` WRITE;
+/*!40000 ALTER TABLE `monhockyhoc` DISABLE KEYS */;
+INSERT INTO `monhockyhoc` VALUES (1,1,2),(2,2,2),(3,3,2),(4,4,2),(5,5,2),(6,6,2),(7,7,2),(8,8,2),(9,9,2),(10,10,2),(11,11,2),(12,12,2),(13,13,2),(14,14,2),(15,15,2),(16,16,2),(17,17,2),(18,18,2),(19,19,2);
+/*!40000 ALTER TABLE `monhockyhoc` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `namhoc`
+--
+
+DROP TABLE IF EXISTS `namhoc`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `namhoc` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `ten` varchar(30) DEFAULT NULL,
+  `mota` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `namhoc`
+--
+
+LOCK TABLES `namhoc` WRITE;
+/*!40000 ALTER TABLE `namhoc` DISABLE KEYS */;
+INSERT INTO `namhoc` VALUES (1,'2015-2016',''),(2,'2016-2017',''),(3,'2017-2018',''),(4,'2020-2021','');
+/*!40000 ALTER TABLE `namhoc` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ngayhoc`
+--
+
+DROP TABLE IF EXISTS `ngayhoc`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ngayhoc` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `ten` varchar(30) DEFAULT NULL,
+  `mota` varchar(50) DEFAULT NULL,
+  `lichhocid` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `lichhocid` (`lichhocid`),
+  CONSTRAINT `ngayhoc_ibfk_1` FOREIGN KEY (`lichhocid`) REFERENCES `lichhoc` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ngayhoc`
+--
+
+LOCK TABLES `ngayhoc` WRITE;
+/*!40000 ALTER TABLE `ngayhoc` DISABLE KEYS */;
+/*!40000 ALTER TABLE `ngayhoc` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `thanhvien`
+--
+
+DROP TABLE IF EXISTS `thanhvien`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `thanhvien` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `username` varchar(50) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  `ngaysinh` date DEFAULT NULL,
+  `email` varchar(50) DEFAULT NULL,
+  `dt` varchar(15) DEFAULT NULL,
+  `ghichu` varchar(100) DEFAULT NULL,
+  `vitri` varchar(15) DEFAULT NULL,
+  `ho` varchar(10) DEFAULT NULL,
+  `dem` varchar(10) DEFAULT NULL,
+  `ten` varchar(10) DEFAULT NULL,
+  `diachiid` int DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `UKaqvl11qr32f5irlamc30ejhpc` (`username`),
+  UNIQUE KEY `UK2a17y6sc1lnme5t0wn6bthpci` (`email`),
+  KEY `diachiid` (`diachiid`),
+  CONSTRAINT `thanhvien_ibfk_1` FOREIGN KEY (`diachiid`) REFERENCES `diachi` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `thanhvien`
+--
+
+LOCK TABLES `thanhvien` WRITE;
+/*!40000 ALTER TABLE `thanhvien` DISABLE KEYS */;
+INSERT INTO `thanhvien` VALUES (1,'thang','$2a$10$smbNcf.fuTOOfkdeV5VbEOstMpw45ee6Fpg7HDFIIE6o3wX9KExDa','1999-05-01','thang@123.com','0337971060','ghichu','giangvien','thang','thang','thang',NULL),(2,'thangATTT','$2a$10$3QOc.89PGPg/hsJqjMa0JO5SNHEVU2hlXxbqD/S.IdN9yitMpkGkm','1999-05-01','thangATTT@123.com','0337971060','ghichu','giangvien','thang','thang','thang',NULL),(3,'thangCNDPT','$2a$10$8/KVe4gK/n975iFDAlP6UeeCnRj0tBAFHTKPSk4BWtrDTf.8R25z.','1999-05-01','thangCNDPT@123.com','0337971060','ghichu','giangvien','thang','thang','thang',NULL);
+/*!40000 ALTER TABLE `thanhvien` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tuanhoc`
+--
+
+DROP TABLE IF EXISTS `tuanhoc`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `tuanhoc` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `ten` varchar(30) DEFAULT NULL,
+  `mota` varchar(30) DEFAULT NULL,
+  `lichhocid` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `lichhocid` (`lichhocid`),
+  CONSTRAINT `tuanhoc_ibfk_1` FOREIGN KEY (`lichhocid`) REFERENCES `lichhoc` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tuanhoc`
+--
+
+LOCK TABLES `tuanhoc` WRITE;
+/*!40000 ALTER TABLE `tuanhoc` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tuanhoc` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -1072,23 +503,4 @@ CREATE TABLE `giangvienkhoa` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-04-02 13:08:35
--- select * from bomon;
--- select * from monhoc;
--- select * from giangvienkhoa;
--- select * from bomon;
--- insert into giangvienkhoa values(2,1,4);
--- delete from thanhvien where id = 2;
--- INSERT INTO `lichhoc` (`ten`, `lhpid`, `tuanid`, `ngayid`, `kipid`, `mota`, `giangvienid`) VALUES ('Nhap Mon CNPM',5,2,1,2,'Hoc som',1);
-alter table thanhvien MODIFY password VARCHAR(255);
-alter table kiphoc
-add foreign key (lichhocid) references lichhoc (id);
-
-alter table ngayhoc
-add foreign key (lichhocid) references lichhoc (id);
-alter table tuanhoc
-add foreign key (lichhocid) references lichhoc (id);
-
-
-INSERT INTO `giangvienkhoa` (`id`, `k_id`, `giangvienid`) VALUES (1,1,1); 
-select * from monhoc;
+-- Dump completed on 2021-05-07  0:05:57
