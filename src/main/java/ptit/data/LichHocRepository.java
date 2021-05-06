@@ -20,5 +20,5 @@ public interface LichHocRepository extends CrudRepository<LichHoc, Integer> {
     @Modifying
     @Transactional
     @Query(value = "UPDATE lichhoc SET giangvienid = ?1 WHERE id = ?2", nativeQuery = true)
-    boolean updateDangKy(int gvId, int id);
+    int updateDangKy(int gvId, int id);
 }

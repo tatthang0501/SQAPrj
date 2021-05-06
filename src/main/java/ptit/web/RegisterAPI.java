@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.RollbackException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -165,7 +166,7 @@ public class RegisterAPI {
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
 
-    @GetMapping("/dangky")
+    @GetMapping(value = "/dangky", produces = "application/json")
     public ResponseEntity<?> getDSMonHocByGvId(HttpServletRequest request, Model model) throws IOException {
         System.out.println("bat dau chay");
         try {
@@ -233,9 +234,6 @@ public class RegisterAPI {
                 ArrayList<LichHoc> listLichHoc = (ArrayList<LichHoc>) lhRepo.findLichLHP(lhp.getId());
                 LichHoc lh = listLichHoc.get(0);
                 lh.setLhp(lhp);
-                // lh.setTuanHoc(thRepo.findByLichHocId(lh.getId()));
-                // lh.setKipHoc(khRepo.findByLichHocId(lh.getId()));
-                // lh.setNgayHoc(nhRepo.findByLichHocId(lh.getId()));
                 List<KipHoc> kh = lh.getKipHoc();
                 for(KipHoc kip : kh){
                     kip.setLh(null);
@@ -317,34 +315,28 @@ public class RegisterAPI {
     @PutMapping(value = "/updatedangky", produces = "application/json")
     public ResponseEntity<?> updateDKHP(@RequestBody ArrayList<LichHocView> listDK, HttpServletRequest request,
             HttpServletResponse response, Model model) {
-        HttpSession session = request.getSession();
         try {
+            System.out.println("Bat dau update dang ky ");
+            System.out.println(listDK.size());
+            System.out.println(listDK.get(0).getTen()+" id day"+ listDK.get(0).getId());
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             String currentPrincipalName = authentication.getName();
             ThanhVien tv = userRepository.findByUsername(currentPrincipalName).get();
-            // ArrayList<LichHoc> listLichDaDK = (ArrayList<LichHoc>) session.getAttribute("listDaDK");
-            // for (LichHocView lh : listDK) {
-            //     for (LichHoc lhDaDK : listLichDaDK) {
-            //         // if (lhDaDK.getKiphoc().getTen() == lh.getKiphoc()
-            //         //         && lhDaDK.getNgayhoc().getTen() == lh.getNgayhoc()) {
-            //         //     String msg = "Bị trùng lịch giảng dạy môn " + lh.getTen() + ", " + lh.getKiphoc() + ", "
-            //         //             + lh.getNgayhoc() + " hàng tuần";
-            //         //     model.addAttribute("msg", msg);
-            //         //     response.sendRedirect("/dangky/dslophocphan?error");
-            //         // }
-            //     }
-            // }
+            System.out.println("Id thang user day " + tv.getId() + tv.getTen());
             for (LichHocView lh : listDK) {
-                lhRepo.updateDangKy(tv.getId(), lh.getId());
+                System.out.println("tao dang chay day");
+                int count = lhRepo.updateDangKy(tv.getId(), lh.getId());
+                if(count != 1){
+                    return new ResponseEntity<>("Có lỗi trong quá trình update",HttpStatus.NOT_MODIFIED);
+                }
             }
-            String msg = "Lưu đăng ký thành công";
-            model.addAttribute("msg", msg);
-            session.removeAttribute("listDaDK");
+            System.out.println("Luu dang ky thah cong");
+            // model.addAttribute("msg", msg);
             return new ResponseEntity<>("update successful", HttpStatus.OK);
-        } catch (Exception e) {
+        }
+         catch (Exception e) {
             String msg = "Có lỗi xảy ra khi lưu danh sách đăng ký";
-            session.removeAttribute("listDaDK");
-            model.addAttribute("msg", msg);
+            // model.addAttribute("msg", msg);
             return new ResponseEntity<>("fail", HttpStatus.NOT_MODIFIED);
         }
     }
