@@ -537,7 +537,6 @@ INSERT INTO `bomon` (`ten`, `mota`, `khoa_id`) VALUES ('Khai phá dữ liệu đ
 INSERT INTO `bomon` (`ten`, `mota`, `khoa_id`) VALUES ('Lập trình game','Chuyên ngành CNĐPT', 3);
 /*!40000 ALTER TABLE `bomon` ENABLE KEYS */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
-
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
@@ -589,7 +588,7 @@ CREATE TABLE `monhoc` (
 --
 
 /*!40000 ALTER TABLE `monhoc` DISABLE KEYS */;
-INSERT INTO `monhoc` (`ten`, `sotc`, `mota`, `bomonid`) VALUES ('Nhập môn công nghệ phần mềm',3,'Môn chuyên ngành',1);
+INSERT INTO `monhoc` (`id`,`ten`, `sotc`, `mota`, `bomonid`) VALUES (1,'Nhập môn công nghệ phần mềm',3,'Môn chuyên ngành',1);
 INSERT INTO `monhoc` (`ten`, `sotc`, `mota`, `bomonid`) VALUES ('Các hệ thống phân tán',3,'Môn chuyên ngành',1);
 INSERT INTO `monhoc` (`ten`, `sotc`, `mota`, `bomonid`) VALUES ('Cơ sở dữ liệu phân tán',2,'Môn chuyên ngành',1);
 INSERT INTO `monhoc` (`ten`, `sotc`, `mota`, `bomonid`) VALUES ('Chuyên đề công nghệ phần mềm',1,'Môn chuyên ngành',1);
@@ -722,7 +721,6 @@ CREATE TABLE `lophocphan` (
 --
 -- Dumping data for table `lophocphan`
 --
-
 /*!40000 ALTER TABLE `lophocphan` DISABLE KEYS */;
 INSERT INTO `lophocphan` (`id`, `ten`, `sisotoida`, `mota`, `monhockyhocid`) VALUES (1,'NMCNPM',50,'',1);
 INSERT INTO `lophocphan` (`id`, `ten`, `sisotoida`, `mota`, `monhockyhocid`) VALUES (2,'NMCNPM',45,'',1);
@@ -895,119 +893,119 @@ CREATE TABLE `lichhoc` (
 --
 
 /*!40000 ALTER TABLE `lichhoc` DISABLE KEYS */;
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn công nghệ phần mềm', 1, 'Hoc som', NULL);
+INSERT INTO `lichhoc` (`id`, `ten`, `lhpid`, `mota`, `giangvienid`) VALUES (1, 'Nhập môn công nghệ phần mềm', 1, 'Hoc som', NULL);
 INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn công nghệ phần mềm', 2, 'Hoc som', NULL);
 INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn công nghệ phần mềm', 3, 'Hoc som', NULL);
 INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn công nghệ phần mềm', 4, 'Hoc som', NULL);
 INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn công nghệ phần mềm', 5, 'Hoc som', NULL);
 
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn công nghệ phần mềm', 6, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn công nghệ phần mềm', 7, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn công nghệ phần mềm', 8, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn công nghệ phần mềm', 9, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn công nghệ phần mềm', 10, 'Hoc som', NULL);
+INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Các hệ thống phân tán', 6, 'Hoc som', NULL);
+INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Các hệ thống phân tán', 7, 'Hoc som', NULL);
+INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Các hệ thống phân tán', 8, 'Hoc som', NULL);
+INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Các hệ thống phân tán', 9, 'Hoc som', NULL);
+INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Các hệ thống phân tán', 10, 'Hoc som', NULL);
 
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn công nghệ phần mềm', 11, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn công nghệ phần mềm', 12, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn công nghệ phần mềm', 13, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn công nghệ phần mềm', 14, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn công nghệ phần mềm', 15, 'Hoc som', NULL);
+INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Cơ sở dữ liệu phân tán', 11, 'Hoc som', NULL);
+INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Cơ sở dữ liệu phân tán', 12, 'Hoc som', NULL);
+INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Cơ sở dữ liệu phân tán', 13, 'Hoc som', NULL);
+INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Cơ sở dữ liệu phân tán', 14, 'Hoc som', NULL);
+INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Cơ sở dữ liệu phân tán', 15, 'Hoc som', NULL);
 
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn công nghệ phần mềm', 16, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn công nghệ phần mềm', 17, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn công nghệ phần mềm', 18, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn công nghệ phần mềm', 19, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn công nghệ phần mềm', 20, 'Hoc som', NULL);
+INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Chuyên đề công nghệ phần mềm', 16, 'Hoc som', NULL);
+INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Chuyên đề công nghệ phần mềm', 17, 'Hoc som', NULL);
+INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Chuyên đề công nghệ phần mềm', 18, 'Hoc som', NULL);
+INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Chuyên đề công nghệ phần mềm', 19, 'Hoc som', NULL);
+INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Chuyên đề công nghệ phần mềm', 20, 'Hoc som', NULL);
 
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn công nghệ phần mềm', 21, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn công nghệ phần mềm', 22, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn công nghệ phần mềm', 23, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn công nghệ phần mềm', 24, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn công nghệ phần mềm', 25, 'Hoc som', NULL);
+INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Lập trình hệ thống nhúng', 21, 'Hoc som', NULL);
+INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Lập trình hệ thống nhúng', 22, 'Hoc som', NULL);
+INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Lập trình hệ thống nhúng', 23, 'Hoc som', NULL);
+INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Lập trình hệ thống nhúng', 24, 'Hoc som', NULL);
+INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Lập trình hệ thống nhúng', 25, 'Hoc som', NULL);
 
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn công nghệ phần mềm', 26, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn công nghệ phần mềm', 27, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn công nghệ phần mềm', 28, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn công nghệ phần mềm', 29, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn công nghệ phần mềm', 30, 'Hoc som', NULL);
+INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn trí tuệ nhân tạo', 26, 'Hoc som', NULL);
+INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn trí tuệ nhân tạo', 27, 'Hoc som', NULL);
+INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn trí tuệ nhân tạo', 28, 'Hoc som', NULL);
+INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn trí tuệ nhân tạo', 29, 'Hoc som', NULL);
+INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn trí tuệ nhân tạo', 30, 'Hoc som', NULL);
 
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn công nghệ phần mềm', 31, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn công nghệ phần mềm', 32, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn công nghệ phần mềm', 33, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn công nghệ phần mềm', 34, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn công nghệ phần mềm', 35, 'Hoc som', NULL);
+INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn tương tác người - máy', 31, 'Hoc som', NULL);
+INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn tương tác người - máy', 32, 'Hoc som', NULL);
+INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn tương tác người - máy', 33, 'Hoc som', NULL);
+INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn tương tác người - máy', 34, 'Hoc som', NULL);
+INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn tương tác người - máy', 35, 'Hoc som', NULL);
 
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn công nghệ phần mềm', 36, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn công nghệ phần mềm', 37, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn công nghệ phần mềm', 38, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn công nghệ phần mềm', 39, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn công nghệ phần mềm', 40, 'Hoc som', NULL);
+INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Cơ sở dữ liệu phân tán', 36, 'Hoc som', NULL);
+INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Cơ sở dữ liệu phân tán', 37, 'Hoc som', NULL);
+INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Cơ sở dữ liệu phân tán', 38, 'Hoc som', NULL);
+INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Cơ sở dữ liệu phân tán', 39, 'Hoc som', NULL);
+INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Cơ sở dữ liệu phân tán', 40, 'Hoc som', NULL);
 
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn công nghệ phần mềm', 41, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn công nghệ phần mềm', 42, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn công nghệ phần mềm', 43, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn công nghệ phần mềm', 44, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn công nghệ phần mềm', 45, 'Hoc som', NULL);
+INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('An toàn và bảo mật hệ thống cơ bản', 41, 'Hoc som', NULL);
+INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('An toàn và bảo mật hệ thống cơ bản', 42, 'Hoc som', NULL);
+INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('An toàn và bảo mật hệ thống cơ bản', 43, 'Hoc som', NULL);
+INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('An toàn và bảo mật hệ thống cơ bản', 44, 'Hoc som', NULL);
+INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('An toàn và bảo mật hệ thống cơ bản', 45, 'Hoc som', NULL);
 
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn công nghệ phần mềm', 46, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn công nghệ phần mềm', 47, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn công nghệ phần mềm', 48, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn công nghệ phần mềm', 49, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn công nghệ phần mềm', 50, 'Hoc som', NULL);
+INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Bảo mật cơ sở dữ liệu', 46, 'Hoc som', NULL);
+INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Bảo mật cơ sở dữ liệu', 47, 'Hoc som', NULL);
+INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Bảo mật cơ sở dữ liệu', 48, 'Hoc som', NULL);
+INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Bảo mật cơ sở dữ liệu', 49, 'Hoc som', NULL);
+INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Bảo mật cơ sở dữ liệu', 50, 'Hoc som', NULL);
 
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn công nghệ phần mềm', 51, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn công nghệ phần mềm', 52, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn công nghệ phần mềm', 53, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn công nghệ phần mềm', 54, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn công nghệ phần mềm', 55, 'Hoc som', NULL);
+INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Ngăn chặn tấn công SQL Injection', 51, 'Hoc som', NULL);
+INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Ngăn chặn tấn công SQL Injection', 52, 'Hoc som', NULL);
+INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Ngăn chặn tấn công SQL Injection', 53, 'Hoc som', NULL);
+INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Ngăn chặn tấn công SQL Injection', 54, 'Hoc som', NULL);
+INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Ngăn chặn tấn công SQL Injection', 55, 'Hoc som', NULL);
 
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn công nghệ phần mềm', 56, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn công nghệ phần mềm', 57, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn công nghệ phần mềm', 58, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn công nghệ phần mềm', 59, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn công nghệ phần mềm', 60, 'Hoc som', NULL);
+INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('DDOS và các vấn đề liên quan', 56, 'Hoc som', NULL);
+INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('DDOS và các vấn đề liên quan', 57, 'Hoc som', NULL);
+INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('DDOS và các vấn đề liên quan', 58, 'Hoc som', NULL);
+INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('DDOS và các vấn đề liên quan', 59, 'Hoc som', NULL);
+INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('DDOS và các vấn đề liên quan', 60, 'Hoc som', NULL);
 
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn công nghệ phần mềm', 61, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn công nghệ phần mềm', 62, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn công nghệ phần mềm', 63, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn công nghệ phần mềm', 64, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn công nghệ phần mềm', 65, 'Hoc som', NULL);
+INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Tìm hiểu và xử lý lỗ hổng hệ thống', 61, 'Hoc som', NULL);
+INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Tìm hiểu và xử lý lỗ hổng hệ thống', 62, 'Hoc som', NULL);
+INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Tìm hiểu và xử lý lỗ hổng hệ thống', 63, 'Hoc som', NULL);
+INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Tìm hiểu và xử lý lỗ hổng hệ thống', 64, 'Hoc som', NULL);
+INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Tìm hiểu và xử lý lỗ hổng hệ thống', 65, 'Hoc som', NULL);
 
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn công nghệ phần mềm', 66, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn công nghệ phần mềm', 67, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn công nghệ phần mềm', 68, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn công nghệ phần mềm', 69, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn công nghệ phần mềm', 70, 'Hoc som', NULL);
+INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn dữ liệu đa phương tiện', 66, 'Hoc som', NULL);
+INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn dữ liệu đa phương tiện', 67, 'Hoc som', NULL);
+INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn dữ liệu đa phương tiện', 68, 'Hoc som', NULL);
+INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn dữ liệu đa phương tiện', 69, 'Hoc som', NULL);
+INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn dữ liệu đa phương tiện', 70, 'Hoc som', NULL);
 
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn công nghệ phần mềm', 71, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn công nghệ phần mềm', 72, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn công nghệ phần mềm', 73, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn công nghệ phần mềm', 74, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn công nghệ phần mềm', 75, 'Hoc som', NULL);
+INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Thao tác với dữ liệu đa phương tiện', 71, 'Hoc som', NULL);
+INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Thao tác với dữ liệu đa phương tiện', 72, 'Hoc som', NULL);
+INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Thao tác với dữ liệu đa phương tiện', 73, 'Hoc som', NULL);
+INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Thao tác với dữ liệu đa phương tiện', 74, 'Hoc som', NULL);
+INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Thao tác với dữ liệu đa phương tiện', 75, 'Hoc som', NULL);
 
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn công nghệ phần mềm', 76, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn công nghệ phần mềm', 77, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn công nghệ phần mềm', 78, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn công nghệ phần mềm', 79, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn công nghệ phần mềm', 80, 'Hoc som', NULL);
+INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Chuyên đề công nghệ đa phương tiện', 76, 'Hoc som', NULL);
+INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Chuyên đề công nghệ đa phương tiện', 77, 'Hoc som', NULL);
+INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Chuyên đề công nghệ đa phương tiện', 78, 'Hoc som', NULL);
+INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Chuyên đề công nghệ đa phương tiện', 79, 'Hoc som', NULL);
+INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Chuyên đề công nghệ đa phương tiện', 80, 'Hoc som', NULL);
 
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn công nghệ phần mềm', 81, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn công nghệ phần mềm', 82, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn công nghệ phần mềm', 83, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn công nghệ phần mềm', 84, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn công nghệ phần mềm', 85, 'Hoc som', NULL);
+INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn lập trình game', 81, 'Hoc som', NULL);
+INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn lập trình game', 82, 'Hoc som', NULL);
+INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn lập trình game', 83, 'Hoc som', NULL);
+INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn lập trình game', 84, 'Hoc som', NULL);
+INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn lập trình game', 85, 'Hoc som', NULL);
 
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn công nghệ phần mềm', 86, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn công nghệ phần mềm', 87, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn công nghệ phần mềm', 88, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn công nghệ phần mềm', 89, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn công nghệ phần mềm', 90, 'Hoc som', NULL);
+INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Công nghệ phát triển game', 86, 'Hoc som', NULL);
+INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Công nghệ phát triển game', 87, 'Hoc som', NULL);
+INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Công nghệ phát triển game', 88, 'Hoc som', NULL);
+INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Công nghệ phát triển game', 89, 'Hoc som', NULL);
+INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Công nghệ phát triển game', 90, 'Hoc som', NULL);
 
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn công nghệ phần mềm', 91, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn công nghệ phần mềm', 92, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn công nghệ phần mềm', 93, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn công nghệ phần mềm', 94, 'Hoc som', NULL);
-INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Nhập môn công nghệ phần mềm', 95, 'Hoc som', NULL);
+INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Công nghệ thực tế ảo', 91, 'Hoc som', NULL);
+INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Công nghệ thực tế ảo', 92, 'Hoc som', NULL);
+INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Công nghệ thực tế ảo', 93, 'Hoc som', NULL);
+INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Công nghệ thực tế ảo', 94, 'Hoc som', NULL);
+INSERT INTO `lichhoc` (`ten`, `lhpid`, `mota`, `giangvienid`) VALUES ('Công nghệ thực tế ảo', 95, 'Hoc som', NULL);
 /*!40000 ALTER TABLE `lichhoc` ENABLE KEYS */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -1092,4 +1090,5 @@ alter table tuanhoc
 add foreign key (lichhocid) references lichhoc (id);
 
 
--- INSERT INTO `giangvienkhoa` (`id`, `k_id`, `giangvienid`) VALUES (1,1,1); 
+INSERT INTO `giangvienkhoa` (`id`, `k_id`, `giangvienid`) VALUES (1,1,1); 
+select * from lophocphan;

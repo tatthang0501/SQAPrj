@@ -2,6 +2,7 @@ package ptit.web;
 
 import java.io.IOException;
 import java.security.Principal;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
@@ -163,12 +164,14 @@ public class RegisterAPI {
     @GetMapping(value = "/dangky", produces = "application/json")
     public ResponseEntity<?> getDSMonHocByGvId(HttpServletRequest request, Model model) throws IOException {
 
-        try {
+        // try {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             String currentPrincipalName = authentication.getName();
             ThanhVien tv = userRepository.findByUsername(currentPrincipalName).get();
+            System.out.print("tv id " + tv.getId());
             GiangVienKhoa gvk = gvkRepo.findById(tv.getId()).get();
             ArrayList<BoMon> listBoMonKhoa = (ArrayList<BoMon>) bmRepo.getListBoMon(gvk.getKhoa().getId());
+            System.out.print("Size list " + listBoMonKhoa.size());
             ArrayList<Integer> listIdMon = new ArrayList<Integer>();
             for (BoMon bm : listBoMonKhoa) {
                 ArrayList<MonHoc> listMH = (ArrayList<MonHoc>) mhRepo.getListMHByBoMonID(bm.getId());
@@ -200,16 +203,17 @@ public class RegisterAPI {
             }
             model.addAttribute("msg", "Lấy danh sách môn học thành công");
             return new ResponseEntity<>(listMHKHView, HttpStatus.OK);
-        } catch (Exception e) {
-            System.out.println("loi session roi");
-            model.addAttribute("msg", "Có lỗi xảy ra khi chọn môn học");
-            return new ResponseEntity<>("fail", HttpStatus.NOT_FOUND);
-        }
+        // } catch (Exception e) {
+        //     System.out.println("loi session roi");
+        //     model.addAttribute("msg", "Có lỗi xảy ra khi chọn môn học");
+        //     return new ResponseEntity<>("fail", HttpStatus.NOT_FOUND);
+        // }
     }
 
-    @GetMapping(value = "/dangky/dslhp/{id}", produces = "application/json")
+    @GetMapping(value = "/dslhp/{id}", produces = "application/json")
     public ResponseEntity<?> getDSLHP(@PathVariable int id, HttpSession session, Model model,
             HttpServletResponse response) {
+                System.out.println("bat dau chay");
         try {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             String currentPrincipalName = authentication.getName();
