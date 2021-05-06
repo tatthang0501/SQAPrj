@@ -36,18 +36,17 @@ public class BoMon implements Serializable {
     @Column(name="mota")
     private String mota;
 
-    @NotNull
-    @ManyToOne(targetEntity= Khoa.class, cascade={CascadeType.ALL})
+    @ManyToOne
     @JoinColumn(name="khoa_id")
     private Khoa khoa;
 
     @NotNull
-    @OneToMany(targetEntity = MonHoc.class, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "boMon", cascade = CascadeType.ALL)
     @OrderColumn
     private List<MonHoc> dsMonHoc;
 
-    @NotNull
-    @OneToMany(targetEntity = ThanhVien.class, cascade = CascadeType.ALL)
-    @OrderColumn
-    private List<ThanhVien> dsGiangVien;
+    // @NotNull
+    // @OneToMany(targetEntity = ThanhVien.class, cascade = CascadeType.ALL)
+    // @OrderColumn
+    // private List<ThanhVien> dsGiangVien;
 }

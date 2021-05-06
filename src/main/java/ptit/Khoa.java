@@ -34,7 +34,6 @@ public class Khoa implements Serializable {
     private String mota;
 
     @NotNull
-    @OneToMany(targetEntity = BoMon.class,  cascade = CascadeType.ALL)
-    @OrderColumn
+    @OneToMany(mappedBy = "khoa",  cascade = CascadeType.ALL)
     private List<BoMon> boMon;
 }

@@ -221,9 +221,9 @@ public class RegisterAPI {
                 ArrayList<LichHoc> listLichHoc = (ArrayList<LichHoc>) lhRepo.findLichLHP(lhp.getId());
                 LichHoc lh = listLichHoc.get(0);
                 lh.setLhp(lhp);
-                lh.setTuanhoc(thRepo.findById(lh.getTuanhoc().getId()).get());
-                lh.setNgayhoc(nhRepo.findById(lh.getNgayhoc().getId()).get());
-                lh.setKiphoc(khRepo.findById(lh.getKiphoc().getId()).get());
+                lh.setTuanHoc(thRepo.findByLichHocId(lh.getId()));
+                lh.setKipHoc(khRepo.findByLichHocId(lh.getId()));
+                lh.setNgayHoc(nhRepo.findByLichHocId(lh.getId()));
                 listLichLHP.add(lh);
             }
 
@@ -234,21 +234,27 @@ public class RegisterAPI {
             for (LichHoc lh : listLichLHP) {
                 LichHocView lhv = new LichHocView();
                 lhv.setId(lh.getId());
-                lhv.setKiphoc(lh.getKiphoc().getTen());
-                lhv.setNgayhoc(lh.getNgayhoc().getTen());
-                lhv.setSoTC(lh.getLhp().getMhkh().getMh().getSoTC());
-                lhv.setTuanhoc(lh.getTuanhoc().getTen());
                 lhv.setTen(lh.getTen());
+                lhv.setSoTC(lh.getLhp().getMhkh().getMh().getSoTC());
+                lhv.setPhong(lh.getPhong());
+                lhv.setNhomTH(lh.getNhomTH());
+                lhv.setSiSoToiDa(lh.getLhp().getSisotoida());
+                lhv.setKipHoc(lh.getKipHoc());
+                lhv.setNgayHoc(lh.getNgayHoc());
+                lhv.setTuanHoc(lh.getTuanHoc());
                 listLichViewLHP.add(lhv);
             }
             for (LichHoc lh : listLichDaDK) {
                 LichHocView lhv = new LichHocView();
                 lhv.setId(lh.getId());
-                lhv.setKiphoc(lh.getKiphoc().getTen());
-                lhv.setNgayhoc(lh.getNgayhoc().getTen());
-                lhv.setSoTC(lh.getLhp().getMhkh().getMh().getSoTC());
-                lhv.setTuanhoc(lh.getTuanhoc().getTen());
                 lhv.setTen(lh.getTen());
+                lhv.setSoTC(lh.getLhp().getMhkh().getMh().getSoTC());
+                lhv.setPhong(lh.getPhong());
+                lhv.setNhomTH(lh.getNhomTH());
+                lhv.setSiSoToiDa(lh.getLhp().getSisotoida());
+                lhv.setKipHoc(lh.getKipHoc());
+                lhv.setNgayHoc(lh.getNgayHoc());
+                lhv.setTuanHoc(lh.getTuanHoc());
                 listLichViewDaDK.add(lhv);
             }
             ListDaDK_ListCoTheDK list = new ListDaDK_ListCoTheDK();
@@ -262,38 +268,38 @@ public class RegisterAPI {
         }
     }
 
-    @PutMapping(value = "/updatedangky", produces = "application/json")
-    public ResponseEntity<?> updateDKHP(@RequestBody ArrayList<LichHocView> listDK, HttpServletRequest request,
-            HttpServletResponse response, Model model) {
-        HttpSession session = request.getSession();
-        try {
-            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-            String currentPrincipalName = authentication.getName();
-            ThanhVien tv = userRepository.findByUsername(currentPrincipalName).get();
-            ArrayList<LichHoc> listLichDaDK = (ArrayList<LichHoc>) session.getAttribute("listDaDK");
-            for (LichHocView lh : listDK) {
-                for (LichHoc lhDaDK : listLichDaDK) {
-                    if (lhDaDK.getKiphoc().getTen() == lh.getKiphoc()
-                            && lhDaDK.getNgayhoc().getTen() == lh.getNgayhoc()) {
-                        String msg = "Bị trùng lịch giảng dạy môn " + lh.getTen() + ", " + lh.getKiphoc() + ", "
-                                + lh.getNgayhoc() + " hàng tuần";
-                        model.addAttribute("msg", msg);
-                        response.sendRedirect("/dangky/dslophocphan?error");
-                    }
-                }
-            }
-            for (LichHocView lh : listDK) {
-                lhRepo.updateDangKy(tv.getId(), lh.getId());
-            }
-            String msg = "Lưu đăng ký thành công";
-            model.addAttribute("msg", msg);
-            session.removeAttribute("listDaDK");
-            return new ResponseEntity<>("update successful", HttpStatus.OK);
-        } catch (Exception e) {
-            String msg = "Có lỗi xảy ra khi lưu danh sách đăng ký";
-            session.removeAttribute("listDaDK");
-            model.addAttribute("msg", msg);
-            return new ResponseEntity<>("fail", HttpStatus.NOT_MODIFIED);
-        }
-    }
+    // @PutMapping(value = "/updatedangky", produces = "application/json")
+    // public ResponseEntity<?> updateDKHP(@RequestBody ArrayList<LichHocView> listDK, HttpServletRequest request,
+    //         HttpServletResponse response, Model model) {
+    //     HttpSession session = request.getSession();
+    //     try {
+    //         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    //         String currentPrincipalName = authentication.getName();
+    //         ThanhVien tv = userRepository.findByUsername(currentPrincipalName).get();
+    //         ArrayList<LichHoc> listLichDaDK = (ArrayList<LichHoc>) session.getAttribute("listDaDK");
+    //         for (LichHocView lh : listDK) {
+    //             for (LichHoc lhDaDK : listLichDaDK) {
+    //                 // if (lhDaDK.getKiphoc().getTen() == lh.getKiphoc()
+    //                 //         && lhDaDK.getNgayhoc().getTen() == lh.getNgayhoc()) {
+    //                 //     String msg = "Bị trùng lịch giảng dạy môn " + lh.getTen() + ", " + lh.getKiphoc() + ", "
+    //                 //             + lh.getNgayhoc() + " hàng tuần";
+    //                 //     model.addAttribute("msg", msg);
+    //                 //     response.sendRedirect("/dangky/dslophocphan?error");
+    //                 // }
+    //             }
+    //         }
+    //         for (LichHocView lh : listDK) {
+    //             lhRepo.updateDangKy(tv.getId(), lh.getId());
+    //         }
+    //         String msg = "Lưu đăng ký thành công";
+    //         model.addAttribute("msg", msg);
+    //         session.removeAttribute("listDaDK");
+    //         return new ResponseEntity<>("update successful", HttpStatus.OK);
+    //     } catch (Exception e) {
+    //         String msg = "Có lỗi xảy ra khi lưu danh sách đăng ký";
+    //         session.removeAttribute("listDaDK");
+    //         model.addAttribute("msg", msg);
+    //         return new ResponseEntity<>("fail", HttpStatus.NOT_MODIFIED);
+    //     }
+    // }
 }

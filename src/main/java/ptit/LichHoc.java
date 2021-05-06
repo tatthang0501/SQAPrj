@@ -1,6 +1,7 @@
 package ptit;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -8,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -38,19 +40,22 @@ public class LichHoc implements Serializable{
     private LopHocPhan lhp;
 
     @NotNull
-    @JoinColumn(name="tuanid")
-    @ManyToOne(targetEntity = TuanHoc.class, cascade = CascadeType.ALL)
-    private TuanHoc tuanhoc;
+    @OneToMany(mappedBy = "lh", cascade = CascadeType.ALL)
+    private List<TuanHoc> tuanHoc;
 
     @NotNull
-    @JoinColumn(name="ngayid")
-    @ManyToOne(targetEntity = NgayHoc.class, cascade = CascadeType.ALL)
-    private NgayHoc ngayhoc;
+    @OneToMany(mappedBy = "lh", cascade = CascadeType.ALL)
+    private List<NgayHoc> ngayHoc;
 
     @NotNull
-    @JoinColumn(name="kipid")
-    @ManyToOne(targetEntity = KipHoc.class, cascade = CascadeType.ALL)
-    private KipHoc kiphoc;
+    @OneToMany(mappedBy = "lh", cascade = CascadeType.ALL)
+    private List<KipHoc> kipHoc;
+
+    @Column(name="phong")
+    private String phong;
+
+    @Column(name="nhomth")
+    private int nhomTH;
 
     @Nullable
     @JoinColumn(name="giangvienid")
