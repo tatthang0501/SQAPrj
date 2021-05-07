@@ -20,4 +20,6 @@ public class LichHocView implements Serializable{
     private List<Integer> ngayHoc;
     private List<Integer> kipHoc;
     private List<Integer> tuanHoc;
+    private boolean daDK = false;
+
 }

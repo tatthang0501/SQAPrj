@@ -256,7 +256,7 @@ public class RegisterAPI {
 
             ArrayList<LichHoc> listLichDaDK = (ArrayList<LichHoc>) lhRepo.findDaDKLHP(tv.getId());
 
-            ArrayList<LichHocView> listLichViewDaDK = new ArrayList<LichHocView>();
+            // ArrayList<LichHocView> listLichViewDaDK = new ArrayList<LichHocView>();
             ArrayList<LichHocView> listLichViewLHP = new ArrayList<LichHocView>();
             for (LichHoc lh : listLichLHP) {
                 LichHocView lhv = new LichHocView();
@@ -289,22 +289,25 @@ public class RegisterAPI {
                 lhv.setTuanHoc(listTH);
 
                 listLichViewLHP.add(lhv);
+                if(lh.getGv() != null){
+                    lhv.setDaDK(true);
+                }
             }
-            for (LichHoc lh : listLichDaDK) {
-                LichHocView lhv = new LichHocView();
-                lhv.setId(lh.getId());
-                lhv.setTen(lh.getTen());
-                lhv.setSoTC(lh.getLhp().getMhkh().getMh().getSoTC());
-                lhv.setPhong(lh.getPhong());
-                lhv.setNhomTH(lh.getNhomTH());
-                lhv.setSiSoToiDa(lh.getLhp().getSisotoida());
-                listLichViewDaDK.add(lhv);
-            }
-            ListDaDK_ListCoTheDK list = new ListDaDK_ListCoTheDK();
-            list.setListLichDaDK(listLichViewDaDK);
-            list.setListLichLHP(listLichViewLHP);
-            session.setAttribute("listDaDK", listLichDaDK);
-            return new ResponseEntity<>(list, HttpStatus.OK);
+            // for (LichHoc lh : listLichDaDK) {
+            //     LichHocView lhv = new LichHocView();
+            //     lhv.setId(lh.getId());
+            //     lhv.setTen(lh.getTen());
+            //     lhv.setSoTC(lh.getLhp().getMhkh().getMh().getSoTC());
+            //     lhv.setPhong(lh.getPhong());
+            //     lhv.setNhomTH(lh.getNhomTH());
+            //     lhv.setSiSoToiDa(lh.getLhp().getSisotoida());
+            //     listLichViewDaDK.add(lhv);
+            // }
+            // ListDaDK_ListCoTheDK list = new ListDaDK_ListCoTheDK();
+            // list.setListLichDaDK(listLichViewDaDK);
+            // list.setListLichLHP(listLichViewLHP);
+            // session.setAttribute("listDaDK", listLichDaDK);
+            return new ResponseEntity<>(listLichViewLHP, HttpStatus.OK);
         } 
         catch (Exception e) {
             model.addAttribute("msg", "Có lỗi xảy ra khi lấy danh sách lớp học phần");
