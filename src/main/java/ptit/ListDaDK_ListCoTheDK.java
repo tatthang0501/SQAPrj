@@ -10,5 +10,4 @@ import lombok.Data;
 public class ListDaDK_ListCoTheDK {
     private ArrayList<LichHocView> listLichDaDK;
     private ArrayList<LichHocView> listLichLHP;
-
 }
