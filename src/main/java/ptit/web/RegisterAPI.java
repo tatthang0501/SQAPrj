@@ -149,6 +149,19 @@ public class RegisterAPI {
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
 
+    @GetMapping(value="/test")
+    public void testAPI(){
+        List<BoMon> listBM = bmRepo.getListBoMon(1);
+            System.out.println(listBM.size());
+            System.out.println(listBM.get(0).getId());
+            System.out.println(listBM.get(0).getTen());
+            System.out.println(listBM.get(0).getMota());
+            System.out.println(listBM.get(0).getKhoa().getId());
+            System.out.println(listBM.get(0).getKhoa().getTen());
+            System.out.println(listBM.get(0).getDsGiangVien().size());
+            // System.out.println(listBM.get(0).getDsMonHoc().size());
+    }
+    
     @GetMapping(value = "/dangky", produces = "application/json")
     public ResponseEntity<?> getDSMonHocByGvId(HttpServletRequest request, Model model) throws IOException {
         System.out.println("bat dau chay");
@@ -156,10 +169,8 @@ public class RegisterAPI {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             String currentPrincipalName = authentication.getName();
             ThanhVien tv = userRepository.findByUsername(currentPrincipalName).get();
-            System.out.print("tv id " + tv.getId());
             GiangVienKhoa gvk = gvkRepo.findById(tv.getId()).get();
             ArrayList<BoMon> listBoMonKhoa = (ArrayList<BoMon>) bmRepo.getListBoMon(gvk.getKhoa().getId());
-            System.out.print("Size list " + listBoMonKhoa.size());
             ArrayList<Integer> listIdMon = new ArrayList<Integer>();
             for (BoMon bm : listBoMonKhoa) {
                 ArrayList<MonHoc> listMH = (ArrayList<MonHoc>) mhRepo.getListMHByBoMonID(bm.getId());
@@ -167,10 +178,6 @@ public class RegisterAPI {
                     listIdMon.add(mh.getId());
                 }
                 bm.setDsMonHoc(listMH);
-            }
-            System.out.print("/n");
-            for (int i : listIdMon) {
-                System.out.println(i);
             }
             ArrayList<KyHoc> listKy = (ArrayList<KyHoc>) kyhocRepo.findAll();
             KyHoc newestKH = listKy.get(listKy.size() - 1);
@@ -197,7 +204,7 @@ public class RegisterAPI {
             model.addAttribute("msg", "Lấy danh sách môn học thành công");
             return new ResponseEntity<>(listMHKHView, HttpStatus.OK);
         } catch (Exception e) {
-            System.out.println("loi session roi");
+            System.out.println("Có lỗi xảy ra trong quá trình lấy danh sách");
             model.addAttribute("msg", "Có lỗi xảy ra khi chọn môn học");
             return new ResponseEntity<>("fail", HttpStatus.NOT_FOUND);
         }
