@@ -293,7 +293,6 @@ public class RegisterAPI {
             ThanhVien tv = userRepository.findByUsername(currentPrincipalName).get();
             System.out.println("Id thang user day " + tv.getId() + tv.getTen());
             for (LichHocView lh : listDK) {
-                System.out.println("tao dang chay day");
                 if (lh.isDaDK() == false) {
                     int count = lhRepo.updateDangKy(tv.getId(), lh.getId());
                     if (count != 1) {
