@@ -24,11 +24,11 @@ public class TestBoMon {
 
     @Autowired
     HocKyRepository hkRepo;
+    
+    //Test lấy tất cả dữ liệu bộ môn qua id của khoa
     @Test
     public void testGetDsBoMonByKhoaID(){
         List<BoMon> listBM =  bmRepo.getListBoMon(1);
-
-
         //Kiểm tra list lấy từ CSDL khác null
         assertNotNull(listBM);
         //Kiểm tra số lượng bộ môn lấy được từ CSDL
@@ -45,5 +45,9 @@ public class TestBoMon {
         assertEquals(listBM.get(0).getKhoa().getId(), 1);
         assertEquals(listBM.get(1).getKhoa().getId(), 1);
     }
+
+    // Test lấy tất cả dữ liệu từ bảng bộ môn
+    @Test
+    public void test
     
 }
