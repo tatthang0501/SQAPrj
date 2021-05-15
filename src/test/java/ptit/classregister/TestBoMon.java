@@ -84,4 +84,26 @@ public class TestBoMon {
         bmRepo.deleteById(1000);
         assertEquals(bmRepo.existsById(1000), false);
     }
+
+    //Test lấy danh sách bộ môn từ id khoa
+    @Test
+    @Order(6)
+    public void testGetAllByKhoaID(){
+        List<BoMon> listBM =  bmRepo.getListBoMon(1);
+        //Kiểm tra list lấy từ CSDL khác null
+        assertNotNull(listBM);
+        //Kiểm tra số lượng bộ môn lấy được từ CSDL
+        assertEquals(listBM.size(), 2);
+        //Kiểm tra id của bộ môn thứ nhất
+        assertEquals(listBM.get(0).getId(), 1);
+        // //Kiểm tra id của bộ môn thứ hai
+        assertEquals(listBM.get(1).getId(), 2);
+        // //Kiểm tra tên của bộ môn thứ nhất
+        assertEquals(listBM.get(0).getTen(), "Công nghệ phần mềm");
+        // //Kiểm tra tên của bộ môn thứ hai
+        assertEquals(listBM.get(1).getTen(), "Trí tuệ nhân tạo");
+        // //Kiểm tra id khoa của 2 bộ môn
+        assertEquals(listBM.get(0).getKhoa().getId(), 1);
+        assertEquals(listBM.get(1).getKhoa().getId(), 1);
+    }
 }

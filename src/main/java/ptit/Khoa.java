@@ -26,14 +26,11 @@ public class Khoa implements Serializable {
     @NotNull
     private int id;
 
-    @NotNull
     @Column(name="ten")
     private String ten;
-    @NotNull
     @Column(name="mota")
     private String mota;
 
-    @NotNull
     @OneToMany(mappedBy = "khoa",  cascade = CascadeType.ALL)
     private List<BoMon> boMon;
 }
