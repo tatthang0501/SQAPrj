@@ -9,7 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 
 import lombok.Data;
 @Data
@@ -27,7 +26,6 @@ public class GiangVienKhoa implements Serializable{
     private int id;
 
     @JoinColumn(name="giangvienid")
-    @NotNull
     @ManyToOne(targetEntity = ThanhVien.class, cascade = CascadeType.ALL)
     private ThanhVien giangVien;
 

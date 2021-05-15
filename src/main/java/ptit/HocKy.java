@@ -24,11 +24,9 @@ public class HocKy implements Serializable{
     @Column(name="id")
     private int id;
 
-    @NotNull
     @Column(name="ten")
     private String ten;
 
-    @NotNull
     @Column(name="mota")
     private String mota;
 }
