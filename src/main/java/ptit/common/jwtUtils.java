@@ -20,10 +20,8 @@ import ptit.services.UserDetailsImpl;
 public class JwtUtils {
     private static final Logger logger = LoggerFactory.getLogger(JwtUtils.class);
 
-    @Value("${godzuu.jwtSecret}")
-    private String jwtSecret;
-    @Value("${godzuu.jwtExpirationMs}")
-    private int jwtExpirationMs;
+    private static String jwtSecret = "godzuu";
+    private static int jwtExpirationMs = 900000;
 
     public String generateJwtToken(Authentication authentication){
         UserDetailsImpl userPrincipal = (UserDetailsImpl) authentication.getPrincipal();
@@ -54,5 +52,10 @@ public class JwtUtils {
             logger.error("JWT claims string is empty", e.getMessage());
         }
         return false;
+    }
+
+    public static String createToken(String username) {
+        UserDetailsImpl userPrincipal = new UserDetailsImpl(1, "thang", "123456", "thang123@gmail.com");
+        return Jwts.builder().setSubject((userPrincipal.getUsername())).setIssuedAt(new Date()).setExpiration(new Date(new Date().getTime() + jwtExpirationMs)).signWith(SignatureAlgorithm.HS512, jwtSecret).compact();
     }
 }

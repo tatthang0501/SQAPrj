@@ -108,12 +108,12 @@ public class RegisterAPI {
         return tv;
     }
 
-    @GetMapping("/getuserid")
-    public String getUser() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String currentPrincipalName = authentication.getName();
-        return currentPrincipalName;
-    }
+    // @GetMapping("/getuserid")
+    // public String getUser() {
+    //     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    //     String currentPrincipalName = authentication.getName();
+    //     return currentPrincipalName;
+    // }
 
     @PostMapping("/login")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginForm loginRequest) {
@@ -123,9 +123,7 @@ public class RegisterAPI {
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = jwtUtils.generateJwtToken(authentication);
-
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
-
         JwtResponse jwtResponse = new JwtResponse(jwt, userDetails.getId(), userDetails.getUsername(),
                 userDetails.getEmail());
         return ResponseEntity.ok(jwtResponse);
