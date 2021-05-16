@@ -23,11 +23,12 @@ public class KipHoc implements Serializable{
      */
     private static final long serialVersionUID = 1L;
     @Id
-    private int id;
     @NotNull
+    private int id;
+
     @Column(name="ten")
     private int ten;
-    @NotNull
+
     @Column(name="mota")
     private String mota;
 

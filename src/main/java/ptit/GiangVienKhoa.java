@@ -21,7 +21,6 @@ public class GiangVienKhoa implements Serializable{
      */
     private static final long serialVersionUID = 1L;
     
-    @GeneratedValue
     @Id
     private int id;
 

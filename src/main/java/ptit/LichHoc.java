@@ -29,25 +29,21 @@ public class LichHoc implements Serializable{
     
     @Id
     @Column(name="id")
+
     private int id;
-    @NotNull
     @Column(name="ten")
     private String ten;
     
-    @NotNull
     @JoinColumn(name="lhpid")
     @ManyToOne(targetEntity = LopHocPhan.class, cascade = CascadeType.ALL)
     private LopHocPhan lhp;
 
-    @NotNull
     @OneToMany(mappedBy = "lh", cascade = CascadeType.ALL)
     private List<TuanHoc> tuanHoc;
 
-    @NotNull
     @OneToMany(mappedBy = "lh", cascade = CascadeType.ALL)
     private List<NgayHoc> ngayHoc;
 
-    @NotNull
     @OneToMany(mappedBy = "lh", cascade = CascadeType.ALL)
     private List<KipHoc> kipHoc;
 

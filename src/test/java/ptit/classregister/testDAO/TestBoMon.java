@@ -1,4 +1,4 @@
-package ptit.classregister;
+package ptit.classregister.testDAO;
 
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -19,7 +19,7 @@ import ptit.Khoa;
 import ptit.data.BoMonRepository;
 import ptit.data.HocKyRepository;
 
-//Test Các chức năng liên quan đến đối tượng BoMon
+//Test Các chức năng của lớp BoMonRepository
 // Nguyễn Tất Thắng
 @SpringBootTest
 @TestMethodOrder(OrderAnnotation.class)

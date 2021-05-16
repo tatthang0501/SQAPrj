@@ -1,4 +1,4 @@
-package ptit.classregister;
+package ptit.classregister.testDAO;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -16,10 +16,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 import ptit.Khoa;
 import ptit.data.KhoaRepository;
 
-//Test các chức năng liên quan đến đối tượng Khoa
+//Test các chức năng của lớp KhoaRepository
+//Nguyễn Tất Thắng
 @SpringBootTest
 @TestMethodOrder(OrderAnnotation.class)
-public class TestGetKhoa {
+public class TestKhoa {
     @Autowired
     KhoaRepository kRepo;
 

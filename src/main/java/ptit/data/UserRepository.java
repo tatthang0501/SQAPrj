@@ -9,7 +9,7 @@ import ptit.ThanhVien;
 
 
 @Repository
-public interface UserRepository extends JpaRepository<ThanhVien, Long> {
+public interface UserRepository extends JpaRepository<ThanhVien, Integer> {
 	Optional<ThanhVien> findByUsername(String username);
 
 	Boolean existsByUsername(String username);
