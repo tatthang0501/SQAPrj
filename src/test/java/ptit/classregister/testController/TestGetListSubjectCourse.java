@@ -1,0 +1,35 @@
+package ptit.classregister.testController;
+
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.web.servlet.MockMvc;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import static org.hamcrest.Matchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import ptit.common.JwtUtils;
+
+//Test request tới url localhost:8080/dangky/dslhp/{id} lấy danh sách môn học
+// Nguyễn Tất Thắng
+@SpringBootTest
+@AutoConfigureMockMvc
+public class TestGetListSubjectCourse {
+    
+    @Autowired
+    private MockMvc mockMvc;
+
+    @Test
+    public void testGetLiistSubjectCourseSuccessful() throws Exception{
+        String token = JwtUtils.createToken();
+        assertNotNull(token);
+        mockMvc.perform(MockMvcRequestBuilders.get("/dangky/dslhp/{id}", 1)
+        .header("Authorization", "Bearer" + token))
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$", hasSize(5)))
+        .andExpect(jsonPath("$[0].id", is(1)));
+    }
+}

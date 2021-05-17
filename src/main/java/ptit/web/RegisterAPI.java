@@ -157,7 +157,6 @@ public class RegisterAPI {
 
     @GetMapping(value = "/dangky", produces = "application/json")
     public ResponseEntity<?> getDSMonHocByGvId(HttpServletRequest request, Model model) throws IOException {
-        System.out.println("bat dau chay");
         try {
             ThanhVien tv = getInstanceUser();
             GiangVienKhoa gvk = gvkRepo.findById(tv.getId()).get();
@@ -192,12 +191,9 @@ public class RegisterAPI {
                 mhkhv.setTen(mhkh.getMh().getTen());
                 listMHKHView.add(mhkhv);
             }
-            model.addAttribute("msg", "Lấy danh sách môn học thành công");
             return new ResponseEntity<>(listMHKHView, HttpStatus.OK);
         } catch (Exception e) {
-            System.out.println("Có lỗi xảy ra trong quá trình lấy danh sách");
-            model.addAttribute("msg", "Có lỗi xảy ra khi chọn môn học");
-            return new ResponseEntity<>("fail", HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("Có lỗi xảy ra trong quá trình lấy danh sách môn học", HttpStatus.NOT_FOUND);
         }
     }
 

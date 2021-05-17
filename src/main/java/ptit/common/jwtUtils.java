@@ -54,7 +54,7 @@ public class JwtUtils {
         return false;
     }
 
-    public static String createToken(String username) {
+    public static String createToken() {
         UserDetailsImpl userPrincipal = new UserDetailsImpl(1, "thang", "123456", "thang123@gmail.com");
         return Jwts.builder().setSubject((userPrincipal.getUsername())).setIssuedAt(new Date()).setExpiration(new Date(new Date().getTime() + jwtExpirationMs)).signWith(SignatureAlgorithm.HS512, jwtSecret).compact();
     }
