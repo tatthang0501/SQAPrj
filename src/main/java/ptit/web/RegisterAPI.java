@@ -58,6 +58,7 @@ import ptit.dto.JwtResponse;
 import ptit.dto.LoginForm;
 import ptit.dto.MessageResponse;
 import ptit.dto.SignupRequest;
+import ptit.exception.zeroSizeException;
 import ptit.services.UserDetailsImpl;
 
 @RestController
@@ -236,10 +237,14 @@ public class RegisterAPI {
                 }
 
                 ArrayList<LichHocView> listLichViewLHP = LichHocConverter.convertLHToLHV(listLichLHP);
+                if(listLichViewLHP.size() == 0) throw new zeroSizeException();
                 return new ResponseEntity<>(listLichViewLHP, HttpStatus.OK);
-            } catch (Exception e) {
-                model.addAttribute("msg", "Có lỗi xảy ra khi lấy danh sách lớp học phần");
-                return new ResponseEntity<>("fail", HttpStatus.NOT_FOUND);
+            } catch(zeroSizeException ex){
+                return new ResponseEntity<>("ID môn học không hợp lệ, vui lòng thử lại", HttpStatus.NOT_FOUND);
+            }
+
+             catch (Exception e) {
+                return new ResponseEntity<>("Có lỗi xảy ra trong quá trình lấy danh sách lớp học phần", HttpStatus.NOT_FOUND);
             }
         } catch (NoSuchElementException e) {
             return new ResponseEntity<>("Chưa đăng nhập, vui lòng đăng nhập trước khi thực hiện đăng ký môn học",

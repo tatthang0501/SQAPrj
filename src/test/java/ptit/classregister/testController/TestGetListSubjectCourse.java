@@ -11,6 +11,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import static org.hamcrest.Matchers.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import ptit.common.JwtUtils;
 
 //Test request tới url localhost:8080/dangky/dslhp/{id} lấy danh sách lớp học phần
@@ -34,15 +35,25 @@ public class TestGetListSubjectCourse {
         .andExpect(jsonPath("$[0].id", is(1)));
     }
 
-    //Test lấy danh sách lớp học phần thành công với id môn học 100, không tồn tại trong hệ thống
+    //Test lấy danh sách lớp học phần không thành công với id môn học 100, không tồn tại trong hệ thống
     @Test
     public void testGetListSubjectCourseUnsuccessful() throws Exception{
         String token = JwtUtils.createToken();
         assertNotNull(token);
-        mockMvc.perform(MockMvcRequestBuilders.get("/dangky/dslhp/{id}", 100)
+        mockMvc.perform(MockMvcRequestBuilders.get("/dangky/dslhp/{id}",100)
         .header("Authorization", "Bearer" + token))
-        .andExpect(status().isOk())
-        .andExpect(jsonPath("$", hasSize(0)));
+        .andExpect(status().isNotFound());
+        // .andExpect(content()
+        // .string(containsString("ChÆ°a ÄÄng nháº­p, vui lÃ²ng ÄÄng nháº­p trÆ°á»c khi thá»±c hiá»n ÄÄng kÃ½ mÃ´n há»c")));
     }
 
+    //Test lấy danh sách lớp học phần không thành công, người dùng chưa đăng nhập vào hệ thống
+    @Test
+    public void testGetListSubjectUnsuccessful() throws Exception{
+        mockMvc.perform(MockMvcRequestBuilders.get("/dangky/dslhp/{id}",1))
+        .andExpect(status().isUnauthorized()).andExpect(content()
+        .string(containsString("ChÆ°a ÄÄng nháº­p, vui lÃ²ng ÄÄng nháº­p trÆ°á»c khi thá»±c hiá»n ÄÄng kÃ½ mÃ´n há»c")));
+    }
+
+    //Test lấy danh sách lớp học phần không thành công, 
 }

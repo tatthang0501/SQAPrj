@@ -11,6 +11,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.hamcrest.Matchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 
 import ptit.common.JwtUtils;
 
@@ -41,6 +42,7 @@ public class TestGetListSubject {
         // String token = JwtUtils.createToken();
         // assertNotNull(token);
         mockMvc.perform(MockMvcRequestBuilders.get("/dangky"))
-        .andExpect(status().isUnauthorized());
+        .andExpect(status().isUnauthorized()).andExpect(content()
+        .string(containsString("ChÆ°a ÄÄng nháº­p, vui lÃ²ng ÄÄng nháº­p trÆ°á»c khi thá»±c hiá»n ÄÄng kÃ½ mÃ´n há»c")));
     }
 }
