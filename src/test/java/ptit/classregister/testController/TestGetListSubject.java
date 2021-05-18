@@ -35,9 +35,12 @@ public class TestGetListSubject {
         .andExpect(jsonPath("$[0].soTC", is(3)));
     }
 
-    //Test get danh sách môn học không thành công
+    //Test get danh sách môn học không thành công, người dùng chưa đăng nhập và không có token
     @Test
-    public void testGetListSubjectUnsuccessful(){
-        
+    public void testGetListSubjectUnsuccessful() throws Exception{
+        // String token = JwtUtils.createToken();
+        // assertNotNull(token);
+        mockMvc.perform(MockMvcRequestBuilders.get("/dangky"))
+        .andExpect(status().isUnauthorized());
     }
 }

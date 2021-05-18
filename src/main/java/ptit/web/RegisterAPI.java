@@ -1,9 +1,12 @@
 package ptit.web;
 
 import java.io.IOException;
-
+import java.sql.BatchUpdateException;
+import java.sql.SQLDataException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -108,13 +111,6 @@ public class RegisterAPI {
         return tv;
     }
 
-    // @GetMapping("/getuserid")
-    // public String getUser() {
-    //     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-    //     String currentPrincipalName = authentication.getName();
-    //     return currentPrincipalName;
-    // }
-
     @PostMapping("/login")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginForm loginRequest) {
 
@@ -157,140 +153,168 @@ public class RegisterAPI {
 
     @GetMapping(value = "/dangky", produces = "application/json")
     public ResponseEntity<?> getDSMonHocByGvId(HttpServletRequest request, Model model) throws IOException {
+        ThanhVien tv;
         try {
-            ThanhVien tv = getInstanceUser();
-            GiangVienKhoa gvk = gvkRepo.findById(tv.getId()).get();
-            ArrayList<BoMon> listBoMonKhoa = (ArrayList<BoMon>) bmRepo.getListBoMon(gvk.getKhoa().getId());
-            ArrayList<Integer> listIdMon = new ArrayList<Integer>();
-            for (BoMon bm : listBoMonKhoa) {
-                ArrayList<MonHoc> listMH = (ArrayList<MonHoc>) mhRepo.getListMHByBoMonID(bm.getId());
-                for (MonHoc mh : listMH) {
-                    listIdMon.add(mh.getId());
+            tv = getInstanceUser();
+            try {
+                GiangVienKhoa gvk = gvkRepo.findById(tv.getId()).get();
+                ArrayList<BoMon> listBoMonKhoa = (ArrayList<BoMon>) bmRepo.getListBoMon(gvk.getKhoa().getId());
+                ArrayList<Integer> listIdMon = new ArrayList<Integer>();
+                for (BoMon bm : listBoMonKhoa) {
+                    ArrayList<MonHoc> listMH = (ArrayList<MonHoc>) mhRepo.getListMHByBoMonID(bm.getId());
+                    for (MonHoc mh : listMH) {
+                        listIdMon.add(mh.getId());
+                    }
+                    bm.setDsMonHoc(listMH);
                 }
-                bm.setDsMonHoc(listMH);
-            }
-            ArrayList<KyHoc> listKy = (ArrayList<KyHoc>) kyhocRepo.findAll();
-            KyHoc newestKH = listKy.get(listKy.size() - 1);
-            ArrayList<MonHocKyHoc> listMHKHTemp = (ArrayList<MonHocKyHoc>) mhkhRepo.getListMHKH(newestKH.getId());
-            ArrayList<MonHocKyHoc> listMHKH = new ArrayList<MonHocKyHoc>();
+                ArrayList<KyHoc> listKy = (ArrayList<KyHoc>) kyhocRepo.findAll();
+                KyHoc newestKH = listKy.get(listKy.size() - 1);
+                ArrayList<MonHocKyHoc> listMHKHTemp = (ArrayList<MonHocKyHoc>) mhkhRepo.getListMHKH(newestKH.getId());
+                ArrayList<MonHocKyHoc> listMHKH = new ArrayList<MonHocKyHoc>();
 
-            for (MonHocKyHoc mhkh : listMHKHTemp) {
-                if (listIdMon.contains(mhkh.getMh().getId())) {
-                    MonHoc mh = mhRepo.findById(mhkh.getMh().getId()).get();
-                    mhkh.setMh(mh);
-                    listMHKH.add(mhkh);
+                for (MonHocKyHoc mhkh : listMHKHTemp) {
+                    if (listIdMon.contains(mhkh.getMh().getId())) {
+                        MonHoc mh = mhRepo.findById(mhkh.getMh().getId()).get();
+                        mhkh.setMh(mh);
+                        listMHKH.add(mhkh);
+                    }
                 }
-            }
 
-            ArrayList<MonHocKyHocView> listMHKHView = new ArrayList<MonHocKyHocView>();
-            for (MonHocKyHoc mhkh : listMHKH) {
-                MonHocKyHocView mhkhv = new MonHocKyHocView();
-                mhkhv.setId(mhkh.getId());
-                mhkhv.setMota(mhkh.getMh().getMota());
-                mhkhv.setSoTC(mhkh.getMh().getSoTC());
-                mhkhv.setTen(mhkh.getMh().getTen());
-                listMHKHView.add(mhkhv);
+                ArrayList<MonHocKyHocView> listMHKHView = new ArrayList<MonHocKyHocView>();
+                for (MonHocKyHoc mhkh : listMHKH) {
+                    MonHocKyHocView mhkhv = new MonHocKyHocView();
+                    mhkhv.setId(mhkh.getId());
+                    mhkhv.setMota(mhkh.getMh().getMota());
+                    mhkhv.setSoTC(mhkh.getMh().getSoTC());
+                    mhkhv.setTen(mhkh.getMh().getTen());
+                    listMHKHView.add(mhkhv);
+                }
+                return new ResponseEntity<>(listMHKHView, HttpStatus.OK);
+            } catch (NoSuchElementException e) {
+                return new ResponseEntity<>("Có lỗi xảy ra trong quá trình lấy danh sách môn học",
+                        HttpStatus.NOT_FOUND);
             }
-            return new ResponseEntity<>(listMHKHView, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>("Có lỗi xảy ra trong quá trình lấy danh sách môn học", HttpStatus.NOT_FOUND);
+        } catch (NoSuchElementException e) {
+            return new ResponseEntity<>("Chưa đăng nhập, vui lòng đăng nhập trước khi thực hiện đăng ký môn học",
+                    HttpStatus.UNAUTHORIZED);
         }
+
     }
 
     @GetMapping(value = "/dangky/dslhp/{id}", produces = "application/json")
     public ResponseEntity<?> getDSLHP(@PathVariable int id, HttpSession session, Model model,
             HttpServletResponse response) {
         try {
+            getInstanceUser();
+            try {
+                ArrayList<LopHocPhan> listLHPFound = (ArrayList<LopHocPhan>) lhpRepo.getLHPByMHKHId(id);
+                ArrayList<LichHoc> listLichLHP = new ArrayList<>();
+                System.out.println(listLichLHP.size());
+                for (LopHocPhan lhp : listLHPFound) {
+                    ArrayList<LichHoc> listLichHoc = (ArrayList<LichHoc>) lhRepo.findLichLHP(lhp.getId());
+                    System.out.println(listLichHoc.size());
+                    LichHoc lh = listLichHoc.get(0);
+                    lh.setLhp(lhp);
+                    List<KipHoc> kh = lh.getKipHoc();
+                    for (KipHoc kip : kh) {
+                        kip.setLh(null);
+                    }
+                    lh.setKipHoc(kh);
 
-            ArrayList<LopHocPhan> listLHPFound = (ArrayList<LopHocPhan>) lhpRepo.getLHPByMHKHId(id);
-            ArrayList<LichHoc> listLichLHP = new ArrayList<>();
-            System.out.println(listLichLHP.size());
-            for (LopHocPhan lhp : listLHPFound) {
-                ArrayList<LichHoc> listLichHoc = (ArrayList<LichHoc>) lhRepo.findLichLHP(lhp.getId());
-                System.out.println(listLichHoc.size());
-                LichHoc lh = listLichHoc.get(0);
-                lh.setLhp(lhp);
-                List<KipHoc> kh = lh.getKipHoc();
-                for (KipHoc kip : kh) {
-                    kip.setLh(null);
-                }
-                lh.setKipHoc(kh);
+                    List<NgayHoc> nh = lh.getNgayHoc();
+                    for (NgayHoc ngay : nh) {
+                        ngay.setLh(null);
+                    }
+                    lh.setNgayHoc(nh);
 
-                List<NgayHoc> nh = lh.getNgayHoc();
-                for (NgayHoc ngay : nh) {
-                    ngay.setLh(null);
+                    List<TuanHoc> th = lh.getTuanHoc();
+                    for (TuanHoc tuan : th) {
+                        tuan.setLh(null);
+                    }
+                    lh.setTuanHoc(th);
+                    listLichLHP.add(lh);
                 }
-                lh.setNgayHoc(nh);
 
-                List<TuanHoc> th = lh.getTuanHoc();
-                for (TuanHoc tuan : th) {
-                    tuan.setLh(null);
-                }
-                lh.setTuanHoc(th);
-                listLichLHP.add(lh);
+                ArrayList<LichHocView> listLichViewLHP = LichHocConverter.convertLHToLHV(listLichLHP);
+                return new ResponseEntity<>(listLichViewLHP, HttpStatus.OK);
+            } catch (Exception e) {
+                model.addAttribute("msg", "Có lỗi xảy ra khi lấy danh sách lớp học phần");
+                return new ResponseEntity<>("fail", HttpStatus.NOT_FOUND);
             }
-
-            ArrayList<LichHocView> listLichViewLHP = LichHocConverter.convertLHToLHV(listLichLHP);
-            return new ResponseEntity<>(listLichViewLHP, HttpStatus.OK);
-        } catch (Exception e) {
-            model.addAttribute("msg", "Có lỗi xảy ra khi lấy danh sách lớp học phần");
-            return new ResponseEntity<>("fail", HttpStatus.NOT_FOUND);
+        } catch (NoSuchElementException e) {
+            return new ResponseEntity<>("Chưa đăng nhập, vui lòng đăng nhập trước khi thực hiện đăng ký môn học",
+                    HttpStatus.UNAUTHORIZED);
         }
     }
 
     @PutMapping(value = "/updatedangky", produces = "application/json")
     public ResponseEntity<?> updateDKHP(@RequestBody ArrayList<LichHocView> listDK, HttpServletRequest request,
             HttpServletResponse response, Model model) {
+        ThanhVien tv;
         try {
-            ThanhVien tv = getInstanceUser();
-            for (LichHocView lh : listDK) {
-                if (lh.isDaDK() == false) {
+            tv = getInstanceUser();
+            try {
+                for (LichHocView lh : listDK) {
+                    if (lh.isDaDK() == true) {
+                        return new ResponseEntity<>("Phát hiện gian lận, hủy bỏ đăng ký!", HttpStatus.NOT_MODIFIED);
+                    }
+                }
+                for (LichHocView lh : listDK) {
                     int count = lhRepo.updateDangKy(tv.getId(), lh.getId());
                     if (count != 1) {
                         return new ResponseEntity<>("Có lỗi hệ thống trong quá trình update", HttpStatus.NOT_MODIFIED);
                     }
-                } else {
-                    return new ResponseEntity<>("Lớp đã có người đăng kí, phát hiện gian lận", HttpStatus.NOT_MODIFIED);
                 }
+                return new ResponseEntity<>("Cập nhật danh sách lớp học phần thành công", HttpStatus.OK);
+            } catch (Exception e) {
+                return new ResponseEntity<>("Có lỗi xảy ra trong quá trình update", HttpStatus.NOT_MODIFIED);
             }
-            System.out.println("Luu dang ky thah cong");
-            // model.addAttribute("msg", msg);
-            return new ResponseEntity<>("Cập nhật danh sách lớp học phần thành công", HttpStatus.OK);
-        } catch (Exception e) {
-            // String msg = "Có lỗi xảy ra khi lưu danh sách đăng ký";
-            // model.addAttribute("msg", msg);
-            return new ResponseEntity<>("Có lỗi xảy ra trong quá trình update", HttpStatus.NOT_MODIFIED);
+        } catch (NoSuchElementException e) {
+            return new ResponseEntity<>("Chưa đăng nhập, vui lòng đăng nhập trước khi thực hiện đăng ký môn học",
+                    HttpStatus.UNAUTHORIZED);
         }
     }
 
     @GetMapping(value = "/xemtkb", produces = "application/json")
     public ResponseEntity<?> updateDKHP(HttpServletRequest request, HttpServletResponse response) {
+        ThanhVien tv;
         try {
-            ThanhVien tv = getInstanceUser();
-            ArrayList<LichHoc> listLHFound = (ArrayList<LichHoc>) lhRepo.findDaDKLHP(tv.getId());
-            ArrayList<LichHocView> listLichViewLHP = LichHocConverter.convertLHToLHV(listLHFound);
-            return new ResponseEntity<>(listLichViewLHP, HttpStatus.OK);
-        } catch (NullPointerException e) {
-            return new ResponseEntity<>("Chưa đăng ký lịch giảng dạy, không thể xem thời khóa biểu",
-                    HttpStatus.NO_CONTENT);
+            tv = getInstanceUser();
+            try {
+                ArrayList<LichHoc> listLHFound = (ArrayList<LichHoc>) lhRepo.findDaDKLHP(tv.getId());
+                ArrayList<LichHocView> listLichViewLHP = LichHocConverter.convertLHToLHV(listLHFound);
+                return new ResponseEntity<>(listLichViewLHP, HttpStatus.OK);
+            } catch (NullPointerException e) {
+                return new ResponseEntity<>("Chưa đăng ký lịch giảng dạy, không thể xem thời khóa biểu",
+                        HttpStatus.NO_CONTENT);
+            }
+        } catch (NoSuchElementException e) {
+            return new ResponseEntity<>("Chưa đăng nhập, vui lòng đăng nhập trước khi thực hiện xem thời khóa biểu",
+                    HttpStatus.UNAUTHORIZED);
         }
     }
 
     @PutMapping(value = "/suadangky", produces = "application/json")
     public ResponseEntity<?> updateDKHP(@RequestBody ArrayList<LichHocView> listDK, HttpServletRequest request,
             HttpServletResponse response) {
+        ThanhVien tv;
         try {
-            ThanhVien tv = getInstanceUser();
-            lhRepo.xoaHetDangKy(tv.getId());
-            for (LichHocView lh : listDK) {
+            tv = getInstanceUser();
+            try {
+                lhRepo.xoaHetDangKy(tv.getId());
+                for (LichHocView lh : listDK) {
                     int count = lhRepo.updateDangKy(tv.getId(), lh.getId());
                     if (count != 1) {
                         return new ResponseEntity<>("Có lỗi hệ thống trong quá trình update", HttpStatus.NOT_MODIFIED);
                     }
+                }
+                return new ResponseEntity<>("Cập nhật danh sách lớp học phần thành công", HttpStatus.OK);
+            } catch (NullPointerException e) {
+                return new ResponseEntity<>("Không có dữ liệu trong danh sách sửa đăng ký", HttpStatus.NO_CONTENT);
             }
-            return new ResponseEntity<>("Cập nhật danh sách lớp học phần thành công", HttpStatus.OK);
-        } catch (NullPointerException e) {
-            return new ResponseEntity<>("Không có dữ liệu trong danh sách sửa đăng ký", HttpStatus.NO_CONTENT);
+        } catch (NoSuchElementException e) {
+            return new ResponseEntity<>("Chưa đăng nhập, vui lòng đăng nhập trước khi thực hiện sửa đăng ký môn học",
+                    HttpStatus.UNAUTHORIZED);
         }
     }
 }
