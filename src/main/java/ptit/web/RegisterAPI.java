@@ -283,14 +283,10 @@ public class RegisterAPI {
             ThanhVien tv = getInstanceUser();
             lhRepo.xoaHetDangKy(tv.getId());
             for (LichHocView lh : listDK) {
-                if (lh.isDaDK() == false) {
                     int count = lhRepo.updateDangKy(tv.getId(), lh.getId());
                     if (count != 1) {
                         return new ResponseEntity<>("Có lỗi hệ thống trong quá trình update", HttpStatus.NOT_MODIFIED);
                     }
-                } else {
-                    return new ResponseEntity<>("Lớp đã có người đăng kí, phát hiện gian lận", HttpStatus.NOT_MODIFIED);
-                }
             }
             return new ResponseEntity<>("Cập nhật danh sách lớp học phần thành công", HttpStatus.OK);
         } catch (NullPointerException e) {
