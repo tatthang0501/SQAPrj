@@ -29,7 +29,7 @@ public class TestGetListSubjectCourse {
         String token = JwtUtils.createToken();
         assertNotNull(token);
         mockMvc.perform(MockMvcRequestBuilders.get("/dangky/dslhp/{id}", 1)
-        .header("Authorization", "Bearer" + token))
+        .header("Authorization", "Bearer " + token))
         .andExpect(status().isOk())
         .andExpect(jsonPath("$", hasSize(5)))
         .andExpect(jsonPath("$[0].id", is(1)));
@@ -41,10 +41,11 @@ public class TestGetListSubjectCourse {
         String token = JwtUtils.createToken();
         assertNotNull(token);
         mockMvc.perform(MockMvcRequestBuilders.get("/dangky/dslhp/{id}",100)
-        .header("Authorization", "Bearer" + token))
-        .andExpect(status().isNotFound());
-        // .andExpect(content()
-        // .string(containsString("ChÆ°a ÄÄng nháº­p, vui lÃ²ng ÄÄng nháº­p trÆ°á»c khi thá»±c hiá»n ÄÄng kÃ½ mÃ´n há»c")));
+        .header("Authorization", "Bearer " + token))
+        .andExpect(status().isNotFound())
+        .andExpect(content()
+        .string(containsString("ID mÃ´n há»c khÃ´ng há»£p lá», vui lÃ²ng thá»­ láº¡i")));
+        //ID môn học không hợp lệ, vui lòng thử lại
     }
 
     //Test lấy danh sách lớp học phần không thành công, người dùng chưa đăng nhập vào hệ thống
@@ -53,7 +54,7 @@ public class TestGetListSubjectCourse {
         mockMvc.perform(MockMvcRequestBuilders.get("/dangky/dslhp/{id}",1))
         .andExpect(status().isUnauthorized()).andExpect(content()
         .string(containsString("ChÆ°a ÄÄng nháº­p, vui lÃ²ng ÄÄng nháº­p trÆ°á»c khi thá»±c hiá»n ÄÄng kÃ½ mÃ´n há»c")));
+        //Chưa đăng nhập, vui lòng đăng nhập trước khi thực hiện đăng ký môn học
     }
 
-    //Test lấy danh sách lớp học phần không thành công, 
 }

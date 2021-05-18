@@ -58,7 +58,7 @@ import ptit.dto.JwtResponse;
 import ptit.dto.LoginForm;
 import ptit.dto.MessageResponse;
 import ptit.dto.SignupRequest;
-import ptit.exception.zeroSizeException;
+import ptit.exception.ZeroSizeException;
 import ptit.services.UserDetailsImpl;
 
 @RestController
@@ -237,14 +237,15 @@ public class RegisterAPI {
                 }
 
                 ArrayList<LichHocView> listLichViewLHP = LichHocConverter.convertLHToLHV(listLichLHP);
-                if(listLichViewLHP.size() == 0) throw new zeroSizeException();
+                if (listLichViewLHP.size() == 0) throw new ZeroSizeException();
                 return new ResponseEntity<>(listLichViewLHP, HttpStatus.OK);
-            } catch(zeroSizeException ex){
-                return new ResponseEntity<>("ID môn học không hợp lệ, vui lòng thử lại", HttpStatus.NOT_FOUND);
+            } catch (ZeroSizeException ex) {
+                return new ResponseEntity<>("Không tìm thấy lớp học phần nào, vui lòng chọn môn học khác", HttpStatus.NOT_FOUND);
             }
 
-             catch (Exception e) {
-                return new ResponseEntity<>("Có lỗi xảy ra trong quá trình lấy danh sách lớp học phần", HttpStatus.NOT_FOUND);
+            catch (Exception e) {
+                return new ResponseEntity<>("Có lỗi xảy ra trong quá trình lấy danh sách lớp học phần",
+                        HttpStatus.NOT_FOUND);
             }
         } catch (NoSuchElementException e) {
             return new ResponseEntity<>("Chưa đăng nhập, vui lòng đăng nhập trước khi thực hiện đăng ký môn học",
@@ -259,6 +260,7 @@ public class RegisterAPI {
         try {
             tv = getInstanceUser();
             try {
+                if (listDK.size() == 0) throw new ZeroSizeException();
                 for (LichHocView lh : listDK) {
                     if (lh.isDaDK() == true) {
                         return new ResponseEntity<>("Phát hiện gian lận, hủy bỏ đăng ký!", HttpStatus.NOT_MODIFIED);
@@ -271,6 +273,8 @@ public class RegisterAPI {
                     }
                 }
                 return new ResponseEntity<>("Cập nhật danh sách lớp học phần thành công", HttpStatus.OK);
+            } catch (ZeroSizeException ex) {
+                return new ResponseEntity<>("Không có lớp học phần nào được chọn, vui lòng thử lại", HttpStatus.NOT_ACCEPTABLE);
             } catch (Exception e) {
                 return new ResponseEntity<>("Có lỗi xảy ra trong quá trình update", HttpStatus.NOT_MODIFIED);
             }
@@ -288,10 +292,11 @@ public class RegisterAPI {
             try {
                 ArrayList<LichHoc> listLHFound = (ArrayList<LichHoc>) lhRepo.findDaDKLHP(tv.getId());
                 ArrayList<LichHocView> listLichViewLHP = LichHocConverter.convertLHToLHV(listLHFound);
+                if (listLichViewLHP.size() == 0)
+                    throw new ZeroSizeException();
                 return new ResponseEntity<>(listLichViewLHP, HttpStatus.OK);
-            } catch (NullPointerException e) {
-                return new ResponseEntity<>("Chưa đăng ký lịch giảng dạy, không thể xem thời khóa biểu",
-                        HttpStatus.NO_CONTENT);
+            } catch (ZeroSizeException e) {
+                return new ResponseEntity<>("Chưa đăng ký lịch giảng dạy, không thể xem thời khóa biểu", HttpStatus.NOT_FOUND);
             }
         } catch (NoSuchElementException e) {
             return new ResponseEntity<>("Chưa đăng nhập, vui lòng đăng nhập trước khi thực hiện xem thời khóa biểu",
@@ -306,6 +311,8 @@ public class RegisterAPI {
         try {
             tv = getInstanceUser();
             try {
+                if (listDK.size() == 0)
+                    throw new ZeroSizeException();
                 lhRepo.xoaHetDangKy(tv.getId());
                 for (LichHocView lh : listDK) {
                     int count = lhRepo.updateDangKy(tv.getId(), lh.getId());
@@ -314,8 +321,8 @@ public class RegisterAPI {
                     }
                 }
                 return new ResponseEntity<>("Cập nhật danh sách lớp học phần thành công", HttpStatus.OK);
-            } catch (NullPointerException e) {
-                return new ResponseEntity<>("Không có dữ liệu trong danh sách sửa đăng ký", HttpStatus.NO_CONTENT);
+            } catch (ZeroSizeException e) {
+                return new ResponseEntity<>("Không có dữ liệu trong danh sách sửa đăng ký", HttpStatus.NOT_ACCEPTABLE);
             }
         } catch (NoSuchElementException e) {
             return new ResponseEntity<>("Chưa đăng nhập, vui lòng đăng nhập trước khi thực hiện sửa đăng ký môn học",

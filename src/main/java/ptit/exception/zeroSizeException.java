@@ -1,5 +1,5 @@
 package ptit.exception;
 
-public class zeroSizeException extends Exception{
+public class ZeroSizeException extends Exception{
 
 }
