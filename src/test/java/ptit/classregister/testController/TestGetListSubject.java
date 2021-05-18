@@ -17,6 +17,7 @@ import ptit.common.JwtUtils;
 
 
 //Test request tới url localhost:8080/dangky lấy danh sách môn học
+// Nguyễn Tất Thắng
 @SpringBootTest
 @AutoConfigureMockMvc
 public class TestGetListSubject {
@@ -26,7 +27,8 @@ public class TestGetListSubject {
     //Test get danh sách môn học thành công, sử dụng token mặc định với tài khoản có id là 1
     @Test
     public void testGetListSubjectSuccessful() throws Exception {
-        String token = JwtUtils.createToken();
+        //Sử dụng token của user có ID là 1
+        String token = JwtUtils.createToken(1,"thang", "123456", "thang123@gmail.com");
         assertNotNull(token);
         mockMvc.perform(MockMvcRequestBuilders.get("/dangky")
         .header("Authorization", "Bearer " + token))
@@ -39,8 +41,6 @@ public class TestGetListSubject {
     //Test get danh sách môn học không thành công, người dùng chưa đăng nhập và không có token
     @Test
     public void testGetListSubjectUnsuccessful() throws Exception{
-        // String token = JwtUtils.createToken();
-        // assertNotNull(token);
         mockMvc.perform(MockMvcRequestBuilders.get("/dangky"))
         .andExpect(status().isUnauthorized()).andExpect(content()
         .string(containsString("ChÆ°a ÄÄng nháº­p, vui lÃ²ng ÄÄng nháº­p trÆ°á»c khi thá»±c hiá»n ÄÄng kÃ½ mÃ´n há»c")));

@@ -58,6 +58,7 @@ import ptit.dto.JwtResponse;
 import ptit.dto.LoginForm;
 import ptit.dto.MessageResponse;
 import ptit.dto.SignupRequest;
+import ptit.exception.RegisteredException;
 import ptit.exception.ZeroSizeException;
 import ptit.services.UserDetailsImpl;
 
@@ -237,10 +238,12 @@ public class RegisterAPI {
                 }
 
                 ArrayList<LichHocView> listLichViewLHP = LichHocConverter.convertLHToLHV(listLichLHP);
-                if (listLichViewLHP.size() == 0) throw new ZeroSizeException();
+                if (listLichViewLHP.size() == 0)
+                    throw new ZeroSizeException();
                 return new ResponseEntity<>(listLichViewLHP, HttpStatus.OK);
             } catch (ZeroSizeException ex) {
-                return new ResponseEntity<>("Không tìm thấy lớp học phần nào, vui lòng chọn môn học khác", HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>("Không tìm thấy lớp học phần nào, vui lòng chọn môn học khác",
+                        HttpStatus.NOT_FOUND);
             }
 
             catch (Exception e) {
@@ -260,10 +263,11 @@ public class RegisterAPI {
         try {
             tv = getInstanceUser();
             try {
-                if (listDK.size() == 0) throw new ZeroSizeException();
+                if (listDK.size() == 0)
+                    throw new ZeroSizeException();
                 for (LichHocView lh : listDK) {
                     if (lh.isDaDK() == true) {
-                        return new ResponseEntity<>("Phát hiện gian lận, hủy bỏ đăng ký!", HttpStatus.NOT_MODIFIED);
+                        throw new RegisteredException();
                     }
                 }
                 for (LichHocView lh : listDK) {
@@ -273,8 +277,13 @@ public class RegisterAPI {
                     }
                 }
                 return new ResponseEntity<>("Cập nhật danh sách lớp học phần thành công", HttpStatus.OK);
-            } catch (ZeroSizeException ex) {
-                return new ResponseEntity<>("Không có lớp học phần nào được chọn, vui lòng thử lại", HttpStatus.NOT_ACCEPTABLE);
+            } catch (RegisteredException e) {
+                return new ResponseEntity<>("Phát hiện gian lận, hủy bỏ đăng ký!", HttpStatus.FORBIDDEN);
+            }
+
+            catch (ZeroSizeException ex) {
+                return new ResponseEntity<>("Không có lớp học phần nào được chọn, vui lòng thử lại",
+                        HttpStatus.NOT_ACCEPTABLE);
             } catch (Exception e) {
                 return new ResponseEntity<>("Có lỗi xảy ra trong quá trình update", HttpStatus.NOT_MODIFIED);
             }
@@ -296,7 +305,8 @@ public class RegisterAPI {
                     throw new ZeroSizeException();
                 return new ResponseEntity<>(listLichViewLHP, HttpStatus.OK);
             } catch (ZeroSizeException e) {
-                return new ResponseEntity<>("Chưa đăng ký lịch giảng dạy, không thể xem thời khóa biểu", HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>("Chưa đăng ký lịch giảng dạy, không thể xem thời khóa biểu",
+                        HttpStatus.NOT_FOUND);
             }
         } catch (NoSuchElementException e) {
             return new ResponseEntity<>("Chưa đăng nhập, vui lòng đăng nhập trước khi thực hiện xem thời khóa biểu",

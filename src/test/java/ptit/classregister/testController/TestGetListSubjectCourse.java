@@ -26,7 +26,8 @@ public class TestGetListSubjectCourse {
     //Test lấy danh sách lớp học phần thành công với id môn học là 1
     @Test
     public void testGetListSubjectCourseSuccessful() throws Exception{
-        String token = JwtUtils.createToken();
+        //Sử dụng token của user có ID là 1
+        String token = JwtUtils.createToken(1,"thang", "123456", "thang123@gmail.com");
         assertNotNull(token);
         mockMvc.perform(MockMvcRequestBuilders.get("/dangky/dslhp/{id}", 1)
         .header("Authorization", "Bearer " + token))
@@ -38,7 +39,8 @@ public class TestGetListSubjectCourse {
     //Test lấy danh sách lớp học phần không thành công với id môn học 100, không tồn tại trong hệ thống
     @Test
     public void testGetListSubjectCourseUnsuccessful() throws Exception{
-        String token = JwtUtils.createToken();
+        //Sử dụng token của user có ID là 1
+        String token = JwtUtils.createToken(1,"thang", "123456", "thang123@gmail.com");
         assertNotNull(token);
         mockMvc.perform(MockMvcRequestBuilders.get("/dangky/dslhp/{id}",100)
         .header("Authorization", "Bearer " + token))

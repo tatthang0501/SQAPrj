@@ -3,7 +3,6 @@ package ptit.classregister.testController;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,9 +13,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-
 import org.springframework.test.web.servlet.MockMvc;
-
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -24,24 +21,25 @@ import ptit.LichHocView;
 import ptit.common.JwtUtils;
 import ptit.data.LichHocRepository;
 
-//Test request tới URL localhost:8080/updatedangky lưu danh sách đăng ký
+//Test request tới url localhost:8080/suadangky sửa danh sách đăng ký lớp học phần
 // Nguyễn Tất Thắng
+
 @SpringBootTest
 @AutoConfigureMockMvc
-public class TestUpdateCourse {
-    
-    @Autowired(required = true)
-    private MockMvc mockMvc;
+public class TestEditCourse {
     @Autowired
-    private ObjectMapper objectMapper;
+    MockMvc mockMvc;
+
+    @Autowired
+    ObjectMapper objectMapper;
+
     @Autowired
     LichHocRepository lhRepo;
-    // Test update danh sách thành công
+    //Test sửa danh sách thành công, danh sách có ít nhất 1 lớp học phần
     @Test
-    public void testUpdateCourseSuccessful() throws JsonProcessingException, Exception{
-        //Xóa hết thông tin đăng ký ban đầu
-        lhRepo.xoaHetDangKy(1);
-        // Chuẩn bị dữ liệu, có 2 lớp học phần
+    public void TestEditCourseSuccessful() throws JsonProcessingException, Exception{
+        //Trong database chưa có dữ liệu đăng ký lớp học phần
+        //Chuẩn bị dữ liệu test, có 2 đối tượng lớp học phần
         ArrayList<LichHocView> listTest = new ArrayList<LichHocView>();
         LichHocView lvh1 = new LichHocView();
         lvh1.setId(1);
@@ -86,65 +84,37 @@ public class TestUpdateCourse {
         //Sử dụng token của user có ID là 1
         String token = JwtUtils.createToken(1,"thang", "123456", "thang123@gmail.com");
         assertNotNull(token);
-        mockMvc.perform(MockMvcRequestBuilders.put("http://localhost:8080/updatedangky", 42L)
+        mockMvc.perform(MockMvcRequestBuilders.put("http://localhost:8080/suadangky", 42L)
         .header("Authorization", "Bearer " + token).contentType("application/json")
         .content(objectMapper.writeValueAsString(listTest)))
         .andExpect(status().isOk());
-        
-        // Kiểm tra dữ liệu đã update
+
+        //Kiểm tra dữ liệu đã sửa
+        //Truy vấn thông qua user có ID là 1
         assertEquals(2, lhRepo.findDaDKLHP(1).size());
         assertEquals(1, lhRepo.findDaDKLHP(1).get(0).getGv().getId());
 
+        //Trả lại trạng thái ban đầu cho database
         lhRepo.xoaHetDangKy(1);
-        // Trả lại trạng thái ban đầu cho database
     }
 
-    // Test update danh sách không thành công, không có môn học nào trong mảng
+    //Test sửa danh sách không thành công, danh sách không có lớp học phần nào
     @Test
-    public void testBlankListUpdateCourse() throws JsonProcessingException, Exception{
-        //Chuẩn bị dữ liệu rỗng
+    public void testEditCourseUnsuccessful() throws JsonProcessingException, Exception{
+        //Trong database chưa có dữ liệu đăng ký lớp học phần
+        //Chuẩn bị dữ liệu test rỗng
         ArrayList<LichHocView> listTest = new ArrayList<LichHocView>();
         //Sử dụng token của user có ID là 1
         String token = JwtUtils.createToken(1,"thang", "123456", "thang123@gmail.com");
         assertNotNull(token);
-        mockMvc.perform(MockMvcRequestBuilders.put("http://localhost:8080/updatedangky", 42L)
+        mockMvc.perform(MockMvcRequestBuilders.put("http://localhost:8080/suadangky", 42L)
         .header("Authorization", "Bearer " + token).contentType("application/json")
         .content(objectMapper.writeValueAsString(listTest)))
         .andExpect(status().isNotAcceptable());
-    }
 
-    //Test update danh sách khi có môn học đã được đăng ký
-    @Test
-    public void testRegisteredUpdateCourse() throws JsonProcessingException, Exception{
-        //Chuẩn bị dữ liệu lớp học phần
-        ArrayList<LichHocView> listTest = new ArrayList<LichHocView>();
-        LichHocView lvh1 = new LichHocView();
-        lvh1.setId(1);
-        lvh1.setTen("Nhập môn công nghệ phần mềm");
-        lvh1.setSoTC(3);
-        lvh1.setPhong("A2");
-        lvh1.setNhomTH(1);
-        lvh1.setSiSoToiDa(50);
-        List<Integer>kip = new ArrayList<Integer>();
-        kip.add(1);
-        kip.add(2);
-        List<Integer> ngay = new ArrayList<Integer>();
-        ngay.add(2);
-        List<Integer> tuan = new ArrayList<Integer>();
-        for(int i = 1; i <= 16; i++) tuan.add(i);
-        lvh1.setKipHoc(kip);
-        lvh1.setTuanHoc(tuan);
-        lvh1.setNgayHoc(ngay);
-        //Thuộc tính true cho biết lớp học phần này đã được đăng ký
-        lvh1.setDaDK(true);
-        listTest.add(lvh1);
-        String token = JwtUtils.createToken(1,"thang", "123456", "thang123@gmail.com");
-        assertNotNull(token);
-        mockMvc.perform(MockMvcRequestBuilders.put("http://localhost:8080/updatedangky", 42L)
-        .header("Authorization", "Bearer " + token).contentType("application/json")
-        .content(objectMapper.writeValueAsString(listTest)))
-        .andExpect(status().isForbidden());
-        //Status trả về của request là 403
-    }
+        //Kiểm tra dữ liệu đã sửa
+        //Truy vấn thông qua user có ID là 1
+        assertEquals(0, lhRepo.findDaDKLHP(1).size());
 
+    }
 }

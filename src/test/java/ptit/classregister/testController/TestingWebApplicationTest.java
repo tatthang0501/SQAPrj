@@ -13,6 +13,8 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 
+// Test hoạt động của controller chính
+// Nguyễn Tất Thắng
 @SpringBootTest
 @AutoConfigureMockMvc
 public class TestingWebApplicationTest {
