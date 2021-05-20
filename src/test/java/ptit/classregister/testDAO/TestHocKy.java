@@ -13,8 +13,8 @@ import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import ptit.HocKy;
 import ptit.data.HocKyRepository;
+import ptit.models.HocKy;
 //Test các chức năng của lớp HocKyRepository
 // Nguyễn Tất Thắng
 @SpringBootTest

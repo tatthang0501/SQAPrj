@@ -13,8 +13,8 @@ import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import ptit.ThanhVien;
 import ptit.data.UserRepository;
+import ptit.models.ThanhVien;
 
 @SpringBootTest
 @TestMethodOrder(OrderAnnotation.class)

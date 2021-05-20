@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
-import ptit.LopHocPhan;
+import ptit.models.LopHocPhan;
 
 public interface LopHocPhanRepository extends CrudRepository<LopHocPhan, Integer>{
     @Query(value="SELECT * FROM lophocphan WHERE monhockyhocid=?1 ",nativeQuery = true)

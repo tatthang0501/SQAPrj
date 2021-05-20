@@ -13,11 +13,10 @@ import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-
-import ptit.LichHoc;
-import ptit.NgayHoc;
 import ptit.data.LichHocRepository;
 import ptit.data.NgayHocRepository;
+import ptit.models.LichHoc;
+import ptit.models.NgayHoc;
 
 
 //Test các chức năng của lớp NgayHocRepository

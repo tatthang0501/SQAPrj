@@ -20,9 +20,9 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import ptit.LichHocView;
 import ptit.common.JwtUtils;
 import ptit.data.LichHocRepository;
+import ptit.models.LichHocView;
 
 //Test request tới url localhost:8080/suadangky sửa danh sách đăng ký lớp học phần
 // Nguyễn Tất Thắng

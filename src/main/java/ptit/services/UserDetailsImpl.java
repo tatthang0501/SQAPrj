@@ -6,8 +6,8 @@ import java.util.Objects;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import ptit.DiaChi;
-import ptit.ThanhVien;
+import ptit.models.DiaChi;
+import ptit.models.ThanhVien;
 
 public class UserDetailsImpl implements UserDetails{
     private int id;

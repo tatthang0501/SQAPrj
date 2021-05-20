@@ -22,9 +22,9 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import ptit.LichHocView;
 import ptit.common.JwtUtils;
 import ptit.data.LichHocRepository;
+import ptit.models.LichHocView;
 
 //Test request tới URL localhost:8080/updatedangky lưu danh sách đăng ký
 // Nguyễn Tất Thắng

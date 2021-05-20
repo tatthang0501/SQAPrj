@@ -8,7 +8,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import ptit.LichHocView;
+import ptit.models.LichHocView;
 import ptit.web.CheckDuplicate;
 
 //Test các chức năng của lớp CheckDuplicate

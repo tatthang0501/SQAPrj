@@ -13,9 +13,8 @@ import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import ptit.NamHoc;
-
 import ptit.data.NamHocRepository;
+import ptit.models.NamHoc;
 
 
 

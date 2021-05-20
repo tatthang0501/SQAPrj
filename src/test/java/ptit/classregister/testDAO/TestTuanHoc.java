@@ -13,9 +13,9 @@ import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import ptit.TuanHoc;
-import ptit.LichHoc;
 import ptit.data.TuanHocRepository;
+import ptit.models.LichHoc;
+import ptit.models.TuanHoc;
 import ptit.data.LichHocRepository;
 
 

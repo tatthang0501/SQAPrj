@@ -3,13 +3,11 @@ package ptit.web;
 import java.util.ArrayList;
 import java.util.List;
 
-
-
-import ptit.KipHoc;
-import ptit.LichHoc;
-import ptit.LichHocView;
-import ptit.NgayHoc;
-import ptit.TuanHoc;
+import ptit.models.KipHoc;
+import ptit.models.LichHoc;
+import ptit.models.LichHocView;
+import ptit.models.NgayHoc;
+import ptit.models.TuanHoc;
 
 public class LichHocConverter {
 

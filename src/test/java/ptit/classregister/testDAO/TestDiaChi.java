@@ -13,8 +13,8 @@ import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import ptit.DiaChi;
 import ptit.data.DiaChiRepository;
+import ptit.models.DiaChi;
 //Test các chức năng của lớp DiaChiRepository
 // Nguyễn Tất Thắng
 @SpringBootTest

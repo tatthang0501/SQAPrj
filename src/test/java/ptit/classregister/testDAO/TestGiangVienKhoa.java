@@ -13,12 +13,12 @@ import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import ptit.GiangVienKhoa;
-import ptit.Khoa;
-import ptit.ThanhVien;
 import ptit.data.GiangVienKhoaRepository;
 import ptit.data.KhoaRepository;
 import ptit.data.UserRepository;
+import ptit.models.GiangVienKhoa;
+import ptit.models.Khoa;
+import ptit.models.ThanhVien;
 
 //Test các chức năng của lớp GiangVienRepository
 // Nguyễn Tất Thắng

@@ -14,10 +14,10 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 
-import ptit.BoMon;
-import ptit.Khoa;
 import ptit.data.BoMonRepository;
 import ptit.data.HocKyRepository;
+import ptit.models.BoMon;
+import ptit.models.Khoa;
 
 //Test Các chức năng của lớp BoMonRepository
 // Nguyễn Tất Thắng

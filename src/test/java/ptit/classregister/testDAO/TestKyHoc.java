@@ -14,12 +14,12 @@ import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import ptit.HocKy;
-import ptit.KyHoc;
-import ptit.NamHoc;
 import ptit.data.HocKyRepository;
 import ptit.data.KyHocRepository;
 import ptit.data.NamHocRepository;
+import ptit.models.HocKy;
+import ptit.models.KyHoc;
+import ptit.models.NamHoc;
 
 //Test các chức năng của lớp KyHocRepository
 // Nguyễn Tất Thắng

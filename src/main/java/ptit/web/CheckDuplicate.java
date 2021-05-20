@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Map.Entry;
 
-import ptit.LichHocView;
+import ptit.models.LichHocView;
 
 public class CheckDuplicate {
     public static ArrayList<LichHocView> checkTrungLapNgayHoc(ArrayList<LichHocView> list) {

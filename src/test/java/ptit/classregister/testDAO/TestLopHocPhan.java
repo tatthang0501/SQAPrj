@@ -13,11 +13,11 @@ import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import ptit.LopHocPhan;
-import ptit.MonHocKyHoc;
-import ptit.LichHoc;
 import ptit.data.LopHocPhanRepository;
 import ptit.data.MonHocKyHocRepository;
+import ptit.models.LichHoc;
+import ptit.models.LopHocPhan;
+import ptit.models.MonHocKyHoc;
 
 
 //Test các chức năng của lớp LopHocPhanRepository

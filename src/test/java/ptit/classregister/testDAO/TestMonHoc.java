@@ -13,10 +13,10 @@ import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import ptit.MonHoc;
-import ptit.BoMon;
-import ptit.LichHoc;
 import ptit.data.MonHocRepository;
+import ptit.models.BoMon;
+import ptit.models.LichHoc;
+import ptit.models.MonHoc;
 import ptit.data.BoMonRepository;
 import ptit.data.LichHocRepository;
 

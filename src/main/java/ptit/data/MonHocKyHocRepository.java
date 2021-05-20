@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
-import ptit.MonHocKyHoc;
+import ptit.models.MonHocKyHoc;
 
 public interface MonHocKyHocRepository extends CrudRepository<MonHocKyHoc, Integer>{
     @Query(value="SELECT * from monhockyhoc WHERE kyhocid = ?1", nativeQuery = true)

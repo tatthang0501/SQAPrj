@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
-import ptit.LichHoc;
+import ptit.models.LichHoc;
 
 public interface LichHocRepository extends CrudRepository<LichHoc, Integer> {
     @Query(value = "SELECT * FROM lichhoc WHERE lhpid = ?1", nativeQuery = true)

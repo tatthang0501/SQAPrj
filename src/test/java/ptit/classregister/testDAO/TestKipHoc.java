@@ -13,10 +13,10 @@ import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import ptit.KipHoc;
-import ptit.LichHoc;
 import ptit.data.KipHocRepository;
 import ptit.data.LichHocRepository;
+import ptit.models.KipHoc;
+import ptit.models.LichHoc;
 
 
 //Test các chức năng của lớp KipHocRepository

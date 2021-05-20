@@ -2,7 +2,7 @@ package ptit.data;
 
 import org.springframework.data.repository.CrudRepository;
 
-import ptit.NamHoc;
+import ptit.models.NamHoc;
 
 public interface NamHocRepository extends CrudRepository<NamHoc, Integer>{
     
