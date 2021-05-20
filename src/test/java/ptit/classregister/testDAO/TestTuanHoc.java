@@ -79,4 +79,14 @@ public class TestTuanHoc {
         thRepo.deleteById(100);
         assertEquals(thRepo.existsById(100), false);
     }
+
+    //Test lấy danh sách qua id lịch học
+    @Test
+    @Order(6)
+    public void testGetAllByLHId(){
+        //Lấy danh sách ngày học của lịch học có id 1
+        List<TuanHoc> listFound = (List<TuanHoc>) thRepo.findByLichHocId(1);
+        assertEquals(16, listFound.size());
+        assertEquals(1, listFound.get(0).getTen());
+    }
 }

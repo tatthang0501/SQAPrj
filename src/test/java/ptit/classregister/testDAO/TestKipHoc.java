@@ -79,4 +79,14 @@ public class TestKipHoc {
         khRepo.deleteById(100);
         assertEquals(khRepo.existsById(100), false);
     }
+
+    // Test lấy danh sách Kiphoc theo id của Lichhoc
+    @Test
+    @Order(6)
+    public void testGetByLichHocId(){
+        //Kiểm tra KipHoc của LichHoc có id là 1
+        List<KipHoc> listTest = khRepo.findByLichHocId(1);
+        assertEquals(listTest.size(), 2);
+        assertEquals(listTest.get(0).getTen(), 1);
+    }
 }

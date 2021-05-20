@@ -84,4 +84,14 @@ public class TestMonHocKyHoc {
         mhkhRepo.deleteById(100);
         assertEquals(mhkhRepo.existsById(100), false);
     }
+
+    //Test lấy danh sách từ id kỳ học
+    @Test
+    @Order(6)
+    public void testGetByKHId(){
+        // Lấy danh sách từ kỳ học có id là 2
+        List<MonHocKyHoc>listFound = (List<MonHocKyHoc>) mhkhRepo.getListMHKH(2);
+        assertEquals(19, listFound.size());
+        assertEquals("Nhập môn công nghệ phần mềm", listFound.get(0).getMh().getTen());
+    }
 }

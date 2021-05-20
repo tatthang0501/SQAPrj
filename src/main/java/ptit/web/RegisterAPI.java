@@ -5,8 +5,11 @@ import java.sql.BatchUpdateException;
 import java.sql.SQLDataException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.NoSuchElementException;
+import java.util.Map.Entry;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -59,6 +62,7 @@ import ptit.dto.LoginForm;
 import ptit.dto.MessageResponse;
 import ptit.dto.SignupRequest;
 import ptit.exception.RegisteredException;
+import ptit.exception.SameDateException;
 import ptit.exception.ZeroSizeException;
 import ptit.services.UserDetailsImpl;
 
@@ -140,15 +144,15 @@ public class RegisterAPI {
         // Create new user's account
         ThanhVien user = new ThanhVien(signUpRequest.getUsername(), signUpRequest.getEmail(),
                 encoder.encode(signUpRequest.getPassword()));
-        user.setDem("thang");
-        user.setDt("0337971060");
-        user.setHo("thang");
-        user.setTen("thang");
-        user.setNgaySinh("19990501");
-        user.setGhichu("ghichu");
-        user.setVitri("giangvien");
-        user.setDiaChi(null);
-        userRepository.save(user);
+        // user.setDem("thang");
+        // user.setDt("0337971060");
+        // user.setHo("thang");
+        // user.setTen("thang");
+        // user.setNgaySinh("19990501");
+        // user.setGhichu("ghichu");
+        // user.setVitri("giangvien");
+        // user.setDiaChi(null);
+        // userRepository.save(user);
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
@@ -211,10 +215,8 @@ public class RegisterAPI {
             try {
                 ArrayList<LopHocPhan> listLHPFound = (ArrayList<LopHocPhan>) lhpRepo.getLHPByMHKHId(id);
                 ArrayList<LichHoc> listLichLHP = new ArrayList<>();
-                System.out.println(listLichLHP.size());
                 for (LopHocPhan lhp : listLHPFound) {
                     ArrayList<LichHoc> listLichHoc = (ArrayList<LichHoc>) lhRepo.findLichLHP(lhp.getId());
-                    System.out.println(listLichHoc.size());
                     LichHoc lh = listLichHoc.get(0);
                     lh.setLhp(lhp);
                     List<KipHoc> kh = lh.getKipHoc();
@@ -263,14 +265,19 @@ public class RegisterAPI {
         try {
             tv = getInstanceUser();
             try {
-                if (listDK.size() == 0)
-                    throw new ZeroSizeException();
+                if (listDK.size() == 0) throw new ZeroSizeException();
+                ArrayList<LichHocView> listDKTemp = listDK;
+                ArrayList<LichHocView> listNgay = CheckDuplicate.checkTrungLapNgayHoc(listDKTemp);
+                if (listNgay.size() != 0) {
+                    System.out.println(listNgay);
+                    boolean check = CheckDuplicate.checkTrungLapKipHoc(listNgay, listDKTemp);
+                    System.out.println(check);
+                    if(check == true) throw new SameDateException();
+                }
                 for (LichHocView lh : listDK) {
                     if (lh.isDaDK() == true) {
                         throw new RegisteredException();
                     }
-                }
-                for (LichHocView lh : listDK) {
                     int count = lhRepo.updateDangKy(tv.getId(), lh.getId());
                     if (count != 1) {
                         return new ResponseEntity<>("Có lỗi hệ thống trong quá trình update", HttpStatus.NOT_MODIFIED);
@@ -279,9 +286,9 @@ public class RegisterAPI {
                 return new ResponseEntity<>("Cập nhật danh sách lớp học phần thành công", HttpStatus.OK);
             } catch (RegisteredException e) {
                 return new ResponseEntity<>("Phát hiện gian lận, hủy bỏ đăng ký!", HttpStatus.FORBIDDEN);
-            }
-
-            catch (ZeroSizeException ex) {
+            } catch (SameDateException e) {
+                return new ResponseEntity<>("Có lớp học bị trùng lịch, vui lòng thử lại", HttpStatus.NOT_ACCEPTABLE);
+            } catch (ZeroSizeException ex) {
                 return new ResponseEntity<>("Không có lớp học phần nào được chọn, vui lòng thử lại",
                         HttpStatus.NOT_ACCEPTABLE);
             } catch (Exception e) {
@@ -321,8 +328,15 @@ public class RegisterAPI {
         try {
             tv = getInstanceUser();
             try {
-                if (listDK.size() == 0)
-                    throw new ZeroSizeException();
+                if (listDK.size() == 0) throw new ZeroSizeException();
+                ArrayList<LichHocView> listDKTemp = listDK;
+                ArrayList<LichHocView> listNgay = CheckDuplicate.checkTrungLapNgayHoc(listDKTemp);
+                if (listNgay.size() != 0) {
+                    System.out.println(listNgay);
+                    boolean check = CheckDuplicate.checkTrungLapKipHoc(listNgay, listDKTemp);
+                    System.out.println(check);
+                    if(check == true) throw new SameDateException();
+                }
                 lhRepo.xoaHetDangKy(tv.getId());
                 for (LichHocView lh : listDK) {
                     int count = lhRepo.updateDangKy(tv.getId(), lh.getId());
@@ -331,6 +345,8 @@ public class RegisterAPI {
                     }
                 }
                 return new ResponseEntity<>("Cập nhật danh sách lớp học phần thành công", HttpStatus.OK);
+            } catch (SameDateException e) {
+                return new ResponseEntity<>("Có lớp học bị trùng lịch, vui lòng thử lại", HttpStatus.NOT_ACCEPTABLE);
             } catch (ZeroSizeException e) {
                 return new ResponseEntity<>("Không có dữ liệu trong danh sách sửa đăng ký", HttpStatus.NOT_ACCEPTABLE);
             }

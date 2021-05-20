@@ -81,4 +81,16 @@ public class TestLopHocPhan {
         lhpRepo.deleteById(100);
         assertEquals(lhpRepo.existsById(100), false);
     }
+
+    // Test lấy danh sách lophocphan từ id monhockyhoc
+    @Test
+    @Order(6)
+    public void testGetByMHKHId(){
+        // Lấy danh sách từ mhkh có id là 1
+        List<LopHocPhan>listFound = (List<LopHocPhan>) lhpRepo.getLHPByMHKHId(1);
+        assertEquals(5, listFound.size());
+        assertEquals(1, listFound.get(0).getId());
+        assertEquals(5, listFound.get(4).getId());
+    }
+
 }

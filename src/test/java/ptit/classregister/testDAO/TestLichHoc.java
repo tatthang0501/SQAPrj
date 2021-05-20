@@ -93,4 +93,59 @@ public class TestLichHoc {
         khRepo.deleteById(100);
         assertEquals(khRepo.existsById(100), false);
     }
+
+    //Test lấy lịch học qua id LopHocPhan
+    @Test
+    @Order(6)
+    public void testGetByLhpId(){
+        // Xóa hết tất cả các đăng ký của giảng viên có id là 1
+        lhRepo.xoaHetDangKy(1);
+        //Tìm lịch của lớp học phần có id là 1
+        List<LichHoc> listTest = lhRepo.findLichLHP(1);
+        assertEquals(2, listTest.size());
+        assertEquals(1, listTest.get(0).getNhomTH());
+    }
+
+    //Test lấy lịch dạy đã đăng ký thông qua id giảng viên
+    @Test
+    @Order(7)
+    public void testGetByGVId(){
+        // Xóa hết tất cả các đăng ký của giảng viên có id là 1
+        lhRepo.xoaHetDangKy(1);
+        //Tìm lịch dạy của giảng viên có id là 1
+        //Đăng ký cho giảng viên dạy lớp có id là 1
+        lhRepo.updateDangKy(1, 1);
+        List<LichHoc> listTest = lhRepo.findDaDKLHP(1);
+        assertEquals(1, listTest.size());
+        assertEquals("Nhập môn công nghệ phần mềm", listTest.get(0).getTen());
+    }
+
+    //Test cập nhật đăng ký lịch dạy cho giảng viên
+    @Order(8)
+    @Test
+    public void testUpdateCourse(){
+        //Giảng viên chưa đăng ký lịch dạy nào
+        // Xóa hết tất cả các đăng ký của giảng viên có id là 1
+        lhRepo.xoaHetDangKy(1);
+        //Cập nhật lớp học có id 1,2,3 cho giảng viên này
+        lhRepo.updateDangKy(1, 1);
+        lhRepo.updateDangKy(1, 2);
+        lhRepo.updateDangKy(1, 3);
+        //Kiểm tra dữ liệu update
+        List<LichHoc> listTest = lhRepo.findDaDKLHP(1);
+        assertEquals(3, listTest.size());
+        assertEquals(1, listTest.get(0).getLhp().getId());
+        //Reset trạng thái ban đầu cho database
+        lhRepo.xoaHetDangKy(1);
+    }
+
+    @Order(9)
+    @Test
+    public void testDeleteAllByGVId(){
+        // Xóa hết tất cả các đăng ký của giảng viên có id là 1
+        lhRepo.xoaHetDangKy(1);
+        //Kiểm tra dữ liệu sau khi xóa
+        List<LichHoc> listTest = lhRepo.findDaDKLHP(1);
+        assertEquals(0, listTest.size());
+    }
 }

@@ -82,4 +82,14 @@ public class TestMonHoc {
         mhRepo.deleteById(100);
         assertEquals(mhRepo.existsById(100), false);
     }
+
+    //Test lấy danh sách môn học từ id của bộ môn
+    @Test
+    @Order(6)
+    public void testGetByBMId(){
+        //Lấy danh sách từ bộ môn có id là 1
+        List<MonHoc>listFound = mhRepo.getListMHByBoMonID(1);
+        assertEquals(5, listFound.size());
+        assertEquals("Nhập môn công nghệ phần mềm", listFound.get(0).getTen());
+    }
 }

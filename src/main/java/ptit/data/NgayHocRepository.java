@@ -8,6 +8,6 @@ import org.springframework.data.repository.CrudRepository;
 import ptit.NgayHoc;
 
 public interface NgayHocRepository extends CrudRepository<NgayHoc,Integer>{
-    @Query(value="SELECT * FROM kiphoc WHERE lichhocid = ?1", nativeQuery = true)
+    @Query(value="SELECT * FROM ngayhoc WHERE lichhocid = ?1", nativeQuery = true)
     List<NgayHoc> findByLichHocId(int lhId);
 }
