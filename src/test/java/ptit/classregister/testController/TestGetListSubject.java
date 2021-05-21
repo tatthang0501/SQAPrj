@@ -44,5 +44,6 @@ public class TestGetListSubject {
         mockMvc.perform(MockMvcRequestBuilders.get("/dangky"))
         .andExpect(status().isUnauthorized()).andExpect(content()
         .string(containsString("ChÆ°a ÄÄng nháº­p, vui lÃ²ng ÄÄng nháº­p trÆ°á»c khi thá»±c hiá»n ÄÄng kÃ½ mÃ´n há»c")));
+        //Chưa đăng nhập, vui lòng đăng nhập trước khi thực hiện đăng ký môn học
     }
 }

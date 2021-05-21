@@ -98,11 +98,8 @@ public class TestLichHoc {
     @Test
     @Order(6)
     public void testGetByLhpId(){
-        // Xóa hết tất cả các đăng ký của giảng viên có id là 1
-        lhRepo.xoaHetDangKy(1);
-        //Tìm lịch của lớp học phần có id là 1
         List<LichHoc> listTest = lhRepo.findLichLHP(1);
-        assertEquals(2, listTest.size());
+        assertEquals(1, listTest.size());
         assertEquals(1, listTest.get(0).getNhomTH());
     }
 

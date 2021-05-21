@@ -372,7 +372,7 @@ public class testDuplicateDate {
     //Test với ít nhất 2 lớp học phần
     @Test
     public void testNoDuplicateShift3(){
-        // Chuẩn bị dữ liệu, có 2 lớp học phần cùng ngày học "2", 2 lớp học phần có cùng ngày học "3", có 2 cặp lịch trùng kíp học nhưng không trùng ngày học
+        // Chuẩn bị dữ liệu, có 2 lớp học phần cùng ngày học "2", 2 lớp học phần có cùng ngày học "3", có 2 cặp lịch trùng kíp học và trùng ngày học
         ArrayList<LichHocView> listTest = new ArrayList<LichHocView>();
         LichHocView lvh1 = new LichHocView();
         lvh1.setId(1);

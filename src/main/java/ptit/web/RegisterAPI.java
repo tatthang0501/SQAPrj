@@ -266,12 +266,13 @@ public class RegisterAPI {
             tv = getInstanceUser();
             try {
                 if (listDK.size() == 0) throw new ZeroSizeException();
-                ArrayList<LichHocView> listDKTemp = listDK;
+                ArrayList<LichHocView> listDKTemp = new ArrayList<>();
+                for(LichHocView lhv: listDK){
+                    listDKTemp.add(lhv);
+                }
                 ArrayList<LichHocView> listNgay = CheckDuplicate.checkTrungLapNgayHoc(listDKTemp);
                 if (listNgay.size() != 0) {
-                    System.out.println(listNgay);
                     boolean check = CheckDuplicate.checkTrungLapKipHoc(listNgay, listDKTemp);
-                    System.out.println(check);
                     if(check == true) throw new SameDateException();
                 }
                 for (LichHocView lh : listDK) {
@@ -329,7 +330,10 @@ public class RegisterAPI {
             tv = getInstanceUser();
             try {
                 if (listDK.size() == 0) throw new ZeroSizeException();
-                ArrayList<LichHocView> listDKTemp = listDK;
+                ArrayList<LichHocView> listDKTemp = new ArrayList<>();
+                for(LichHocView lhv: listDK){
+                    listDKTemp.add(lhv);
+                }
                 ArrayList<LichHocView> listNgay = CheckDuplicate.checkTrungLapNgayHoc(listDKTemp);
                 if (listNgay.size() != 0) {
                     System.out.println(listNgay);

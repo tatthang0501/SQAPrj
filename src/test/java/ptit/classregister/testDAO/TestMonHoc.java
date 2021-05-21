@@ -15,10 +15,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import ptit.data.MonHocRepository;
 import ptit.models.BoMon;
-import ptit.models.LichHoc;
 import ptit.models.MonHoc;
 import ptit.data.BoMonRepository;
-import ptit.data.LichHocRepository;
 
 
 //Test các chức năng của lớp MonHocRepository

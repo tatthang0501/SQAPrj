@@ -46,8 +46,8 @@ public class TestGetListSubjectCourse {
         .header("Authorization", "Bearer " + token))
         .andExpect(status().isNotFound())
         .andExpect(content()
-        .string(containsString("ID mÃ´n há»c khÃ´ng há»£p lá», vui lÃ²ng thá»­ láº¡i")));
-        //ID môn học không hợp lệ, vui lòng thử lại
+        .string(containsString("vui lÃ²ng chá»n mÃ´n há»c khÃ¡c")));
+        //Không tìm thấy môn học nào
     }
 
     //Test lấy danh sách lớp học phần không thành công, người dùng chưa đăng nhập vào hệ thống
