@@ -24,10 +24,10 @@ public class TuanHoc implements Serializable{
     private static final long serialVersionUID = 1L;
     @Id
     private int id;
-    @NotNull
+
     @Column(name="ten")
     private int ten;
-    @NotNull
+
     @Column(name="mota")
     private String mota;
 

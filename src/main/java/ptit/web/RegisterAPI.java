@@ -38,16 +38,16 @@ import org.springframework.web.bind.annotation.RestController;
 import ptit.common.JwtUtils;
 import ptit.data.BoMonRepository;
 import ptit.data.GiangVienKhoaRepository;
+
 import ptit.data.KyHocRepository;
 import ptit.data.LichHocRepository;
 import ptit.data.LopHocPhanRepository;
 import ptit.data.MonHocKyHocRepository;
 import ptit.data.MonHocRepository;
+
 import ptit.data.UserRepository;
 import ptit.dto.JwtResponse;
 import ptit.dto.LoginForm;
-import ptit.dto.MessageResponse;
-import ptit.dto.SignupRequest;
 import ptit.exception.RegisteredException;
 import ptit.exception.SameDateException;
 import ptit.exception.ZeroSizeException;
@@ -129,32 +129,6 @@ public class RegisterAPI {
         JwtResponse jwtResponse = new JwtResponse(jwt, userDetails.getId(), userDetails.getUsername(),
                 userDetails.getEmail());
         return ResponseEntity.ok(jwtResponse);
-    }
-
-    @PostMapping("/signup")
-    public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
-        if (userRepository.existsByUsername(signUpRequest.getUsername())) {
-            return ResponseEntity.badRequest().body(new MessageResponse("Error: Username is already taken!"));
-        }
-
-        if (userRepository.existsByEmail(signUpRequest.getEmail())) {
-            return ResponseEntity.badRequest().body(new MessageResponse("Error: Email is already in use!"));
-        }
-
-        // Create new user's account
-        ThanhVien user = new ThanhVien(signUpRequest.getUsername(), signUpRequest.getEmail(),
-                encoder.encode(signUpRequest.getPassword()));
-        // user.setDem("thang");
-        // user.setDt("0337971060");
-        // user.setHo("thang");
-        // user.setTen("thang");
-        // user.setNgaySinh("19990501");
-        // user.setGhichu("ghichu");
-        // user.setVitri("giangvien");
-        // user.setDiaChi(null);
-        // userRepository.save(user);
-
-        return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
 
     @GetMapping(value = "/dangky", produces = "application/json")
@@ -265,15 +239,17 @@ public class RegisterAPI {
         try {
             tv = getInstanceUser();
             try {
-                if (listDK.size() == 0) throw new ZeroSizeException();
+                if (listDK.size() == 0)
+                    throw new ZeroSizeException();
                 ArrayList<LichHocView> listDKTemp = new ArrayList<>();
-                for(LichHocView lhv: listDK){
+                for (LichHocView lhv : listDK) {
                     listDKTemp.add(lhv);
                 }
                 ArrayList<LichHocView> listNgay = CheckDuplicate.checkTrungLapNgayHoc(listDKTemp);
                 if (listNgay.size() != 0) {
                     boolean check = CheckDuplicate.checkTrungLapKipHoc(listNgay, listDKTemp);
-                    if(check == true) throw new SameDateException();
+                    if (check == true)
+                        throw new SameDateException();
                 }
                 for (LichHocView lh : listDK) {
                     if (lh.isDaDK() == true) {
@@ -329,9 +305,10 @@ public class RegisterAPI {
         try {
             tv = getInstanceUser();
             try {
-                if (listDK.size() == 0) throw new ZeroSizeException();
+                if (listDK.size() == 0)
+                    throw new ZeroSizeException();
                 ArrayList<LichHocView> listDKTemp = new ArrayList<>();
-                for(LichHocView lhv: listDK){
+                for (LichHocView lhv : listDK) {
                     listDKTemp.add(lhv);
                 }
                 ArrayList<LichHocView> listNgay = CheckDuplicate.checkTrungLapNgayHoc(listDKTemp);
@@ -339,7 +316,8 @@ public class RegisterAPI {
                     System.out.println(listNgay);
                     boolean check = CheckDuplicate.checkTrungLapKipHoc(listNgay, listDKTemp);
                     System.out.println(check);
-                    if(check == true) throw new SameDateException();
+                    if (check == true)
+                        throw new SameDateException();
                 }
                 lhRepo.xoaHetDangKy(tv.getId());
                 for (LichHocView lh : listDK) {
