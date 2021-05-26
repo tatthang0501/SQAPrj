@@ -15,7 +15,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import ptit.data.GiangVienKhoaRepository;
 import ptit.data.KhoaRepository;
-import ptit.data.UserRepository;
+import ptit.data.ThanhVienRepository;
 import ptit.models.GiangVienKhoa;
 import ptit.models.Khoa;
 import ptit.models.ThanhVien;
@@ -30,7 +30,7 @@ public class TestGiangVienKhoa {
     GiangVienKhoaRepository gvkRepo;
 
     @Autowired
-    UserRepository tvRepo;
+    ThanhVienRepository tvRepo;
 
     @Autowired
     KhoaRepository kRepo;

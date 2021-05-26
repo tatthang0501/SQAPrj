@@ -8,13 +8,13 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import ptit.data.UserRepository;
+import ptit.data.ThanhVienRepository;
 import ptit.models.ThanhVien;
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService{
 
     @Autowired
-    UserRepository userRepo;
+    ThanhVienRepository userRepo;
 
     @Override
     @Transactional

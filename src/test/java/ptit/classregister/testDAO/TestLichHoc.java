@@ -15,7 +15,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import ptit.data.LichHocRepository;
 import ptit.data.LopHocPhanRepository;
-import ptit.data.UserRepository;
+import ptit.data.ThanhVienRepository;
 import ptit.models.LichHoc;
 import ptit.models.LopHocPhan;
 import ptit.models.ThanhVien;
@@ -33,7 +33,7 @@ public class TestLichHoc {
     @Autowired
     LopHocPhanRepository lhpRepo;
     @Autowired
-    UserRepository tvRepo;
+    ThanhVienRepository tvRepo;
 
     //Test tạo một dòng trong bảng LichHoc
     @Test

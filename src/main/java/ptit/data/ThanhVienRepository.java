@@ -9,7 +9,7 @@ import ptit.models.ThanhVien;
 
 
 @Repository
-public interface UserRepository extends JpaRepository<ThanhVien, Integer> {
+public interface ThanhVienRepository extends JpaRepository<ThanhVien, Integer> {
 	Optional<ThanhVien> findByUsername(String username);
 
 	Boolean existsByUsername(String username);

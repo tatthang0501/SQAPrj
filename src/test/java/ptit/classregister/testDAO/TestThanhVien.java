@@ -13,7 +13,7 @@ import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import ptit.data.UserRepository;
+import ptit.data.ThanhVienRepository;
 import ptit.models.ThanhVien;
 
 @SpringBootTest
@@ -21,7 +21,7 @@ import ptit.models.ThanhVien;
 public class TestThanhVien {
     
     @Autowired
-    UserRepository tvRepo;
+    ThanhVienRepository tvRepo;
 
     //Test tạo ra một dòng trong bảng thanhvien
     @Test

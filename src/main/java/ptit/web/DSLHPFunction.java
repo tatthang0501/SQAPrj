@@ -3,13 +3,15 @@ package ptit.web;
 import java.util.ArrayList;
 import java.util.List;
 
+import ptit.data.LichHocRepository;
 import ptit.models.KipHoc;
 import ptit.models.LichHoc;
 import ptit.models.LichHocView;
+import ptit.models.LopHocPhan;
 import ptit.models.NgayHoc;
 import ptit.models.TuanHoc;
 
-public class LichHocConverter {
+public class DSLHPFunction {
 
     public static ArrayList<LichHocView> convertLHToLHV(ArrayList<LichHoc> listLHFound) {
         ArrayList<LichHocView> listLichViewLHP = new ArrayList<LichHocView>();
@@ -51,4 +53,29 @@ public class LichHocConverter {
         return listLichViewLHP;
     }
 
+    public static void fixLopHocPhanData(ArrayList<LopHocPhan> listLHPFound, ArrayList<LichHoc> listLichLHP, LichHocRepository lhRepo){
+        for (LopHocPhan lhp : listLHPFound) {
+            ArrayList<LichHoc> listLichHoc = (ArrayList<LichHoc>) lhRepo.findLichLHP(lhp.getId());
+            LichHoc lh = listLichHoc.get(0);
+            lh.setLhp(lhp);
+            List<KipHoc> kh = lh.getKipHoc();
+            for (KipHoc kip : kh) {
+                kip.setLh(null);
+            }
+            lh.setKipHoc(kh);
+
+            List<NgayHoc> nh = lh.getNgayHoc();
+            for (NgayHoc ngay : nh) {
+                ngay.setLh(null);
+            }
+            lh.setNgayHoc(nh);
+
+            List<TuanHoc> th = lh.getTuanHoc();
+            for (TuanHoc tuan : th) {
+                tuan.setLh(null);
+            }
+            lh.setTuanHoc(th);
+            listLichLHP.add(lh);
+        }
+    }
 }

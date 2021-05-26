@@ -12,8 +12,9 @@ import ptit.models.LichHocView;
 import ptit.web.CheckDuplicate;
 
 //Test các chức năng của lớp CheckDuplicate
+//Nguyễn Tất Thắng
 @SpringBootTest
-public class testDuplicateDate {
+public class TestDuplicateDate {
 
     //Test phương thức lấy ra các lịch học bị trùng ngày học
     // Test với ít nhất 2 lớp học phần

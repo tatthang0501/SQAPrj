@@ -1,15 +1,9 @@
 package ptit.web;
 
 import java.io.IOException;
-import java.sql.BatchUpdateException;
-import java.sql.SQLDataException;
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+
 import java.util.NoSuchElementException;
-import java.util.Map.Entry;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -45,7 +39,7 @@ import ptit.data.LopHocPhanRepository;
 import ptit.data.MonHocKyHocRepository;
 import ptit.data.MonHocRepository;
 
-import ptit.data.UserRepository;
+import ptit.data.ThanhVienRepository;
 import ptit.dto.JwtResponse;
 import ptit.dto.LoginForm;
 import ptit.exception.RegisteredException;
@@ -53,17 +47,17 @@ import ptit.exception.SameDateException;
 import ptit.exception.ZeroSizeException;
 import ptit.models.BoMon;
 import ptit.models.GiangVienKhoa;
-import ptit.models.KipHoc;
+
 import ptit.models.KyHoc;
 import ptit.models.LichHoc;
 import ptit.models.LichHocView;
 import ptit.models.LopHocPhan;
-import ptit.models.MonHoc;
+
 import ptit.models.MonHocKyHoc;
 import ptit.models.MonHocKyHocView;
-import ptit.models.NgayHoc;
+
 import ptit.models.ThanhVien;
-import ptit.models.TuanHoc;
+
 import ptit.services.UserDetailsImpl;
 
 @RestController
@@ -90,7 +84,7 @@ public class RegisterAPI {
     AuthenticationManager authenticationManager;
 
     @Autowired
-    UserRepository userRepository;
+    ThanhVienRepository userRepository;
 
     @Autowired
     PasswordEncoder encoder;
@@ -110,12 +104,13 @@ public class RegisterAPI {
         this.bmRepo = bmRepo;
     }
 
-    private ThanhVien getInstanceUser() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String currentPrincipalName = authentication.getName();
-        ThanhVien tv = userRepository.findByUsername(currentPrincipalName).get();
-        return tv;
-    }
+    // private ThanhVien getInstanceUser() {
+    // Authentication authentication =
+    // SecurityContextHolder.getContext().getAuthentication();
+    // String currentPrincipalName = authentication.getName();
+    // ThanhVien tv = userRepository.findByUsername(currentPrincipalName).get();
+    // return tv;
+    // }
 
     @PostMapping("/login")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginForm loginRequest) {
@@ -135,45 +130,20 @@ public class RegisterAPI {
     public ResponseEntity<?> getDSMonHocByGvId(HttpServletRequest request, Model model) throws IOException {
         ThanhVien tv;
         try {
-            tv = getInstanceUser();
-            try {
-                GiangVienKhoa gvk = gvkRepo.findById(tv.getId()).get();
-                ArrayList<BoMon> listBoMonKhoa = (ArrayList<BoMon>) bmRepo.getListBoMon(gvk.getKhoa().getId());
-                ArrayList<Integer> listIdMon = new ArrayList<Integer>();
-                for (BoMon bm : listBoMonKhoa) {
-                    ArrayList<MonHoc> listMH = (ArrayList<MonHoc>) mhRepo.getListMHByBoMonID(bm.getId());
-                    for (MonHoc mh : listMH) {
-                        listIdMon.add(mh.getId());
-                    }
-                    bm.setDsMonHoc(listMH);
-                }
-                ArrayList<KyHoc> listKy = (ArrayList<KyHoc>) kyhocRepo.findAll();
-                KyHoc newestKH = listKy.get(listKy.size() - 1);
-                ArrayList<MonHocKyHoc> listMHKHTemp = (ArrayList<MonHocKyHoc>) mhkhRepo.getListMHKH(newestKH.getId());
-                ArrayList<MonHocKyHoc> listMHKH = new ArrayList<MonHocKyHoc>();
+            tv = MainFunction.getInstanceUser(userRepository);
+            GiangVienKhoa gvk = gvkRepo.findById(tv.getId()).get();
+            ArrayList<BoMon> listBoMonKhoa = (ArrayList<BoMon>) bmRepo.getListBoMon(gvk.getKhoa().getId());
+            ArrayList<Integer> listIdMon = new ArrayList<Integer>();
 
-                for (MonHocKyHoc mhkh : listMHKHTemp) {
-                    if (listIdMon.contains(mhkh.getMh().getId())) {
-                        MonHoc mh = mhRepo.findById(mhkh.getMh().getId()).get();
-                        mhkh.setMh(mh);
-                        listMHKH.add(mhkh);
-                    }
-                }
+            DangKyFunction.setDataListBMKAndListIdMon(listBoMonKhoa, listIdMon, mhRepo);
+            ArrayList<KyHoc> listKy = (ArrayList<KyHoc>) kyhocRepo.findAll();
+            KyHoc newestKH = listKy.get(listKy.size() - 1);
+            ArrayList<MonHocKyHoc> listMHKHTemp = (ArrayList<MonHocKyHoc>) mhkhRepo.getListMHKH(newestKH.getId());
+            ArrayList<MonHocKyHoc> listMHKH = new ArrayList<MonHocKyHoc>();
 
-                ArrayList<MonHocKyHocView> listMHKHView = new ArrayList<MonHocKyHocView>();
-                for (MonHocKyHoc mhkh : listMHKH) {
-                    MonHocKyHocView mhkhv = new MonHocKyHocView();
-                    mhkhv.setId(mhkh.getId());
-                    mhkhv.setMota(mhkh.getMh().getMota());
-                    mhkhv.setSoTC(mhkh.getMh().getSoTC());
-                    mhkhv.setTen(mhkh.getMh().getTen());
-                    listMHKHView.add(mhkhv);
-                }
-                return new ResponseEntity<>(listMHKHView, HttpStatus.OK);
-            } catch (NoSuchElementException e) {
-                return new ResponseEntity<>("Có lỗi xảy ra trong quá trình lấy danh sách môn học",
-                        HttpStatus.NOT_FOUND);
-            }
+            DangKyFunction.MHKHFilter(listMHKHTemp, listMHKH, listIdMon, mhRepo);
+            ArrayList<MonHocKyHocView> listMHKHView = DangKyFunction.convertToMHKHView(listMHKH);
+            return new ResponseEntity<>(listMHKHView, HttpStatus.OK);
         } catch (NoSuchElementException e) {
             return new ResponseEntity<>("Chưa đăng nhập, vui lòng đăng nhập trước khi thực hiện đăng ký môn học",
                     HttpStatus.UNAUTHORIZED);
@@ -185,35 +155,13 @@ public class RegisterAPI {
     public ResponseEntity<?> getDSLHP(@PathVariable int id, HttpSession session, Model model,
             HttpServletResponse response) {
         try {
-            getInstanceUser();
+            MainFunction.getInstanceUser(userRepository);
             try {
                 ArrayList<LopHocPhan> listLHPFound = (ArrayList<LopHocPhan>) lhpRepo.getLHPByMHKHId(id);
                 ArrayList<LichHoc> listLichLHP = new ArrayList<>();
-                for (LopHocPhan lhp : listLHPFound) {
-                    ArrayList<LichHoc> listLichHoc = (ArrayList<LichHoc>) lhRepo.findLichLHP(lhp.getId());
-                    LichHoc lh = listLichHoc.get(0);
-                    lh.setLhp(lhp);
-                    List<KipHoc> kh = lh.getKipHoc();
-                    for (KipHoc kip : kh) {
-                        kip.setLh(null);
-                    }
-                    lh.setKipHoc(kh);
 
-                    List<NgayHoc> nh = lh.getNgayHoc();
-                    for (NgayHoc ngay : nh) {
-                        ngay.setLh(null);
-                    }
-                    lh.setNgayHoc(nh);
-
-                    List<TuanHoc> th = lh.getTuanHoc();
-                    for (TuanHoc tuan : th) {
-                        tuan.setLh(null);
-                    }
-                    lh.setTuanHoc(th);
-                    listLichLHP.add(lh);
-                }
-
-                ArrayList<LichHocView> listLichViewLHP = LichHocConverter.convertLHToLHV(listLichLHP);
+                DSLHPFunction.fixLopHocPhanData(listLHPFound, listLichLHP, lhRepo);
+                ArrayList<LichHocView> listLichViewLHP = DSLHPFunction.convertLHToLHV(listLichLHP);
                 if (listLichViewLHP.size() == 0)
                     throw new ZeroSizeException();
                 return new ResponseEntity<>(listLichViewLHP, HttpStatus.OK);
@@ -222,10 +170,6 @@ public class RegisterAPI {
                         HttpStatus.NOT_FOUND);
             }
 
-            catch (Exception e) {
-                return new ResponseEntity<>("Có lỗi xảy ra trong quá trình lấy danh sách lớp học phần",
-                        HttpStatus.NOT_FOUND);
-            }
         } catch (NoSuchElementException e) {
             return new ResponseEntity<>("Chưa đăng nhập, vui lòng đăng nhập trước khi thực hiện đăng ký môn học",
                     HttpStatus.UNAUTHORIZED);
@@ -237,7 +181,7 @@ public class RegisterAPI {
             HttpServletResponse response, Model model) {
         ThanhVien tv;
         try {
-            tv = getInstanceUser();
+            tv = MainFunction.getInstanceUser(userRepository);
             try {
                 if (listDK.size() == 0)
                     throw new ZeroSizeException();
@@ -255,21 +199,16 @@ public class RegisterAPI {
                     if (lh.isDaDK() == true) {
                         throw new RegisteredException();
                     }
-                    int count = lhRepo.updateDangKy(tv.getId(), lh.getId());
-                    if (count != 1) {
-                        return new ResponseEntity<>("Có lỗi hệ thống trong quá trình update", HttpStatus.NOT_MODIFIED);
-                    }
+                    lhRepo.updateDangKy(tv.getId(), lh.getId());
                 }
                 return new ResponseEntity<>("Cập nhật danh sách lớp học phần thành công", HttpStatus.OK);
             } catch (RegisteredException e) {
-                return new ResponseEntity<>("Phát hiện gian lận, hủy bỏ đăng ký!", HttpStatus.FORBIDDEN);
+                return new ResponseEntity<>("Lớp học này đã được đăng ký!", HttpStatus.FORBIDDEN);
             } catch (SameDateException e) {
                 return new ResponseEntity<>("Có lớp học bị trùng lịch, vui lòng thử lại", HttpStatus.NOT_ACCEPTABLE);
             } catch (ZeroSizeException ex) {
                 return new ResponseEntity<>("Không có lớp học phần nào được chọn, vui lòng thử lại",
                         HttpStatus.NOT_ACCEPTABLE);
-            } catch (Exception e) {
-                return new ResponseEntity<>("Có lỗi xảy ra trong quá trình update", HttpStatus.NOT_MODIFIED);
             }
         } catch (NoSuchElementException e) {
             return new ResponseEntity<>("Chưa đăng nhập, vui lòng đăng nhập trước khi thực hiện đăng ký môn học",
@@ -281,10 +220,10 @@ public class RegisterAPI {
     public ResponseEntity<?> updateDKHP(HttpServletRequest request, HttpServletResponse response) {
         ThanhVien tv;
         try {
-            tv = getInstanceUser();
+            tv = MainFunction.getInstanceUser(userRepository);
             try {
                 ArrayList<LichHoc> listLHFound = (ArrayList<LichHoc>) lhRepo.findDaDKLHP(tv.getId());
-                ArrayList<LichHocView> listLichViewLHP = LichHocConverter.convertLHToLHV(listLHFound);
+                ArrayList<LichHocView> listLichViewLHP = DSLHPFunction.convertLHToLHV(listLHFound);
                 if (listLichViewLHP.size() == 0)
                     throw new ZeroSizeException();
                 return new ResponseEntity<>(listLichViewLHP, HttpStatus.OK);
@@ -303,7 +242,7 @@ public class RegisterAPI {
             HttpServletResponse response) {
         ThanhVien tv;
         try {
-            tv = getInstanceUser();
+            tv = MainFunction.getInstanceUser(userRepository);
             try {
                 if (listDK.size() == 0)
                     throw new ZeroSizeException();
@@ -313,9 +252,7 @@ public class RegisterAPI {
                 }
                 ArrayList<LichHocView> listNgay = CheckDuplicate.checkTrungLapNgayHoc(listDKTemp);
                 if (listNgay.size() != 0) {
-                    System.out.println(listNgay);
                     boolean check = CheckDuplicate.checkTrungLapKipHoc(listNgay, listDKTemp);
-                    System.out.println(check);
                     if (check == true)
                         throw new SameDateException();
                 }
