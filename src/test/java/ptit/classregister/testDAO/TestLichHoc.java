@@ -12,6 +12,7 @@ import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import ptit.data.LichHocRepository;
 import ptit.data.LopHocPhanRepository;
@@ -136,6 +137,7 @@ public class TestLichHoc {
         lhRepo.xoaHetDangKy(1);
     }
 
+    @Transactional
     @Order(9)
     @Test
     public void testDeleteAllByGVId(){

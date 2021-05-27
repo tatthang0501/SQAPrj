@@ -127,7 +127,7 @@ public class API {
     }
 
     @GetMapping(value = "/dangky", produces = "application/json")
-    public ResponseEntity<?> getDSMonHocByGvId(HttpServletRequest request, Model model) throws IOException {
+    public ResponseEntity<?> getDSMonHocByGvId() throws IOException {
         ThanhVien tv;
         try {
             tv = MainFunction.getInstanceUser(userRepository);
@@ -153,8 +153,7 @@ public class API {
     }
 
     @GetMapping(value = "/dangky/dslhp/{id}", produces = "application/json")
-    public ResponseEntity<?> getDSLHP(@PathVariable int id, HttpSession session, Model model,
-            HttpServletResponse response) {
+    public ResponseEntity<?> getDSLHP(@PathVariable int id) {
         try {
             MainFunction.getInstanceUser(userRepository);
             try {
@@ -178,8 +177,7 @@ public class API {
     }
 
     @PutMapping(value = "/updatedangky", produces = "application/json")
-    public ResponseEntity<?> updateDKHP(@RequestBody ArrayList<LichHocView> listDK, HttpServletRequest request,
-            HttpServletResponse response, Model model) {
+    public ResponseEntity<?> SaveDKHP(@RequestBody ArrayList<LichHocView> listDK) {
         ThanhVien tv;
         try {
             tv = MainFunction.getInstanceUser(userRepository);
@@ -218,7 +216,7 @@ public class API {
     }
 
     @GetMapping(value = "/xemtkb", produces = "application/json")
-    public ResponseEntity<?> updateDKHP(HttpServletRequest request, HttpServletResponse response) {
+    public ResponseEntity<?> getSchedule() {
         ThanhVien tv;
         try {
             tv = MainFunction.getInstanceUser(userRepository);
@@ -239,8 +237,7 @@ public class API {
     }
 
     @PutMapping(value = "/suadangky", produces = "application/json")
-    public ResponseEntity<?> updateDKHP(@RequestBody ArrayList<LichHocView> listDK, HttpServletRequest request,
-            HttpServletResponse response) {
+    public ResponseEntity<?> updateDKHP(@RequestBody ArrayList<LichHocView> listDK) {
         ThanhVien tv;
         try {
             tv = MainFunction.getInstanceUser(userRepository);

@@ -178,7 +178,7 @@ public class TestEditCourse {
         .content(objectMapper.writeValueAsString(listTest)))
         .andExpect(status().isNotAcceptable()).andExpect(content()
         .string(containsString("CÃ³ lá»p há»c bá» trÃ¹ng lá»ch, vui lÃ²ng thá»­ láº¡i")));
-
+        // Có lớp học bị trùng lịch, vui lòng thử lại
         assertEquals(0, lhRepo.findDaDKLHP(1).size());
         //Kiểm tra số lượng đã đăng ký
         //Status trả về của request là 406

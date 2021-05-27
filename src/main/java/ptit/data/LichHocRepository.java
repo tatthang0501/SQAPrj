@@ -12,7 +12,7 @@ import ptit.models.LichHoc;
 
 public interface LichHocRepository extends CrudRepository<LichHoc, Integer> {
     @Query(value = "SELECT * FROM lichhoc WHERE lhpid = ?1", nativeQuery = true)
-    List<LichHoc> findLichLHP(int khpId);
+    List<LichHoc> findLichLHP(int lhpId);
 
     @Query(value = "SELECT * FROM lichhoc WHERE giangvienid = ?1", nativeQuery = true)
     List<LichHoc> findDaDKLHP(int gvId);
