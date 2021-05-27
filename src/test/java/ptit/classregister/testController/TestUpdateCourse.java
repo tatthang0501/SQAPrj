@@ -20,6 +20,8 @@ import org.springframework.core.annotation.Order;
 import org.springframework.test.web.servlet.MockMvc;
 import static org.hamcrest.Matchers.containsString;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.transaction.annotation.Transactional;
+
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import ptit.common.JwtUtils;
@@ -42,9 +44,8 @@ public class TestUpdateCourse {
     // Test update danh sách thành công, các lớp học phần chọn chưa được đăng ký và có lịch không trùng nhau
     @Test
     @Order(1)
+    @Transactional
     public void testUpdateCourseSuccessful() throws JsonProcessingException, Exception{
-        //Xóa hết thông tin đăng ký ban đầu
-        lhRepo.xoaHetDangKy(1);
         // Chuẩn bị dữ liệu, có 2 lớp học phần
         ArrayList<LichHocView> listTest = new ArrayList<LichHocView>();
         LichHocView lvh1 = new LichHocView();
@@ -98,9 +99,6 @@ public class TestUpdateCourse {
         // Kiểm tra dữ liệu đã update
         assertEquals(2, lhRepo.findDaDKLHP(1).size());
         assertEquals(1, lhRepo.findDaDKLHP(1).get(0).getGv().getId());
-
-        lhRepo.xoaHetDangKy(1);
-        // Trả lại trạng thái ban đầu cho database
     }
 
     // Test update danh sách không thành công, không có môn học nào trong mảng
@@ -155,8 +153,8 @@ public class TestUpdateCourse {
         .header("Authorization", "Bearer " + token).contentType("application/json")
         .content(objectMapper.writeValueAsString(listTest)))
         .andExpect(status().isForbidden()).andExpect(content()
-        .string(containsString("PhÃ¡t hiá»n gian láº­n, há»§y bá» ÄÄng kÃ½!")));
-
+        .string(containsString("!")));
+        // Lớp học phần này đã được đăng ký
         assertEquals(0, lhRepo.findDaDKLHP(1).size());
         //Kiểm tra số lượng đã đăng ký
         //Status trả về của request là 403
@@ -227,8 +225,6 @@ public class TestUpdateCourse {
     @Test
     @Order(5)
     public void testUpdateCourseNotLogin() throws JsonProcessingException, Exception{
-        //Xóa hết thông tin đăng ký ban đầu
-        lhRepo.xoaHetDangKy(1);
         // Chuẩn bị dữ liệu, có 2 lớp học phần
         ArrayList<LichHocView> listTest = new ArrayList<LichHocView>();
         LichHocView lvh1 = new LichHocView();
@@ -283,7 +279,5 @@ public class TestUpdateCourse {
         // Kiểm tra dữ liệu đã update
         assertEquals(0, lhRepo.findDaDKLHP(1).size());
 
-        lhRepo.xoaHetDangKy(1);
-        // Trả lại trạng thái ban đầu cho database
     }
 }

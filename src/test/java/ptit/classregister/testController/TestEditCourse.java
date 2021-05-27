@@ -18,6 +18,8 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.transaction.annotation.Transactional;
+
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.hamcrest.Matchers.containsString;
@@ -43,10 +45,8 @@ public class TestEditCourse {
     //Test sửa danh sách thành công, danh sách có ít nhất 1 lớp học phần, lịch không trùng với các lớp học phần còn lại
     @Test
     @Order(1)
+    @Transactional // Rollback dữ liệu sau khi thực hiện test
     public void TestEditCourseSuccessful() throws JsonProcessingException, Exception{
-        //Trong database chưa có dữ liệu đăng ký lớp học phần
-        lhRepo.xoaHetDangKy(1);
-        //Chuẩn bị dữ liệu test, có 2 đối tượng lớp học phần
         ArrayList<LichHocView> listTest = new ArrayList<LichHocView>();
         LichHocView lvh1 = new LichHocView();
         lvh1.setId(1);
@@ -100,17 +100,13 @@ public class TestEditCourse {
         //Truy vấn thông qua user có ID là 1
         assertEquals(2, lhRepo.findDaDKLHP(1).size());
         assertEquals(1, lhRepo.findDaDKLHP(1).get(0).getGv().getId());
-
-        //Trả lại trạng thái ban đầu cho database
-        lhRepo.xoaHetDangKy(1);
     }
 
     //Test sửa danh sách không thành công, danh sách không có lớp học phần nào
     @Test
     @Order(2)
+    @Transactional // Rollback dữ liệu sau khi thực hiện test
     public void testEditCourseBlankUnsuccessful() throws JsonProcessingException, Exception{
-        //Trong database chưa có dữ liệu đăng ký lớp học phần
-        lhRepo.xoaHetDangKy(1);
         //Chuẩn bị dữ liệu test rỗng
         ArrayList<LichHocView> listTest = new ArrayList<LichHocView>();
         //Sử dụng token của user có ID là 1

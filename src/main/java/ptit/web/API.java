@@ -131,6 +131,7 @@ public class API {
         ThanhVien tv;
         try {
             tv = MainFunction.getInstanceUser(userRepository);
+            System.out.println("Id thanh vien " + tv.getId());
             GiangVienKhoa gvk = gvkRepo.findById(tv.getId()).get();
             ArrayList<BoMon> listBoMonKhoa = (ArrayList<BoMon>) bmRepo.getListBoMon(gvk.getKhoa().getId());
             ArrayList<Integer> listIdMon = new ArrayList<Integer>();

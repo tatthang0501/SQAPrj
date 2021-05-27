@@ -69,11 +69,7 @@ public class TestDangKyFunction {
     // Test trường hợp mảng listBoMonKhoa truyền vào không có dữ liệu
     @Test
     public void testSetDataBlankList() {
-        // Chuẩn bị dữ liệu, mảng listBoMonKhoa tương ứng với các bộ môn thuộc khoa của
-        // giảng viên
-        // Lấy ra mảng tương ứng với bộ môn có khoaid = 1
-
-        //Khởi tạo mảng rỗng
+         //Khởi tạo mảng rỗng
         ArrayList<BoMon> listBoMonKhoa = new ArrayList<>();
         // Kiểm tra thuộc tính mảng chưa được lấy ra từ CSDL
         for (BoMon bm : listBoMonKhoa) {
@@ -81,13 +77,14 @@ public class TestDangKyFunction {
         }
         // Khởi tạo mảng trống listIdMon lưu các môn học thuộc các khoa trên
         // chạy phương thức
+        ArrayList<Integer> listIdMon = new ArrayList<Integer>();
         DangKyFunction.setDataListBMKAndListIdMon(listBoMonKhoa, listIdMon, mhRepo);
         // Kiểm tra dữ liệu sau khi chạy phương thức
         for (BoMon bm : listBoMonKhoa) {
-            assertNotEquals(0, bm.getDsMonHoc().size());
+            assertEquals(0, bm.getDsMonHoc().size());
         }
         // Kiểm tra dữ liệu ở mảng Id
-        assertNotEquals(0, listIdMon.size());
+        assertEquals(0, listIdMon.size());
     }
 
     // Test phương thức MHKHFilter
