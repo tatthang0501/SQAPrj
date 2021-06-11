@@ -104,13 +104,11 @@ public class API {
         this.bmRepo = bmRepo;
     }
 
-    // private ThanhVien getInstanceUser() {
-    // Authentication authentication =
-    // SecurityContextHolder.getContext().getAuthentication();
-    // String currentPrincipalName = authentication.getName();
-    // ThanhVien tv = userRepository.findByUsername(currentPrincipalName).get();
-    // return tv;
-    // }
+    @GetMapping("/test")
+    public String test(){
+        String temp = lhRepo.checkGiangVienID(2);
+        return temp;
+    }
 
     @PostMapping("/login")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginForm loginRequest) {
@@ -195,7 +193,8 @@ public class API {
                         throw new SameDateException();
                 }
                 for (LichHocView lh : listDK) {
-                    if (lh.isDaDK() == true) {
+                    String temp = lhRepo.checkGiangVienID(lh.getId());
+                    if (lh.isDaDK() == true || temp!=null) {
                         throw new RegisteredException();
                     }
                     lhRepo.updateDangKy(tv.getId(), lh.getId());
@@ -242,8 +241,6 @@ public class API {
         try {
             tv = MainFunction.getInstanceUser(userRepository);
             try {
-                if (listDK.size() == 0)
-                    throw new ZeroSizeException();
                 ArrayList<LichHocView> listDKTemp = new ArrayList<>();
                 for (LichHocView lhv : listDK) {
                     listDKTemp.add(lhv);
@@ -254,18 +251,21 @@ public class API {
                     if (check == true)
                         throw new SameDateException();
                 }
+                for (LichHocView lh : listDK) {
+                    String temp = lhRepo.checkGiangVienID(lh.getId());
+                    if (temp != null && !temp.equals(Integer.toString(tv.getId()))) {
+                        throw new RegisteredException();
+                    }
+                }
                 lhRepo.xoaHetDangKy(tv.getId());
                 for (LichHocView lh : listDK) {
-                    int count = lhRepo.updateDangKy(tv.getId(), lh.getId());
-                    if (count != 1) {
-                        return new ResponseEntity<>("Có lỗi hệ thống trong quá trình update", HttpStatus.NOT_MODIFIED);
-                    }
+                    lhRepo.updateDangKy(tv.getId(), lh.getId());
                 }
                 return new ResponseEntity<>("Cập nhật danh sách lớp học phần thành công", HttpStatus.OK);
             } catch (SameDateException e) {
                 return new ResponseEntity<>("Có lớp học bị trùng lịch, vui lòng thử lại", HttpStatus.NOT_ACCEPTABLE);
-            } catch (ZeroSizeException e) {
-                return new ResponseEntity<>("Không có dữ liệu trong danh sách sửa đăng ký", HttpStatus.NOT_ACCEPTABLE);
+            } catch (RegisteredException e) {
+                return new ResponseEntity<>("Lớp học này đã được đăng ký!", HttpStatus.FORBIDDEN);
             }
         } catch (NoSuchElementException e) {
             return new ResponseEntity<>("Chưa đăng nhập, vui lòng đăng nhập trước khi thực hiện sửa đăng ký môn học",

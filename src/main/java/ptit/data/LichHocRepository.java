@@ -31,4 +31,7 @@ public interface LichHocRepository extends CrudRepository<LichHoc, Integer> {
     @Transactional
     @Query(value = "DELETE from lichhoc WHERE id = ?1", nativeQuery = true)
     public void deleteById(int id);
+
+    @Query(value = "SELECT lichhoc.giangvienid from lichhoc where id = ?1", nativeQuery = true)
+    String checkGiangVienID(int id);
 }
